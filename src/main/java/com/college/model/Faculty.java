@@ -23,13 +23,11 @@ private Integer id;
 @Column(length=30,nullable=false,unique=true)
 private String name;
 
-@OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
-@JoinColumn(name="faculty_id", referencedColumnName="id")
-private List<Student> student;
+
 
 @Override
 public String toString() {
-	return "Faculty [id=" + id + ", name=" + name + ", student=" + student + "]";
+	return "Faculty [id=" + id + ", name=" + name ;
 }
 
 public Integer getId() {
@@ -48,11 +46,5 @@ public void setName(String name) {
 	this.name = name;
 }
 
-public List<Student> getStudent() {
-	return student;
-}
 
-public void setStudent(List<Student> student) {
-	this.student = student;
-}
 }

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
+@Entity(name="Student")
 @Table(name="students")
 public class Student {
  
@@ -40,7 +40,7 @@ public class Student {
  private String image;
  @Column(name="uniqueCode",length=50,nullable=false,unique=true)
  private String uniqueCode;
- @Column(name="registraton_year" ,length=20,nullable=false,unique=false)
+ @Column(name="registration_year" ,length=20,nullable=false,unique=false)
  private String registrationYear;
 // @DateTimeFormat(pattern = "mm/dd/yyyy")
  private Date dob;
@@ -49,15 +49,18 @@ public class Student {
  @Column(length=8,nullable=false,unique=false)
  private String gender;
  
- @ManyToOne(targetEntity=Faculty.class,cascade=CascadeType.ALL)
- private Faculty faculty;
+ @ManyToOne(targetEntity=Program.class,cascade=CascadeType.ALL)
+
+ private Program program;
  
- public Faculty getFaculty() {
-	return faculty;
+
+
+public Program getProgram() {
+	return program;
 }
 
-public void setFaculty(Faculty faculty) {
-	this.faculty = faculty;
+public void setProgram(Program program) {
+	this.program = program;
 }
 
 public String getGender() {

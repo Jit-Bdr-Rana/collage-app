@@ -13,15 +13,30 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentRepository stuRepo;
 	 
-	@Override
-	public List<Student> getAllEmployees() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public void saveStudent(Student student) {
 	    this.stuRepo.save(student);
+	}
+
+	@Override
+	public List<Student> getAllStudent() {
+	  return this.stuRepo.findAll();
+		
+	}
+
+	@Override
+	public Student getStudentById(Integer id) {
+		return stuRepo.getById(id);
+	}
+
+	@Override
+	public List<Student> fetchStudentByYearAndProgram(String year, Integer program_id) {
+		
+	
+		return stuRepo.getStudentByYearAndProgram(year,program_id);
+		
 	}
 
 }
