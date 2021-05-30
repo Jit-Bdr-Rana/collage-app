@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
+
 @Entity(name="Student")
 @Table(name="students")
 public class Student {
@@ -32,28 +34,44 @@ public class Student {
  private String lastName;
  @Column(name="contact",length=12,nullable=false)
  private String contact;
- @Column(length=50,nullable=false,unique=true)
- private String email;
-// @Column(length=15,nullable=false,unique=false)
-// private String faculty;
+
  @Column(length=100,nullable=true,unique=false)
  private String image;
- @Column(name="uniqueCode",length=50,nullable=false,unique=true)
- private String uniqueCode;
+
  @Column(name="registration_year" ,length=20,nullable=false,unique=false)
  private String registrationYear;
 // @DateTimeFormat(pattern = "mm/dd/yyyy")
  private Date dob;
- @Column(name="password",length=100)
- private String password;
+ 
  @Column(length=8,nullable=false,unique=false)
  private String gender;
  
- @ManyToOne(targetEntity=Program.class,cascade=CascadeType.ALL)
+ @OneToOne(targetEntity=Program.class,cascade=CascadeType.ALL)
 
  private Program program;
  
+ 
+ @OneToOne(cascade = CascadeType.ALL)
+ @JoinColumn(name = "user_id", referencedColumnName = "id")
+ private User user;
 
+ 
+ 
+
+@Override
+public String toString() {
+	return "Student [id=" + id + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
+			+ ", contact=" + contact + ", image=" + image + ", registrationYear=" + registrationYear + ", dob=" + dob
+			+ ", gender=" + gender + ", program=" + program + ",]";
+}
+
+public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
+}
 
 public Program getProgram() {
 	return program;
@@ -82,13 +100,7 @@ public void setRegistrationYear(String registrationYear) {
 }
 
 
- public String getEmail() {
-	return email;
-}
 
-public void setEmail(String email) {
-	this.email = email;
-}
 
 public String getImage() {
 	return image;
@@ -99,13 +111,7 @@ public void setImage(String image) {
 }
 
 
-@Override
-public String toString() {
-	return "Student [id=" + id + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
-			+ ", contact=" + contact + ", email=" + email + ", image=" + image + ", uniqueCode=" + uniqueCode
-			+ ", registrationYear=" + registrationYear + ", dob=" + dob + ", password=" + password + ", gender="
-			+ gender + "]";
-}
+
 
 public Integer getId() {
 	return id;
@@ -147,13 +153,7 @@ public void setContact(String contact) {
 	this.contact = contact;
 }
 
-public String getUniqueCode() {
-	return uniqueCode;
-}
 
-public void setUniqueCode(String uniqueCode) {
-	this.uniqueCode = uniqueCode;
-}
 
 public Date getDob() {
 	return dob;
@@ -163,13 +163,7 @@ public void setDob(Date dob) {
 	this.dob = dob;
 }
 
-public String getPassword() {
-	return password;
-}
 
-public void setPassword(String password) {
-	this.password = password;
-}
  
  
 }

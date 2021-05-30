@@ -14,8 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.college.model.Program;
 import com.college.model.Student;
+import com.college.model.User;
 import com.college.service.ProgramService;
 import com.college.service.StudentService;
+import com.college.service.UserService;
 
 @Controller
 public class StudentController {
@@ -26,6 +28,8 @@ private StudentService studentService;
 @Autowired
 private ProgramService programService;
 
+@Autowired
+private UserService userService;
 
 @GetMapping("/student/form")
 public String showStudentForm(Model model) {
@@ -49,7 +53,9 @@ public String showStudentTable(Model model) {
 			
 }
 @PostMapping("/student/save")
-public String saveStudent(Student student,RedirectAttributes redirAttrs) {
+public String saveStudent(Student student,RedirectAttributes redirAttrs,HttpServletRequest request) {
+	
+        student.getUser().setRole("student");
 	  this.studentService.saveStudent(student);
 	  if(student.getId()==null)
 	  {
@@ -59,6 +65,7 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs) {
 	  }
 	 
 	return "redirect:/student";
+	
 }
 @GetMapping("/student/update/{id}")
  public String updateStudent(@PathVariable("id") Integer id,Model model ) {

@@ -42,6 +42,7 @@
 										<!-- form start -->
 										<form class="ml-5 mr-5" role="form" action="" th:action="@{/student/save}" method="post" th:object="${student}">
 											<input type="hidden" th:field="*{id}" th:value="*{id}">
+											
 											<div class="box-body row">
 												<div class="col-md-4">
 													<div class="form-group">
@@ -75,7 +76,7 @@
 													<div class="form-group">
 														<label for="exampleInputDes1">Email</label> <input
 															type="text" class="form-control" id="exampleInputDes1"
-															placeholder="Email" th:field="*{email}">
+															placeholder="Email" name="email" th:field="${student.user.email}">
 													</div>
 												</div>
 												<div class="col-md-4">
@@ -110,27 +111,26 @@
 														</select>
 													</div>
 												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label for="exampleInputDes1">Unique Code</label> <input
-															type="text" class="form-control" id="exampleInputDes1"
-															placeholder="BIT2020-145" th:field="*{uniqueCode}">
-													</div>
-												</div>
-
+											
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for="exampleInputDes1">Password</label> 
-														<th:block th:if="${student.password==null}">
+														
+														<th:block th:if="${student.id==null}">
 														<input
 															type="password" class="form-control"
-															id="password" placeholder="password" th:field="*{password}">
-															</th:block>
-															<th:block th:unless="${student.password==null}">
+															id="password" placeholder="password"  name="password" th:field="${student.user.password}">
+															
+														</th:block>
+														<th:block th:unless="${student.id==null}">
+														<input type="hidden" th:field="${student.user.id}" th:value="${student.user.id}">
 														<input
 															type="text" class="form-control"
-															id="password" placeholder="password" th:field="*{password}">
-															</th:block>
+															id="password" placeholder="password"  name="password" th:field="${student.user.password}">
+															
+														</th:block>
+														
+															
 													</div>
 												</div>
 
