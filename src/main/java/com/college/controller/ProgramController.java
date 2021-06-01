@@ -2,6 +2,7 @@ package com.college.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,41 @@ public class ProgramController {
 	}
 
 	@PostMapping("/program/save")
-	public String saveFaculty(@ModelAttribute("faculty") Program program,RedirectAttributes redirAttrs) {
-		this.programService.saveProgram(program);
-		redirAttrs.addFlashAttribute("success", "Program has been added Successfully!.");
-		return "redirect:/program";
+	public String saveFaculty(Program program,RedirectAttributes redirAttrs,Model model,HttpServletRequest  request) {
+		Program matchProgram=this.programService.fetchProgramFromName(program.getName());
+		if(matchProgram==null) { 
+			
+			if(program.getId()==null) {
+				this.programService.saveProgram(program);
+				redirAttrs.addFlashAttribute("success", "Program has been added Successfully!.");
+				return "redirect:/program";
+			}else {
+				this.programService.saveProgram(program);
+			redirAttrs.addFlashAttribute("success", "Program has been Updated Successfully!.");
+			return "redirect:/program";
+			}
+		}
+		else {
+			 if(program.getId()==matchProgram.getId()) {
+				 
+				 redirAttrs.addFlashAttribute("success", "Program has been Updated Successfully!.");
+					return "redirect:/program";
+				 
+			 }else {
+					String po_link = "active";
+					model.addAttribute("program", program);
+					model.addAttribute("po_link", po_link);
+					
+					model.addAttribute("nameError","program Already exists ");
+					return "admin/program_form";
+				 
+			 }
+		
+		
+			
+		}
+		
+		
 	}
 	@GetMapping("/program/update/{id}")
 	public String showUpdateForm(@PathVariable(value="id")Integer id,Model model) {

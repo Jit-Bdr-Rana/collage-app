@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 
-@Entity
+@Entity(name="Program")
 @Table(name="programs")
 public class Program {
 	@Id
@@ -31,6 +31,7 @@ public class Program {
 	@OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="program_id", referencedColumnName="id")
 	private List<Student> student;
+	
 	@Override
 	public String toString() {
 		return "Program [id=" + id + ", name=" + name + "]";

@@ -51,6 +51,11 @@ public class ProgramServiceImpl implements ProgramService {
 		return null;
 		
 		
+	}
+
+	@Override
+	public Program fetchProgramFromName(String name) {
+		  return this.programRepository.getProgramByName(name);
 	}	
 
 }

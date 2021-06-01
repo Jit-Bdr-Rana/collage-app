@@ -1,15 +1,18 @@
 package com.college.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.college.model.Program;
@@ -18,6 +21,8 @@ import com.college.model.User;
 import com.college.service.ProgramService;
 import com.college.service.StudentService;
 import com.college.service.UserService;
+
+
 
 @Controller
 public class StudentController {
@@ -42,31 +47,37 @@ public String showStudentForm(Model model) {
 	return "admin/student_form";
 }
 @GetMapping("/student")
-public String showStudentTable(Model model) {
-	List<Student> listStudents =studentService.getAllStudent();
-	List<Program> listPrograms = programService.showAllProgram();
-	String stu_link="active";
-	model.addAttribute("stu_link",stu_link);
-	model.addAttribute("listStudents",listStudents);
-	model.addAttribute("listPrograms",listPrograms);
-	return "admin/student_table";
+public String showStudentTable(Model model,HttpServletRequest response) {
+	
+	return findPaginated(1,"firstName","asc",model,response);
+	
+//	List<Student> listStudents =studentService.getAllStudent();
+//	List<Program> listPrograms = programService.showAllProgram();
+//	String stu_link="active";
+//	model.addAttribute("stu_link",stu_link);
+//	model.addAttribute("listStudents",listStudents);
+//	model.addAttribute("listPrograms",listPrograms);
+//	return "admin/student_table";
 			
 }
 @PostMapping("/student/save")
 public String saveStudent(Student student,RedirectAttributes redirAttrs,HttpServletRequest request) {
 	
         student.getUser().setRole("student");
-	  this.studentService.saveStudent(student);
+	 
 	  if(student.getId()==null)
 	  {
-		  redirAttrs.addFlashAttribute("success", "Program has been added Successfully!.");  
+		  redirAttrs.addFlashAttribute("success", "Student has been added Successfully!.");  
 	  }else {
-		  redirAttrs.addFlashAttribute("success", "Program has been Updated Successfully!.");
+		  
+		  redirAttrs.addFlashAttribute("success", "Student has been Updated Successfully!.");
 	  }
+	  this.studentService.saveStudent(student);
 	 
 	return "redirect:/student";
 	
 }
+
 @GetMapping("/student/update/{id}")
  public String updateStudent(@PathVariable("id") Integer id,Model model ) {
 	Student student=studentService.getStudentById(id);
@@ -77,19 +88,58 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs,HttpServ
 	model.addAttribute("listPrograms",listPrograms);
 	return "admin/student_form";
 }
-@GetMapping("/student/fetch")
-public String featchStudent(HttpServletRequest response,Model model) {
+
+
+@GetMapping("/page/{pageNo}")
+public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestParam("sortField") String sortField,@RequestParam("sortDir") String sortDir,Model model,HttpServletRequest response) {
+	int pageSize=2;
+    List<Student> listStudents;
+    Page<Student> page;
 	String year=response.getParameter("year");
 	String program=response.getParameter("program");
-	if(year!=null|| program!=null) {
-		List<Student> listStudents =studentService.fetchStudentByYearAndProgram(year,Integer.parseInt(program));
-		model.addAttribute("listStudents",listStudents);	
+	System.out.println(program);
+	
+	System.out.println("null");
+	if(year==null|| program==null || program.equals("null") ) {
+		System.out.println(13);
+		 page=studentService.findPaginate(pageNo, pageSize,"firstName","asc");
+		 listStudents=page.getContent();
+		
+			
+	}else {
+		
+		 page =studentService.fetchStudentByYearAndProgram(pageNo, pageSize,"firstName","asc",year,Integer.parseInt(program));
+		 listStudents=page.getContent();
+		 
+		 model.addAttribute("year",year);
+		 model.addAttribute("program",program);
 	}
 	
+	
+	String stu_link="active";
 	List<Program> listPrograms = programService.showAllProgram();
+	model.addAttribute("stu_link",stu_link);
 	
 	model.addAttribute("listPrograms",listPrograms);
-	return  "admin/student_table";
+	model.addAttribute("currentPage",pageNo);
+	model.addAttribute("totalPages", page.getTotalPages());
+	model.addAttribute("totalItems",page.getTotalElements());
+	model.addAttribute("listStudents",listStudents);
+	model.addAttribute("sortField",sortField);
+	model.addAttribute("sortDir",sortDir);
+	model.addAttribute("pageSize",pageSize);
+	model.addAttribute("reverseSortDir",sortDir.equals("asc")?"desc":"asc");
+	return "admin/student_table";
 }
+  
+  @GetMapping("/student/delete/{id}")
+  public String  deleteStudent(@PathVariable(value="id") Integer id,RedirectAttributes redirAttrs) {
+	  this.studentService.deleteStudentById(id);
+	  redirAttrs.addFlashAttribute("success", "Student  has been added Successfully!.");
+	  return "redirect:/student";
+  }
+  
+     
+  
 
 }

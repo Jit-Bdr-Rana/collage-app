@@ -16,6 +16,7 @@ public interface ProgramService {
 	public Program  programFindById(Integer id);
 	public void deleteProgram(Integer id);
 	public String validaeForm(Program program,RedirectAttributes redirAttrs);
+	public Program fetchProgramFromName(String name);
     
 
 }

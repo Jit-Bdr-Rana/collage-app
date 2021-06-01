@@ -46,7 +46,7 @@ public class Student {
  @Column(length=8,nullable=false,unique=false)
  private String gender;
  
- @OneToOne(targetEntity=Program.class,cascade=CascadeType.ALL)
+ @ManyToOne(targetEntity=Program.class)
 
  private Program program;
  
