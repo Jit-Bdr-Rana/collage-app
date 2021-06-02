@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html xmlns:th="www.thymeleaf.org">
-<title>Student</title>
+<title>Parents Of Student</title>
 <head>
     <th:block  th:insert="~{admin/fragment/fragment :: css}"></th:block>
 </head>
@@ -30,10 +30,9 @@
                             
                                 <!-- Page Heading -->
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <h1 class="h3 mb-0 text-gray-800">Student</h1>
+                                    <h1 class="h3 mb-0 text-gray-800">Parents Of Student</h1>
                               
-                                    <a th:href="@{/student/form}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus text-white mr-1"></i> 
-			                         Add New</a>
+                              
                                 </div>
                                 <form th:action="@{'/page/'+${currentPage}}" method="get">
                                   <input type="hidden" name="sortField" th:value="${sortField}">
@@ -93,19 +92,15 @@
                             </div>
 
                             <!-- column start -->
-                            <div class="col-md-12 ">
+                            <div class="col-md-8 mx-auto mt-5">
                                 <div class="card">
                                     <div class="table-responsive">
-                                        <table class="table v-middle">
+                                        <table class="table v-middle table-hover">
                                             <thead>
                                                 <tr class="bg-light">
-                                                    <th class="border-top-0">SN</th>
-                                                    <th class="border-top-0">Name</th>
-                                                    <th class="border-top-0">contact</th>
-                                                    <th class="border-top-0">Email</th>
-                                                    <th class="border-top-0">Batch</th>
-                                                    <th class="border-top-0">Gender</th>
-                                                    <th class="border-top-0">Program</th>
+                                                    <th class="border"colspan=2>SN</th>
+                                                    <th class="border-top-0" colspan=2>Name</th>
+                                                   
                                                     <th class="border-top-0">Action</th>
                                                 </tr>
                                             </thead>
@@ -113,17 +108,14 @@
                                                 <tr th:each="student,iStat:${listStudents}">
                                                        
                                                   
-                                                      <td >[[${(pageSize*(currentPage-1))+iStat.count}]]</td>
+                                                      <td colspan=2>[[${(pageSize*(currentPage-1))+iStat.count}]]</td>
                                                     
-                                                      <td >[[${student.firstName}]]  [[${student.middleName}]]  [[${student.lastName}]]</td>
-                                                      <td>[[${student.contact}]]</td>
-                                                       <td>[[${student.user.email}]]</td>
-                                                        <td>[[${student.registrationYear}]]</td>
-                                                         <td>[[${student.gender}]]</td>
-                                                         <td>[[${student.program.name}]]</td>
+                                                      <td colspan=2>[[${student.firstName}]]  [[${student.middleName}]]  [[${student.lastName}]]</td>
+                                                    
                                                         <td>
-                                                        <a type="button" class="btn btn-success" th:href="@{'/student/update/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}"   styel="color:white" ><i class="fas fa-edit"></i></a>
-                                                        <a type="button" class="btn btn-danger"  th:href="@{'/student/delete/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}"  styel="color:white"><i class="far fa-trash-alt"></i></a>
+                                                        <a type="button" class="btn btn-success" th:href="@{'/parent/update/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}"   styel="color:white" ><i class="fas fa-edit"></i></a>
+                                                        <a type="button" class="btn btn-danger"  th:href="@{'/parent/show/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}"  styel="color:white"><i class="far fa-eye"></i></a>
+                                                       
                                                     </td>
                                                 </tr>
                                             

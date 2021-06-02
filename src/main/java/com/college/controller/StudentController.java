@@ -61,8 +61,10 @@ public String showStudentTable(Model model,HttpServletRequest response) {
 			
 }
 @PostMapping("/student/save")
-public String saveStudent(Student student,RedirectAttributes redirAttrs,HttpServletRequest request) {
+public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpServletRequest request) {
 	
+	  
+	 
         student.getUser().setRole("student");
 	 
 	  if(student.getId()==null)
@@ -70,7 +72,15 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs,HttpServ
 		  redirAttrs.addFlashAttribute("success", "Student has been added Successfully!.");  
 	  }else {
 		  
+		
+		  Integer page =Integer.parseInt( request.getParameter("page"));
+		   String sortDir=request.getParameter("sortDir");
+		   String year=request.getParameter("year");
+		   String program=request.getParameter("programs");
+		   String sortField=request.getParameter("sortField");
+		   this.studentService.saveStudent(student);
 		  redirAttrs.addFlashAttribute("success", "Student has been Updated Successfully!.");
+		  return "redirect:/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
 	  }
 	  this.studentService.saveStudent(student);
 	 
@@ -79,13 +89,21 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs,HttpServ
 }
 
 @GetMapping("/student/update/{id}")
- public String updateStudent(@PathVariable("id") Integer id,Model model ) {
+ public String updateStudent(@PathVariable("id") Integer id,Model model,@RequestParam("sortField") String sortField,@RequestParam("page") int page,@RequestParam("sortDir") String sortDir,@RequestParam("year") String year,@RequestParam("program") String program ) {
+	
 	Student student=studentService.getStudentById(id);
 	List<Program> listPrograms = programService.showAllProgram();
 	String stu_link="active";
 	model.addAttribute("stu_link",stu_link);
 	model.addAttribute("student",student);
+	model.addAttribute("sortField",sortField);
+	model.addAttribute("sortDir",sortDir);
+	model.addAttribute("page",page);
+	model.addAttribute("program",program);
+	model.addAttribute("year",year);
+	
 	model.addAttribute("listPrograms",listPrograms);
+	
 	return "admin/student_form";
 }
 
@@ -99,9 +117,9 @@ public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestPar
 	String program=response.getParameter("program");
 	System.out.println(program);
 	
-	System.out.println("null");
+	
 	if(year==null|| program==null || program.equals("null") ) {
-		System.out.println(13);
+	
 		 page=studentService.findPaginate(pageNo, pageSize,"firstName","asc");
 		 listStudents=page.getContent();
 		
@@ -112,7 +130,7 @@ public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestPar
 		 listStudents=page.getContent();
 		 
 		 model.addAttribute("year",year);
-		 model.addAttribute("program",program);
+		 model.addAttribute("program",Integer.parseInt(program));
 	}
 	
 	
@@ -133,10 +151,10 @@ public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestPar
 }
   
   @GetMapping("/student/delete/{id}")
-  public String  deleteStudent(@PathVariable(value="id") Integer id,RedirectAttributes redirAttrs) {
+  public String  deleteStudent(@PathVariable(value="id") Integer id,RedirectAttributes redirAttrs,@RequestParam("sortField") String sortField,@RequestParam("page") int page,@RequestParam("sortDir") String sortDir,@RequestParam("year") String year,@RequestParam("program") String program) {
 	  this.studentService.deleteStudentById(id);
-	  redirAttrs.addFlashAttribute("success", "Student  has been added Successfully!.");
-	  return "redirect:/student";
+	  redirAttrs.addFlashAttribute("success", "Student  has been Deleted Successfully!.");
+	  return "redirect:/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
   }
   
      

@@ -48,17 +48,10 @@
 															class="form-control d-none d-sm-inline-block" name="year">
 															<option value="0" selected="true" disabled="true">Select
 																Year</option>
-															<option th:if="${year=='2021'}" value="2021" selected>2021</option>
-															<option th:unless="${year=='2021'}" value="2021" >2021</option>
-															
-															<option th:if="${year=='2022'}" value="2021" selected>2022</option>
-															<option th:unless="${year=='2022'}" value="2021" >2022</option>
-															
-															<option th:if="${year=='2023'}" value="2021" selected>2023</option>
-															<option th:unless="${year=='2023'}" value="2021" >2023</option>
-															
-															<option th:if="${year=='2024'}" value="2021" selected>2024</option>
-															<option th:unless="${year=='2024'}" value="2021" >2024</option>
+															<option value="2021">2021</option>
+															<option value="2022">2022</option>
+															<option value="2023">2023</option>
+															<option value="2024">2024</option>
 														</select>
 													</div>
 											
@@ -69,12 +62,8 @@
 															name="program" >
 															<option value="0" selected="true" disabled="true">Select
 																Program</option>
-																<th:block  th:each="programs:${listPrograms}">
-																<option  th:if="${programs.id==program}" th:value="${programs.id}" selected>[[${programs.name}]]
+																<option th:each="program:${listPrograms}" th:value="${program.id}">[[${program.name}]]
 																</option>
-																<option  th:unless="${programs.id==program}"  th:value="${programs.id}" >[[${programs.name}]]
-																</option>
-																</th:block>
 														</select>
 													</div>
 												</div>
