@@ -47,11 +47,55 @@ public class Student {
  private String gender;
  
  @ManyToOne(targetEntity=Program.class)
-
  private Program program;
  
+ @ManyToOne(targetEntity=Year.class)
+ private Year registrationyear;
  
- @OneToOne(cascade = CascadeType.ALL)
+ public Year getRegistrationyear() {
+	return registrationyear;
+}
+
+public void setRegistrationyear(Year registrationyear) {
+	this.registrationyear = registrationyear;
+}
+
+public Date getCreatedAt() {
+	return createdAt;
+}
+
+public void setCreatedAt(Date createdAt) {
+	this.createdAt = createdAt;
+}
+
+public Date getUpdatedAt() {
+	return updatedAt;
+}
+
+public void setUpdatedAt(Date updatedAt) {
+	this.updatedAt = updatedAt;
+}
+
+@OneToOne(targetEntity = Parent.class, cascade = CascadeType.ALL)
+ private Parent parent;
+
+@OneToOne(targetEntity = Fee.class, cascade = CascadeType.ALL)
+private Fee fee;
+ 
+ @Column(name="created_at",nullable=true)
+ private Date createdAt;
+ @Column(name="updated_at",nullable=true)
+ private Date updatedAt;
+ 
+ public Parent getParent() {
+	return parent;
+}
+
+public void setParent(Parent parent) {
+	this.parent = parent;
+}
+
+@OneToOne(cascade = CascadeType.ALL)
  @JoinColumn(name = "user_id", referencedColumnName = "id")
  private User user;
 

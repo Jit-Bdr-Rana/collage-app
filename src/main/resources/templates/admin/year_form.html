@@ -37,17 +37,17 @@
 								<div class="card">
 									<div class="box box-primary">
 										<div class="box-header">
-											<h3 class="box-title mt-3 ml-5">Program</h3>
+											<h3 class="box-title mt-3 ml-5">Year</h3>
 										</div>
 										<!-- form start -->
-										<form class="ml-5 mr-5" role="form" action="" th:action="@{/admin/program/save}" method="post" th:object="${program}">
+										<form class="ml-5 mr-5" role="form" action="" th:action="@{/admin/year/save}" method="post" th:object="${year}">
 											 <input type="hidden" th:field="*{id}" th:value="*{id}">
 											<div class="box-body row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label for="exampleInputTitle1">program Name</label> <input
+														<label for="exampleInputTitle1">Year Name</label> <input
 															type="text" class="form-control" id="name"
-															placeholder="Program Name" th:field="*{name}" >
+															placeholder="Year Name" th:field="*{name}" >
 															<span style="color:red;font-style:itallic;" >[[${nameError}]] </span>
 														
 													</div>

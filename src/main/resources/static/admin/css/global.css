@@ -491,3 +491,55 @@ textarea.form-control {
     height: 150px !important;
 }
 
+
+.table .thead-dark th {
+    color: #fff;
+    background-color: #212529;
+    border-color: none !important;
+    font-size:9px;
+}
+
+.btn{
+    margin-top: 0px;
+}
+.btn-sm{
+    line-height:1;
+}
+
+/*Fee structure css start here below*/
+
+.title-fees{
+    text-align: center  !important;
+    font-size: 28px;
+}
+
+.items-fees p{
+  display: inline;
+  width: 100px;
+  height: 100px;
+  padding-left:15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius:5px;
+  color: #fff;
+  margin-right: 10px;
+  background-color:#343a40;
+
+}
+
+.go_button{
+margin-top: 34px;
+}
+
+.custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }

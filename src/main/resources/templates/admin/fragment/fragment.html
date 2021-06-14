@@ -41,37 +41,38 @@
 
 
 				<li class=""><a class="nav-link  text-left"
-					th:if="${stu_link==null}"  role="button" th:href="@{/student}">
+					th:if="${stu_link==null}"  role="button" th:href="@{/admin/student}">
 						<i class="fas fa-images text-white"></i> Student
 				</a> <a class="nav-link  text-left active" th:unless="${stu_link==null}"
-					 role="button" th:href="@{/student}"> <i
+					 role="button" th:href="@{/admin/student}"> <i
 						class="fas fa-images text-white"></i> Student
 				</a>
 				</li>
-						<li class=""><a class="nav-link  text-left"
-					th:if="${fac_link==null}"  role="button" th:href="@{/faculty}">
-						<i class="fas fa-images text-white"></i> Faculty
-				</a> <a class="nav-link  text-left active" th:unless="${fac_link==null}"
-					 role="button" th:href="@{/faculty}"> <i
-						class="fas fa-images text-white"></i> Faculty
-				</a>
-				</li>
+						
 				
 				<li class=""><a class="nav-link  text-left"
-					th:if="${po_link==null}"  role="button" th:href="@{/program}">
-						<i class="fas fa-images text-white"></i> Program
+					th:if="${po_link==null}"  role="button" th:href="@{/admin/program-year}">
+						<i class="fas fa-images text-white"></i> Program And Year
 				</a> <a class="nav-link  text-left active" th:unless="${po_link==null}"
-					 role="button" th:href="@{/program}"> <i
-						class="fas fa-images text-white"></i> Program
+					 role="button" th:href="@{/admin/program-year}"> <i
+						class="fas fa-images text-white"></i> Program And Year
 				</a>
 				</li>
 				
 					<li class=""><a class="nav-link  text-left"
-					th:if="${parent_link==null}"  role="button" th:href="@{/parent}">
+					th:if="${parent_link==null}"  role="button" th:href="@{/admin/parent}">
 						<i class="fas fa-images text-white"></i> Parent
 				</a> <a class="nav-link  text-left active" th:unless="${parent_link==null}"
-					 role="button" th:href="@{/parent}"> <i
+					 role="button" th:href="@{/admin/parent}"> <i
 						class="fas fa-images text-white"></i> Parent
+				</a>
+				</li>
+				<li class=""><a class="nav-link  text-left"
+					th:if="${fee_link==null}"  role="button" th:href="@{/admin/fee}">
+						<i class="fas fa-images text-white"></i> Fee
+				</a> <a class="nav-link  text-left active" th:unless="${fee_link==null}"
+					 role="button" th:href="@{/admin/fee}"> <i
+						class="fas fa-images text-white"></i> Fee
 				</a>
 				</li>
 				<li class=""><a class="nav-link text-left" role="button"> <i

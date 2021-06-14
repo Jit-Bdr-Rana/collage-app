@@ -12,8 +12,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface StudentRepository extends JpaRepository<Student,Integer> {
 
-	@Query("SELECT s FROM Student s where s.registrationYear= ?1 and s.program.id=?2")
-	public Page<Student> getStudentByYearAndProgram(String year,Integer program_id,Pageable pageable);
+	@Query("SELECT s FROM Student s where s.registrationyear.id= ?1 and s.program.id=?2")
+	public Page<Student> getStudentByYearAndProgram(Integer year_id,Integer program_id,Pageable pageable);
 	
 	@Query("SELECT s FROM Student s where s.contact=?1")
 	public Student getStudentByContact(String contact);

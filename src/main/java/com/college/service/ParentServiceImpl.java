@@ -12,8 +12,8 @@ public class ParentServiceImpl implements ParentService {
 	 @Autowired
 	 private ParentRepository parentRepository;
 	@Override
-	public void saveParent(Parent parent) {
-		 this.parentRepository.save(parent);
+	public Parent saveParent(Parent parent) {
+		return this.parentRepository.save(parent);
 		
 	}
 

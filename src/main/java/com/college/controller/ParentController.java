@@ -11,16 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.college.model.Parent;
 import com.college.model.Program;
 import com.college.model.Student;
+import com.college.model.Year;
 import com.college.service.ParentService;
 import com.college.service.ProgramService;
 import com.college.service.StudentService;
+import com.college.service.YearService;
 
 @Controller
+@RequestMapping("/admin/")
 public class ParentController {
     
 	@Autowired
@@ -31,6 +35,8 @@ public class ParentController {
 	
 	@Autowired
 	private ParentService parentService;
+	@Autowired
+	private YearService yearService;
 
 	
 	@GetMapping("/parent")
@@ -41,39 +47,61 @@ public class ParentController {
 	}
 	
 	@PostMapping("/parent/save")
-	public String saveParent(Parent parent) {
-		this.parentService.saveParent(parent);
-		return "redirect:/parent";
+	public String saveParent(Parent parent, @RequestParam("stu")String id, HttpServletRequest request) {
+		   Integer page =Integer.parseInt( request.getParameter("page"));
+		   String sortDir=request.getParameter("sortDir");
+		   String year=request.getParameter("year");
+		   String program=request.getParameter("programs");
+		   String sortField=request.getParameter("sortField");
+		Student student =studentService.getStudentById(Integer.parseInt(id));
+		Parent getCurrentSavedParent=parentService.saveParent(parent);
+		student.setParent(getCurrentSavedParent);
+		this.studentService.saveStudent(student);
+		  student.setParent(parent);
+		  if(page==1){
+		  return "redirect:/admin/parent";
+		  }else {
+			  return "redirect:/admin/parent/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
+		  }
+		  
 	}
 	
 	
 	@GetMapping("/parent/update/{id}")
-	public String updateParent(@PathVariable(name="id") Integer id,Model model) {
+	public String updateParent(@PathVariable(name="id") Integer id,Model model,@RequestParam("sortField") String sortField,@RequestParam("page") int page,@RequestParam("sortDir") String sortDir,@RequestParam("year") String year,@RequestParam("program") String program) {
 		String parent_link="active";
 		Student student =studentService.getStudentById(id);
 		
-//	   if(student.getParent()==null) {
-//		   Parent parent=new Parent();
-//			parent.setStudent(student);
-//			model.addAttribute("parent_link",parent);
-//			model.addAttribute("parent",parent);
-//	   }
-//	   else {
-//		   Parent parent=new Parent();
-//		    parent.setId(student.getParent().getId());
-//			parent.setStudent(student);
-//			model.addAttribute("parent_link",parent);
-//			model.addAttribute("parent",parent);
-//		   
-//	   }
-	
+		
+		if(student.getParent()==null) {
+		
+			    Parent parent=new Parent();
+			    
+			    model.addAttribute("parent_link",parent_link);
+			    model.addAttribute("year",2020);
+			    model.addAttribute("parent",parent);
+				model.addAttribute("stu",id);
+		}else {
+			    
+			    
+			    model.addAttribute("parent_link",parent_link);
+			    model.addAttribute("year",2020);
+			    model.addAttribute("parent",student.getParent());
+				model.addAttribute("stu",id);
 			
+		}
+			
+		model.addAttribute("sortField",sortField);
+		model.addAttribute("sortDir",sortDir);
+		model.addAttribute("page",page);
+		model.addAttribute("program",program);
+		model.addAttribute("year",year);	
 		
 		return "admin/parent_form";	
 	}
 	
 	
-	@GetMapping("parent/page/{pageNo}")
+	@GetMapping("/parent/page/{pageNo}")
 	public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestParam("sortField") String sortField,@RequestParam("sortDir") String sortDir,Model model,HttpServletRequest response) {
 		int pageSize=2;
 	    List<Student> listStudents;
@@ -91,16 +119,20 @@ public class ParentController {
 				
 		}else {
 			
-			 page =studentService.fetchStudentByYearAndProgram(pageNo, pageSize,"firstName","asc",year,Integer.parseInt(program));
+			 page =studentService.fetchStudentByYearAndProgram(pageNo, pageSize,"firstName","asc",Integer.parseInt(year),Integer.parseInt(program));
 			 listStudents=page.getContent();
 			 
-			 model.addAttribute("year",year);
-			 model.addAttribute("program",Integer.parseInt(program));
+			 model.addAttribute("year_id",Integer.parseInt(year));
+			 model.addAttribute("program_id",Integer.parseInt(program));
 		}
 		
 		
 		String parent_link="active";
+		
+		List<Year> listYears=yearService.getYear();
 		List<Program> listPrograms = programService.showAllProgram();
+		model.addAttribute("listprograms",listPrograms);
+		model.addAttribute("listyears",listYears);
 		model.addAttribute("parent_link",parent_link);
 		
 		model.addAttribute("listPrograms",listPrograms);

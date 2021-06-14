@@ -1,5 +1,6 @@
 package com.college.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,14 +38,43 @@ public class Parent {
 	@Column(name="mother_last_name",length=10,nullable=true)
 	private String motherLastName;
 	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	@Column(name="contact",nullable=true,length=15)
 	private String  contact;
 	
 	@Column(name="address",nullable=true,length=100)
 	private String  address;
 	
-	 
+	 @OneToOne(targetEntity = Student.class, mappedBy = "parent")	    
+	 private Student student;
+	 @Column(name="created_at",nullable=true)
+	 private Date createdAt;
+	 @Column(name="updated_at",nullable=true)
+	 private Date updatedAt;
 	
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	@Override
 	public String toString() {
 		return "Parent [id=" + id + ", fatherFirstName=" + fatherFirstName + ", fatherMiddleName=" + fatherMiddleName

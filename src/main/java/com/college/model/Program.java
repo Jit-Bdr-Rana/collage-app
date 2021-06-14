@@ -1,5 +1,6 @@
 package com.college.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,7 +32,29 @@ public class Program {
 	@OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="program_id", referencedColumnName="id")
 	private List<Student> student;
+	@Column(name="created_at",nullable=true)
+	private java.sql.Date createdAt;
+	 @Column(name="updated_at",nullable=true)
+	 private java.sql.Date updatedAt;
 	
+	public List<Student> getStudent() {
+		return student;
+	}
+	public void setStudent(List<Student> student) {
+		this.student = student;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	@Override
 	public String toString() {
 		return "Program [id=" + id + ", name=" + name + "]";

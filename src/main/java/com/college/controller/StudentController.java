@@ -12,19 +12,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.college.model.Program;
 import com.college.model.Student;
 import com.college.model.User;
+import com.college.model.Year;
 import com.college.service.ProgramService;
 import com.college.service.StudentService;
 import com.college.service.UserService;
+import com.college.service.YearService;
 
 
 
 @Controller
+@RequestMapping("/admin/")
 public class StudentController {
 
 @Autowired
@@ -36,13 +40,18 @@ private ProgramService programService;
 @Autowired
 private UserService userService;
 
+@Autowired
+private YearService yearService;
+
 @GetMapping("/student/form")
 public String showStudentForm(Model model) {
 	String stu_link="active";
 	List<Program> listPrograms = programService.showAllProgram();
+	List<Year> listYears = yearService.getYear();
 	model.addAttribute("stu_link",stu_link);
 	model.addAttribute("student",new Student());
 	model.addAttribute("listPrograms",listPrograms);
+	model.addAttribute("listYears",listYears);
 	
 	return "admin/student_form";
 }
@@ -66,6 +75,7 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 	  
 	 
         student.getUser().setRole("student");
+        student.setRegistrationYear("2020");
 	 
 	  if(student.getId()==null)
 	  {
@@ -80,11 +90,11 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 		   String sortField=request.getParameter("sortField");
 		   this.studentService.saveStudent(student);
 		  redirAttrs.addFlashAttribute("success", "Student has been Updated Successfully!.");
-		  return "redirect:/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
+		  return "redirect:/admin/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
 	  }
 	  this.studentService.saveStudent(student);
 	 
-	return "redirect:/student";
+	return "redirect:/admin/student";
 	
 }
 
@@ -93,6 +103,7 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 	
 	Student student=studentService.getStudentById(id);
 	List<Program> listPrograms = programService.showAllProgram();
+	List<Year> listYears = yearService.getYear();
 	String stu_link="active";
 	model.addAttribute("stu_link",stu_link);
 	model.addAttribute("student",student);
@@ -102,6 +113,7 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 	model.addAttribute("program",program);
 	model.addAttribute("year",year);
 	
+	model.addAttribute("listYears",listYears);
 	model.addAttribute("listPrograms",listPrograms);
 	
 	return "admin/student_form";
@@ -115,7 +127,7 @@ public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestPar
     Page<Student> page;
 	String year=response.getParameter("year");
 	String program=response.getParameter("program");
-	System.out.println(program);
+	
 	
 	
 	if(year==null|| program==null || program.equals("null") ) {
@@ -126,19 +138,21 @@ public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestPar
 			
 	}else {
 		
-		 page =studentService.fetchStudentByYearAndProgram(pageNo, pageSize,"firstName","asc",year,Integer.parseInt(program));
+		 page =studentService.fetchStudentByYearAndProgram(pageNo, pageSize,"firstName","asc",Integer.parseInt(year),Integer.parseInt(program));
 		 listStudents=page.getContent();
 		 
-		 model.addAttribute("year",year);
-		 model.addAttribute("program",Integer.parseInt(program));
+		 model.addAttribute("year_id",Integer.parseInt(year));
+		 model.addAttribute("program_id",Integer.parseInt(program));
 	}
 	
 	
 	String stu_link="active";
 	List<Program> listPrograms = programService.showAllProgram();
+	List<Year> listYears = yearService.getYear();
 	model.addAttribute("stu_link",stu_link);
 	
-	model.addAttribute("listPrograms",listPrograms);
+	model.addAttribute("listyears",listYears);
+	model.addAttribute("listprograms",listPrograms);
 	model.addAttribute("currentPage",pageNo);
 	model.addAttribute("totalPages", page.getTotalPages());
 	model.addAttribute("totalItems",page.getTotalElements());
@@ -154,7 +168,7 @@ public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestPar
   public String  deleteStudent(@PathVariable(value="id") Integer id,RedirectAttributes redirAttrs,@RequestParam("sortField") String sortField,@RequestParam("page") int page,@RequestParam("sortDir") String sortDir,@RequestParam("year") String year,@RequestParam("program") String program) {
 	  this.studentService.deleteStudentById(id);
 	  redirAttrs.addFlashAttribute("success", "Student  has been Deleted Successfully!.");
-	  return "redirect:/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
+	  return "redirect:/admin/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
   }
   
      

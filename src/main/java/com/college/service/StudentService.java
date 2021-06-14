@@ -8,9 +8,9 @@ import com.college.model.Student;
 public interface StudentService {
 	
 	List<Student> getAllStudent();
-	void saveStudent(Student employee);
+	void saveStudent(Student student);
 	Student getStudentById(Integer id);
-	public Page<Student> fetchStudentByYearAndProgram(int pageNo, int pageSize, String sortField, String sortDirection,String year,Integer program_id);
+	public Page<Student> fetchStudentByYearAndProgram(int pageNo, int pageSize, String sortField, String sortDirection,Integer year_id,Integer program_id);
 	 public Page<Student> findPaginate(int pageNo, int pageSize, String sortField, String sortDirection);
 	 public void deleteStudentById(Integer id);
 	 

@@ -32,10 +32,10 @@
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                     <h1 class="h3 mb-0 text-gray-800">Student</h1>
                               
-                                    <a th:href="@{/student/form}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus text-white mr-1"></i> 
+                                    <a th:href="@{/admin/student/form}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus text-white mr-1"></i> 
 			                         Add New</a>
                                 </div>
-                                <form th:action="@{'/page/'+${currentPage}}" method="get">
+                                <form th:action="@{'/admin/page/'+${currentPage}}" method="get">
                                   <input type="hidden" name="sortField" th:value="${sortField}">
                                   <input type="hidden" name="sortDir" th:value="${sortDir}">
                                   
@@ -44,37 +44,30 @@
                        
                                       	<div class="form-group">
 														
-														<select 
-															class="form-control d-none d-sm-inline-block" name="year">
-															<option value="0" selected="true" disabled="true">Select
-																Year</option>
-															<option th:if="${year=='2021'}" value="2021" selected>2021</option>
-															<option th:unless="${year=='2021'}" value="2021" >2021</option>
-															
-															<option th:if="${year=='2022'}" value="2021" selected>2022</option>
-															<option th:unless="${year=='2022'}" value="2021" >2022</option>
-															
-															<option th:if="${year=='2023'}" value="2021" selected>2023</option>
-															<option th:unless="${year=='2023'}" value="2021" >2023</option>
-															
-															<option th:if="${year=='2024'}" value="2021" selected>2024</option>
-															<option th:unless="${year=='2024'}" value="2021" >2024</option>
+														<select class="form-control"
+															name="year">
+															<option value="0" selected="true" disabled="true">Year</option>
+															<sapan th:each="year:${listyears}">
+															<option 
+																  th:if="${year.isActive==true && year.id==year_id}" th:value="${year.id}" selected>[[${year.name}]]</option>
+															<option
+																th:if="${year.isActive==true}" th:unless="${year.id==year_id}" th:value="${year.id}">[[${year.name}]]</option>
+														 </sapan>
 														</select>
 													</div>
 											
 												</div>
 										<div class="col-md-4">
 													<div class="form-group">
-														 <select class="form-control"
-															name="program" >
-															<option value="0" selected="true" disabled="true">Select
-																Program</option>
-																<th:block  th:each="programs:${listPrograms}">
-																<option  th:if="${programs.id==program}" th:value="${programs.id}" selected>[[${programs.name}]]
-																</option>
-																<option  th:unless="${programs.id==program}"  th:value="${programs.id}" >[[${programs.name}]]
-																</option>
-																</th:block>
+														  <select class="form-control"
+															name="program">
+															<option value="0" selected="true" disabled="true">Programs</option>
+															<span th:each="program:${listprograms}">
+															<option th:if="${program.id==program_id}"
+																th:value="${program.id}" selected>[[${program.name}]]</option>
+																<option th:unless="${program.id==program_id}"
+																th:value="${program.id}">[[${program.name}]]</option>
+																</span>
 														</select>
 													</div>
 												</div>
@@ -96,6 +89,7 @@
                             <div class="col-md-12 ">
                                 <div class="card">
                                     <div class="table-responsive">
+                                    
                                         <table class="table v-middle">
                                             <thead>
                                                 <tr class="bg-light">
@@ -122,40 +116,41 @@
                                                          <td>[[${student.gender}]]</td>
                                                          <td>[[${student.program.name}]]</td>
                                                         <td>
-                                                        <a type="button" class="btn btn-success" th:href="@{'/student/update/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}"   styel="color:white" ><i class="fas fa-edit"></i></a>
-                                                        <a type="button" class="btn btn-danger"  th:href="@{'/student/delete/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}"  styel="color:white"><i class="far fa-trash-alt"></i></a>
+                                                        <a type="button" class="btn btn-success" th:href="@{'/admin/student/update/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}"   styel="color:white" ><i class="fas fa-edit"></i></a>
+                                                        <a type="button" class="btn btn-danger"  th:href="@{'/admin/student/delete/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}"  styel="color:white"><i class="far fa-trash-alt"></i></a>
+                                                        
                                                     </td>
                                                 </tr>
                                             
                                             </tbody>
                                         </table>
-                                        <!-- column end -->
-                                    </div>
-                                </div>
-                            </div>
-                                           <div class="container">
+                                         <div class="container">
                                 <hr />
                                 <ul class="pagination pagination-md">
                                      <span th:if="${currentPage==1}" >
                                      <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                                      </span>
                                      <span th:unless="${currentPage==1}" >
-                                     <li class="page-item"><a class="page-link" th:href="@{'/page/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}">Previous</a></li>
+                                     <li class="page-item"><a class="page-link" th:href="@{'/admin/page/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}">Previous</a></li>
                                      </span>
                                     
-                                     <span th:each="i:${#numbers.sequence(1,totalPages)}">
-                                     <th:block th:if="${i==0}")>
-                                     <li class="page-item disabled"> <a th:if="${currentPage!=i}" class="page-link" th:href="@{'/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}">[[${i}]]</a></li>
-                                     </th:block>
-                                     <th:block th:unless="${i==0}")>
-                                     <li class="page-item"> <a th:if="${currentPage!=i}" class="page-link" th:href="@{'/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}">[[${i}]]</a></li>
-                                     </th:block>   
-                                    
-                                    </span>
+                                  	<span th:each="i:${#numbers.sequence(1,totalPages)}">
+													<li th:if="${i==currentPage}" class="page-item active"><a
+														class="page-link"
+														th:href="@{'/admin/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}">[[${i}]]</a></li>
+													<li th:unless="${i==currentPage}" class="page-item "><a
+														class="page-link"
+														th:href="@{'/admin/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}">[[${i}]]</a></li>
+												</span>
                                     <li class="page-item disabled"><a th:unless="${currentPage<totalPages}"  class="page-link disable" href="#">Next</a></li>
-                                    <li class="page-item"><a th:if="${currentPage<totalPages}" th:href="@{'/page/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year}+'&program='+${program}}" class="page-link" href="#">Next</a></li>
+                                    <li class="page-item"><a th:if="${currentPage<totalPages}" th:href="@{'/admin/page/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}" class="page-link" href="#">Next</a></li>
                                 </ul>
                             </div>
+                                        <!-- column end -->
+                                    </div>
+                                </div>
+                            </div>
+                                          
                         </div>
                     </div>
                     <!-- container-fluid -->

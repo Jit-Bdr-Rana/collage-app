@@ -38,12 +38,12 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Page<Student> fetchStudentByYearAndProgram(int pageNo, int pageSize, String sortField, String sortDirection,String year, Integer program_id) {
+	public Page<Student> fetchStudentByYearAndProgram(int pageNo, int pageSize, String sortField, String sortDirection,Integer  year_id, Integer program_id) {
 		
 		Sort sort=sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())?Sort.by(sortField).ascending():Sort.by(sortField).descending();
 		Pageable pageable=PageRequest.of(pageNo-1,pageSize,sort);
 	
-		return stuRepo.getStudentByYearAndProgram(year,program_id,pageable);
+		return stuRepo.getStudentByYearAndProgram(year_id,program_id,pageable);
 		
 	}
    public Page<Student> findPaginate(int pageNo, int pageSize, String sortField, String sortDirection) {

@@ -1,5 +1,7 @@
 package com.college.model;
 
+import java.sql.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +30,26 @@ private String password;
 @OneToOne(mappedBy = "user")
 private Student student;
 private String role;
+@Column(name="created_at",nullable=true)
+private Date createdAt;
+@Column(name="updated_at",nullable=true)
+private Date updatedAt;
 
+public Date getCreatedAt() {
+	return createdAt;
+}
+
+public void setCreatedAt(Date createdAt) {
+	this.createdAt = createdAt;
+}
+
+public Date getUpdatedAt() {
+	return updatedAt;
+}
+
+public void setUpdatedAt(Date updatedAt) {
+	this.updatedAt = updatedAt;
+}
 
 @Override
 public String toString() {

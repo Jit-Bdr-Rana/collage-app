@@ -40,7 +40,7 @@
 											<h3 class="box-title mt-3 ml-5">Student Registration</h3>
 										</div>
 										<!-- form start -->
-										<form class="ml-5 mr-5" role="form" action="" th:action="@{/student/save}" method="post" th:object="${student}">
+										<form class="ml-5 mr-5" role="form" action="" th:action="@{/admin/student/save}" method="post" th:object="${student}">
 											<input type="hidden" th:field="*{id}" th:value="*{id}">
 											
 											<div class="box-body row">
@@ -89,14 +89,12 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Registration year</label> 
-														<select th:field="*{registrationYear}"
+														<select th:field="*{registrationyear}"
 															class="form-control" name="semester_id">
 															<option value="0" selected="true" disabled="true">Select
 																Year</option>
-															<option value="2021">2021</option>
-															<option value="2022">2022</option>
-															<option value="2023">2023</option>
-															<option value="2024">2024</option>
+															   <option th:each="year:${listYears}" th:if="${year.isActive==true}" th:value="${year.id}">[[${year.name}]]</option>		
+															   
 														</select>
 													</div>
 												</div>
@@ -106,7 +104,7 @@
 															name="semester_id" th:field="*{program}">
 															<option value="0" selected="true" disabled="true">Select
 																Program</option>
-																<option th:each="program:${listPrograms}" th:value="${program.id}">[[${program.name}]]
+																<option th:each="program:${listPrograms}"  th:value="${program.id}">[[${program.name}]]
 																</option>
 														</select>
 													</div>
