@@ -71,12 +71,13 @@ public class ProgramAndYearController {
 	     year.setCreatedAt(this.date);
 	     year.setActive(false);
 		this.yearService.saveYear(year);
+		redirAttrs.addFlashAttribute("success", "Year has been Added Successfully!.");
 		return "redirect:/admin/program-year";
 		
 	}
 
 	@PostMapping("/program/save")
-	public String saveFaculty(Program program,RedirectAttributes redirAttrs,Model model,HttpServletRequest  request) {
+	public String saveProgram(Program program,RedirectAttributes redirAttrs,Model model,HttpServletRequest  request) {
 	
 		Program matchProgram=this.programService.fetchProgramFromName(program.getName());
 		if(matchProgram==null) { 
@@ -135,9 +136,10 @@ public class ProgramAndYearController {
 	}
 	@GetMapping("/program/delete/{id}")
 	public String deleteFaculty(@PathVariable(value="id")Integer id,RedirectAttributes redirAttrs) {
+		
 		this.programService.deleteProgram(id);
 		redirAttrs.addFlashAttribute("success", "Program has been deleted Successfully!.");
-		return "redirect:/admin/program";
+		return "redirect:/admin/program-year";
 	}
 	
 	@GetMapping("/program/findbyid")

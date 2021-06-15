@@ -51,10 +51,30 @@
     {
         $('#form_submit').removeAttr("disabled","true");
     }
+    
+    if($('#pacakage__total').val()!=sum)
+    {
+       $('#form_submit').attr("disabled","true");
+    }else
+    {
+    $('#form_submit').removeAttr("disabled","true");
+    }
      
      
 });
 
+ $(document).ready(function(){
+ 
+   if ($('#full_schoolarship').is(":checked")){
+      $('#form_submit').removeAttr("disabled","true");
+                     { 
+                       
+                      makeDisable()
+                     }
+ }
+ 
+ 
+ });
 
 
 
@@ -82,34 +102,65 @@
      });
     $('#total').val(sum);
     
+     if( $('#pacakage__total').val()==0){
+      $('#form_submit').attr("disabled","true");
+        }else
+        {
+         $('#form_submit').removeAttr("disabled","true");
+        }
     
     });
+    
+   
 });
 
     //disble on checking full schoolarship
 
 
                 $("#full_schoolarship").click(function() { 
-                 
+                   
                     if ($('#full_schoolarship').is(":checked"))
                      { 
-                       
-                        $('#pacakage__total').attr('disabled','true'); 
-                         $('#scholarship').attr('disabled','true'); 
-                         $('#sem1').attr('disabled','true'); 
-                         $('#sem2').attr('disabled','true'); 
-                        $('#sem3').attr('disabled','true'); 
-                        $('#sem4').attr('disabled','true'); 
-                        $('#sem5').attr('disabled','true'); 
-                        $('#sem6').attr('disabled','true'); 
-                        $('#sem7').attr('disabled','true'); 
-                        $('#sem8').attr('disabled','true');   
-                        $('#btn1').attr('disabled','true');   
+                      $('#form_submit').removeAttr("disabled","true");
+                      makeDisable()
                      }
                      else 
                      {
-                        
-                       $('#pacakage__total').removeAttr('disabled','true');
+                      $('#form_submit').attr("disabled","true");
+                      makeEnable()
+                     }
+                });
+                
+                
+            function makeDisable(){
+                
+                  $('#pacakage__total').val(""); 
+                        $('#pacakage__total').attr('disabled','true'); 
+                         $('#scholarship').attr('disabled','true'); 
+                         $('#scholarship').val(""); 
+                         $('#sem1').attr('disabled','true'); 
+                         $('#sem1').val(""); 
+                         $('#sem2').attr('disabled','true'); 
+                         $('#sem2').val(""); 
+                        $('#sem3').attr('disabled','true'); 
+                        $('#sem3').val(""); 
+                        $('#sem4').attr('disabled','true'); 
+                        $('#sem4').val(""); 
+                        $('#sem5').attr('disabled','true'); 
+                        $('#sem5').val(""); 
+                        $('#sem6').attr('disabled','true'); 
+                        $('#sem6').val(""); 
+                        $('#sem7').attr('disabled','true'); 
+                        $('#sem7').val(""); 
+                        $('#sem8').attr('disabled','true');   
+                        $('#sem8').val("");   
+                        $('#btn1').attr('disabled','true');   
+                        $('#btn1').val("");   
+            
+            }
+            
+            function makeEnable(){
+             $('#pacakage__total').removeAttr('disabled','true');
                        $('#pacakage__total').removeAttr('disabled','true'); 
                          $('#scholarship').removeAttr('disabled','true'); 
                          $('#sem1').removeAttr('disabled','true'); 
@@ -121,7 +172,9 @@
                         $('#sem7').removeAttr('disabled','true'); 
                         $('#sem8').removeAttr('disabled','true');   
                         $('#btn1').removeAttr('disabled','true');   
-                     }
-                });
+            
+            }
+            
+            
 
 

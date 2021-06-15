@@ -35,18 +35,24 @@
                                     <hr>
                                     <!-- Main content start here -->
                                     <div class="main- fees-content flex">
-                                        <p class="ml-4 float-left">Name: Jit Bahadur Rana</p>
-                                        <p class="mr-4 float-right">Program: BIT</p>
-                                        <p class=" text-center"> Batch: 2017</p>
+                                        <p class="ml-4 float-left">Name: [[${student.firstName+' '+student.middleName+' '+student.lastName}]]</p>
+                                        <p class="mr-4 float-right">Program: [[${student.program.name}]]</p>
+                                        <p class=" text-center"> Batch: [[${student.registrationYear}]]</p>
                                     </div>
                                    <form  th:action="@{/admin/fee/save}" method="post" enctype="multipart/form-data" th:object="${fee}">
-                                      <input type="hidden" name="program_id" th:value="${program_id}" >
+                                      <input type="hidden" name="student_id" th:value="${student_id}" >
+                                      <input type="hidden" name="sortField"
+													th:value="${sortField}"> <input type="hidden"
+													name="sortDir" th:value="${sortDir}"> <input
+													type="hidden" name="page" th:value="${pageNo}"> <input
+													type="hidden" name="year" th:value="${year_id}"> <input
+													type="hidden" name="program" th:value="${program_id}">
                                      <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group ml-4">
                                                 <label class="font-weight-bold" for="pacakage__total">Full
                                                     Schoolarship
-                                               <input type="checkbox" class="ml-3 btn "  id="full_schoolarship" th:field="${fee.isFullSchoolarship}"
+                                               <input type="checkbox" class="ml-3 btn " th:field="*{schoolarship}" id="full_schoolarship" 
                                                     placeholder="Enter Amount">
                                                 </label>
                                                 
@@ -136,12 +142,15 @@
                                         <label class="font-weight-bold" for="exampleInputFile">
                                             Upload Agreement
                                         </label>
-                                        <input type="file" id="exampleInputFile" th:field="*{document}">
+                                        <input type="file"  id="exampleInputFile" name="agreement">
                                     </div>
 
                                     <div class="button-for-pay">
-                                        <button type="submit"   id="form_submit" class="btn btn-primary shadow-sm ml-4 mb-3">
+                                        <button th:if="*{id==null}" type="submit" disabled="disabled"  id="form_submit" class="btn btn-primary shadow-sm ml-4 mb-3">
                                             Submit
+                                        </button>
+                                         <button th:unless="*{id==null}" type="submit" disabled="disabled"  id="form_submit" class="btn btn-primary shadow-sm ml-4 mb-3">
+                                            Update
                                         </button>
                                     </div>
                             </form>

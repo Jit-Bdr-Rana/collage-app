@@ -18,8 +18,18 @@ public class Fee {
 	private Integer id;
 	
 	@Column(name="is_full_schoolarship")
-	private boolean isFullSchoolarship;
+	private boolean schoolarship;
 	
+
+
+	public boolean isSchoolarship() {
+		return schoolarship;
+	}
+
+	public void setSchoolarship(boolean schoolarship) {
+		this.schoolarship = schoolarship;
+	}
+
 	@Column(name="semester_first" ,length=500)
 	private Integer semesterFirst;
 	
@@ -57,7 +67,7 @@ public class Fee {
 
 	@Override
 	public String toString() {
-		return "Fee [id=" + id + ", isFullSchoolarship=" + isFullSchoolarship + ", semesterFirst=" + semesterFirst
+		return "Fee [id=" + id + ", isFullSchoolarship=" + schoolarship + ", semesterFirst=" + semesterFirst
 				+ ", semesterSecond=" + semesterSecond + ", semesterThird=" + semesterThird + ", semesterFourth="
 				+ semesterFourth + ", semesterFifth=" + semesterFifth + ", semesterSixth=" + semesterSixth
 				+ ", semesterSeventh=" + semesterSeventh + ", semesterEight=" + semesterEight + ", document=" + document

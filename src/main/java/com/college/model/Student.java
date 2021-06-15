@@ -76,6 +76,14 @@ public void setUpdatedAt(Date updatedAt) {
 	this.updatedAt = updatedAt;
 }
 
+public Fee getFee() {
+	return fee;
+}
+
+public void setFee(Fee fee) {
+	this.fee = fee;
+}
+
 @OneToOne(targetEntity = Parent.class, cascade = CascadeType.ALL)
  private Parent parent;
 
