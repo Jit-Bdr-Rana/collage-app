@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,9 @@ import com.college.service.YearService;
 @Controller
 @RequestMapping("/admin/")
 public class ParentController {
-    
+	  private	long millis=System.currentTimeMillis();  
+	  private   Date date=new Date(millis); 
+	    
 	@Autowired
 	private StudentService studentService;
 	

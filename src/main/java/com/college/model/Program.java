@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
@@ -36,7 +37,42 @@ public class Program {
 	private java.sql.Date createdAt;
 	 @Column(name="updated_at",nullable=true)
 	 private java.sql.Date updatedAt;
+	 @OneToOne(targetEntity = AdmissionFee.class, mappedBy = "program")	    
+	 private AdmissionFee admissionFee;
+	 
+	 @OneToOne(targetEntity = SecurityFee.class, mappedBy = "program")	    
+	 private SecurityFee securityFee;
+	 
+	 @Column(name="has_fee")
+	 private boolean hasFee=false;
+	 
+	 @Column(name="has_security")
+	 private boolean hasSecurity=false;
 	
+	public SecurityFee getSecurityFee() {
+		return securityFee;
+	}
+	public boolean isHasSecurity() {
+		return hasSecurity;
+	}
+	public void setSecurityFee(SecurityFee securityFee) {
+		this.securityFee = securityFee;
+	}
+	public void setHasSecurity(boolean hasSecurity) {
+		this.hasSecurity = hasSecurity;
+	}
+	public AdmissionFee getAdmissionFee() {
+		return admissionFee;
+	}
+	public void setAdmissionFee(AdmissionFee admissionFee) {
+		this.admissionFee = admissionFee;
+	}
+	public boolean isHasFee() {
+		return hasFee;
+	}
+	public void setHasFee(boolean hasFee) {
+		this.hasFee = hasFee;
+	}
 	public List<Student> getStudent() {
 		return student;
 	}

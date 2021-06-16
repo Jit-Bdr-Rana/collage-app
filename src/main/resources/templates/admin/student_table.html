@@ -121,6 +121,10 @@
                                                         
                                                     </td>
                                                 </tr>
+                                                <tr th:if="${listStudents.isEmpty}"  >
+												<th colspan=4 class="text-center">  No Data</th>
+													
+												</tr>
                                             
                                             </tbody>
                                         </table>
@@ -135,10 +139,11 @@
                                      </span>
                                     
                                   	<span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                  	               
 													<li th:if="${i==currentPage}" class="page-item active"><a
 														class="page-link"
 														th:href="@{'/admin/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}">[[${i}]]</a></li>
-													<li th:unless="${i==currentPage}" class="page-item "><a
+													<li th:unless="${i==currentPage}" th:if="${i!=0}" class="page-item "><a
 														class="page-link"
 														th:href="@{'/admin/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}">[[${i}]]</a></li>
 												</span>

@@ -37,10 +37,10 @@
 								<div class="card">
 									<div class="box box-primary">
 										<div class="box-header">
-											<h3 class="box-title mt-3 ml-5">Program</h3>
+											<h3 class="box-title mt-3 ml-5">Security Fee</h3>
 										</div>
 										<!-- form start -->
-										<form class="ml-5 mr-5" role="form" action="" th:action="@{/admin/admission/fee/save}" method="post" th:object="${admission_fee}">
+										<form class="ml-5 mr-5" role="form" action="" th:action="@{/admin/security/fee/save}" method="post" th:object="${security_fee}">
 											<input type="hidden" th:field="*{id}">
 											<div class="box-body row">
 												<div class="col-md-6">
@@ -48,8 +48,8 @@
 														<label for="exampleInputTitle1">Program</label> 
 														<select class="form-control" th:field="*{program}" required>
 														<span th:each="program:${programLists}">
-														<option th:if="${program.hasFee==false and admission_fee.id==null}" th:value="${program.id}">[[${program.name}]]</option>
-														<option th:if="${admission_fee.id!=null &&admission_fee.program.id==program.id }" th:value="${program.id}">[[${program.name}]]</option>
+														<option th:if="${program.hasSecurity==false and security_fee.id==null}" th:value="${program.id}">[[${program.name}]]</option>
+														<option th:if="${security_fee.id!=null &&security_fee.program.id==program.id }" th:value="${program.id}">[[${program.name}]]</option>
 														</span>
 														</select>
 															<span style="color:red;font-style:itallic;" >[[${nameError}]] </span>

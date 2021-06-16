@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.college.model.Faculty;
+
 import com.college.model.Program;
 import com.college.repository.ProgramRepository;
 

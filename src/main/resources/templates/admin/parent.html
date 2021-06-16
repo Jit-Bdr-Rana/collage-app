@@ -116,6 +116,10 @@
 														th:href="@{'/admin/parent/show/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}"
 														styel="color:white"><i class="far fa-eye"></i></a></td>
 												</tr>
+												<tr th:if="${listStudents.isEmpty}"  >
+												<th colspan=5 class="text-center">  No Data</th>
+													
+												</tr>
 											</table>
 											<div class="container">
 								

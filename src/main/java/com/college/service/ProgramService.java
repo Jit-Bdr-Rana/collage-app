@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.college.model.Faculty;
+
 import com.college.model.Program;
 
 public interface ProgramService {

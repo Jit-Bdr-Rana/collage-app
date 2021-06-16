@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.college.model.Faculty;
+
 import com.college.model.Program;
 import com.college.model.Year;
 import com.college.repository.YearRepository;
