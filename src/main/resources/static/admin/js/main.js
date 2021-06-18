@@ -175,6 +175,102 @@
             
             }
             
-            
+           
+      //File upload hide and show 
+$(document).ready(function() {
+  $("#checkMark1").click(function() {
+    $("#form1").toggle("hide");
+  });
+    $("#checkMark11").click(function() {
+    if($('#form1').is(':visible')) {
+    $("#form1").toggle("hide");
+  }
+  });
+   $("#checkMark2").click(function() {
+    $("#form2").toggle();
+  });
 
+});
+// check box only selectable in payment of fee
 
+$('input[type="checkbox"]').on('change', function() {
+   $('input[type="checkbox"]').not(this).prop('checked', false);
+});
+
+// payment form submission
+$("form1").submit(function(e){
+        e.preventDefault();
+    });
+    
+// first semester payment
+function pay_first(){
+  var mode="cash";
+  var amountFirst=$('#amount_first').val();
+  var fileFirst=$('#file_first').val();
+  var enteredBy=$('#entered_by').val();
+  var fileFirst=$('#file_first').val();
+  var feeId=$('#fee_id').val();
+
+  
+   if (!$('#checkMark11').is(":checked") && !$('#checkMark1').is(":checked") || !$('#amount_first').val())
+   { alert(11);
+   }
+   else
+   {
+      if($('#checkMark1').is(":checked")){
+        var mode="voucher";
+        
+        if( !$('#file_first').val()){
+          
+            alert("no file");
+           }
+         else{  
+        var fd = new FormData();
+        var files = $('#file_first')[0].files[0];
+        fd.append("file",files);
+        fd.append("mode",mode);
+        fd.append("amountFirst",amountFirst);
+        fd.append("feeId",feeId);
+       
+           $.ajax({
+         type: 'post',
+         url: '/admin/payment/save/type-voucher',
+         data: fd,
+         contentType: false,
+         processData: false,
+         dataType: "json",
+         success: function(response) {
+        
+         }
+        });
+        
+                   
+         }  
+      }else{      var semester=1;
+                  var fd = new FormData();
+                 fd.append("enteredBy",enteredBy);
+                 fd.append("mode",mode);
+                fd.append("semester",1);
+                fd.append("amountFirst",amountFirst);
+                  fd.append("feeId",feeId);
+               $.ajax({
+                      type: 'post',
+                      url: '/admin/payment/save/type-cash',
+                      data: fd,
+                       contentType: false,
+                       processData: false,
+                      dataType: "json",
+                      success: function(response) {
+                       $("#amount_first").val("");
+                    }
+                 });
+        
+      
+     
+          
+      }
+   
+   }
+  
+  
+}

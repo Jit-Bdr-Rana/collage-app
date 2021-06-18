@@ -1,6 +1,7 @@
 package com.college.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,6 +31,11 @@ private String password;
 @OneToOne(mappedBy = "user")
 private Student student;
 private String role;
+
+@OneToMany(targetEntity=Payment.class,cascade=CascadeType.ALL)
+@JoinColumn(name="user_id", referencedColumnName="id")
+private List<Payment> payment;
+
 @Column(name="created_at",nullable=true)
 private Date createdAt;
 @Column(name="updated_at",nullable=true)

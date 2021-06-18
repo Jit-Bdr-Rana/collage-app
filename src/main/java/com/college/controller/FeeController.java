@@ -53,6 +53,8 @@ public class FeeController {
 	
 	@PostMapping("/fee/save")
 	 public String saveFee(Fee fee,@RequestParam("agreement") MultipartFile agreement,@RequestParam("student_id") Integer id,HttpServletRequest request,RedirectAttributes redirAttrs) {
+		 
+	
 		
 		 Integer page =Integer.parseInt( request.getParameter("page"));
 		   String sortDir=request.getParameter("sortDir");

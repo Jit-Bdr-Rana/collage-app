@@ -1,0 +1,262 @@
+<!doctype html>
+
+<html xmlns:th="www.thymeleaf.org">
+<title>Student</title>
+<head>
+<th:block th:insert="~{admin/fragment/fragment :: css}"></th:block>
+</head>
+
+
+<body>
+
+	<div id="wrapper">
+		<div class="overlay"></div>
+		<!-- Sidebar Start -->
+
+		<!-- Sidebar-wrapper -->
+
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper" class="toggled">
+			<div id="content">
+				<th:block th:insert="~{admin/fragment/fragment :: sidebar}"></th:block>
+				<div class="container-fluid p-0 px-lg-0 px-md-0">
+					<!-- Topbar -->
+					<th:block th:replace="~{admin/fragment/fragment :: topbar}"></th:block>
+					<!-- End of Topbar -->
+                   <!-- Begin Page Content -->
+                    <div class="container-fluid px-lg-4">
+                        <div class="row">
+                            <!-- column start -->
+                            <div class="col-md-12 mt-4">
+                                <div class="card">
+                                    <h1 class="text-capitalize text-center mt-2 title-fees">Fees Structure</h1>
+                                    <!-- Main content start here -->
+                                    <div class="main- fees-content flex">
+                                        <p class="ml-4 float-left">Name: [[${student.firstName+" "+student.middleName+" "+student.lastName}]]</p>
+                                        <p class="mr-4 float-right">Program: [[${student.program.name}]]</p>
+                                    </div>
+
+                                    <div class="semester-structure">
+                                        <!-- First Semester -->
+                                        <hr>
+                                        <h4 class="ml-4 font-weight-bold float-left ml-4 mb-1">Semester I <i
+                                                class="fa fa-check-circle text-success" style="font-size:19px"
+                                                aria-hidden="true"></i><i class="fas fa-exclamation-triangle text-danger"></i></h4>
+                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                                class="fas fa-receipt text-white mr-1"></i>
+                                            Bill</a>
+                                    </div>
+                                    <hr>
+                                    <div class="box-body row">
+                                        <div class="col-md-6">
+                                            <div class="flex ml-4 items-fees">
+                                                <div class="admission_fee">
+                                                <input type="hidden" id="entered_by" value="" >
+                                                <input type="hidden" id="fee_id" th:value="${student.fee.id}" >
+                                                    <label for="test">Admission Fee:</label>
+                                                    <span class="ml-4">Rs.[[${student.program.admissionFee.amount}]]</span>
+                                                </div>
+                                                <div class="semester_fee">
+                                                    <label for="test">Semester Fee:</label>
+                                                    <span class="sp__1">Rs.[[${student.fee.semesterFirst}]]</span>
+                                                </div>
+                                                <div class="securiy_fee">
+                                                    <label for="test">Security Deposit:</label>
+                                                    <span class="sp__2">Rs.[[${student.program.securityFee.amount}]]</span>
+                                                </div>
+                                                <div class="checkbox flex-column">
+                                                    <label>Payment Mode: </label>
+                                                    <label class="mr-2">
+                                                        <input type="checkbox" id="checkMark11" name="mode" > Cash
+                                                    </label>
+                                                    <label class="mr-2">
+                                                        <input type="checkbox" id="checkMark1" name="mode" > Voucher
+                                                    </label>
+                                                </div>
+                                                <div class="form-group" style="display:none" id="form1">
+                                                    <label for="File">File input</label>
+                                                    <form  method="post" enctype="multipart/form-data" action="">
+                                                    <input type="file" id="file_first" name="first_file">
+                                                    </form>
+                                                </div>
+
+                                                <div class="total_fee">
+                                                    <label for="test">Total:</label>
+                                                    <span class="sp__3">Rs.[[${student.program.securityFee.amount+student.fee.semesterFirst+student.program.admissionFee.amount}]]</span>
+                                                </div>
+
+                                                <div class=" form-group amount__form">
+                                                    Amount: <input class="sp__4" type="number" 
+                                                        id="amount_first" placeholder="Enter Amount" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <p>Log:</p>
+                                            
+                                            <div class="log__dates1 mb-2" th:each="payment:${paymentlists}" th:if="${payment.semester==1}">
+                                             
+                                                <p>[[${payment.createdAt}]]</p>
+                                                <p th:if="${payment.mode=='cash'}">
+                                                <button
+                                                        class="btn btn-sm btn-success pb_custom">Cash</button>
+                                                </p>
+                                                <p th:unless="${payment.mode=='cash'}">
+                                                <button
+                                                        class="btn btn-sm btn-danger pl-3 pr-3">Voucher</button>
+                                                 </p>
+                                                <p>[[${payment.amount}]]</p>
+                                               
+                                            </div>
+                                            <hr>
+                                            <div class="log__dates1 mb-2">
+                                             
+                                                <p>total</p>
+                                                <p >
+                                                <button
+                                                        class="btn btn-sm btn-success pb_custom">Cash</button>
+                                                </p>
+                                                
+                                                <p>jj</p>
+                                               
+                                            </div>
+
+
+                                            <div class="due__paid">
+                                                <div class="due">
+                                                    <label for="test">Due:</label>
+                                                    <span class="sp__5">Rs.11100</span>
+                                                </div>
+                                                <div class="paid">
+                                                    <label for="test">Paid:</label>
+                                                    <span class="sp__6">Rs.11100</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-for-pay ml-2">
+                                        <button onclick="pay_first()"  href="#" class="btn btn-primary shadow-sm ml-4 mb-3"><i
+                                                class="fas fa-money-bill text-white mr-1"></i>
+                                            Pay</button>
+                                    </div>
+                                    <!-- First semester end here... -->
+                                    <!-- Main content end here -->
+
+                                    <!--   Second Semester start -->
+                                    <div class="semester-structure">
+                                        <!-- Second Semester -->
+                                        <hr>
+                                        <h4 class="ml-4 font-weight-bold float-left ml-4 mb-1">Semester II <i
+                                                class="fa fa-check-circle text-success" style="font-size:19px"
+                                                aria-hidden="true"></i></h4>
+                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1"><i
+                                                class="fas fa-receipt text-white mr-1"></i>
+                                            Bill</a>
+                                    </div>
+                                    <hr>
+                                    <div class="box-body row">
+                                        <div class="col-md-6">
+                                            <div class="flex ml-4 items-fees">
+                                                <div class="semester_fee">
+                                                    <label for="test">Semester Fee:</label>
+                                                    <span class="sp__1">Rs.11100</span>
+                                                </div>
+                                                <div class="checkbox flex-column">
+                                                    <label>Payment Mode: </label>
+                                                    <label class="mr-2">
+                                                        <input type="checkbox"> Cash
+                                                    </label>
+                                                    <label class="mr-2">
+                                                        <input type="checkbox" id="checkMark2"> Voucher
+                                                    </label>
+                                                </div>
+                                                <div class="form-group" style="display:none" id="form2">
+                                                    <label for="File">File input</label>
+                                                    <input type="file" id="file">
+                                                </div>
+
+                                                <div class="total_fee">
+                                                    <label for="test">Total:</label>
+                                                    <span class="sp__3">Rs.11100</span>
+                                                </div>
+
+                                                <div class=" form-group amount__form">
+                                                    Amount: <input class="sp__4" type="text" 
+                                                        id="exampleInputAmount" placeholder="Enter Amount">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <p>Log:</p>
+                                            <div class="log__dates1 mb-2">
+                                                <p>2012-15-25</p>
+                                                <p class=""><button
+                                                        class="btn btn-sm btn-success pb_custom">Cash</button></p>
+                                                <p>600000</p>
+                                            </div>
+
+                                            <div class="log__dates2 mb-2">
+                                                <p>2012-15-25</p>
+                                                <p class=""><button
+                                                        class="btn btn-sm btn-danger pl-3 pr-3">Voucher</button></p>
+                                                <p>600000</p>
+                                            </div>
+
+                                            <div class="due__paid">
+                                                <div class="due">
+                                                    <label for="test">Due:</label>
+                                                    <span class="sp__5">Rs.11100</span>
+                                                </div>
+                                                <div class="paid">
+                                                    <label for="test">Paid:</label>
+                                                    <span class="sp__6">Rs.11100</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-for-pay ml-2">
+                                        <a href="#" class="btn btn-primary shadow-sm ml-4 mb-3"><i
+                                                class="fas fa-money-bill text-white mr-1"></i>
+                                            Pay</a>
+                                    </div>
+
+                                    <!-- Second semester end here -->
+
+                                    <!-- column end -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End of the page content -->
+                </div>
+            </div>
+        </div>
+        <!--page-content-wrapper -->
+					
+					
+					
+				</div>
+				<!-- container-fluid -->
+			</div>
+		</div>
+	</div>
+	<!--page-content-wrapper -->
+	</div>
+	<!--wrapper -->
+
+
+	<!-- js -->
+	<th:block th:insert="~{admin/fragment/fragment :: js}"></th:block>
+
+	<!-- end js -->
+
+
+</body>
+
+</html>

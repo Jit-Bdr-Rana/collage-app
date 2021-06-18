@@ -13,6 +13,12 @@ import javax.persistence.Table;
 @Entity(name="SecurityFee")
 @Table(name="security_fees")
 public class SecurityFee {
+	@Override
+	public String toString() {
+		return "SecurityFee [id=" + id + ", amount=" + amount + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", program=" + program + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;

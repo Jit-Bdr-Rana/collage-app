@@ -417,6 +417,28 @@ form {
 .font-16 {
     font-size: 16px;
 }
+.sp__1{
+    margin-left: 32px;
+}
+.sp__2{
+    margin-left: 14px;
+}
+.sp__3{
+    margin-left: 95px;
+}
+.sp__4{
+    margin-left: 74px;
+}
+.sp__5{
+   margin-left: 64px;
+}
+.sp__6{
+   margin-left: 60px;
+}
+.mr-2{
+    margin-left: 23px;
+}
+
 
 
 /* main-table */
@@ -513,7 +535,7 @@ textarea.form-control {
     font-size: 28px;
 }
 
-.items-fees p{
+/*.items-fees p{
   display: inline;
   width: 100px;
   height: 100px;
@@ -526,6 +548,21 @@ textarea.form-control {
   margin-right: 10px;
   background-color:#343a40;
 
+}*/
+.log__dates1 p{
+  display: inline;
+  margin-right: 15px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+.log__dates2 p{
+  display: inline;
+  margin-right: 15px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+.amount__form > input{
+    height: 14px;
 }
 
 .go_button{
@@ -543,3 +580,9 @@ margin-top: 34px;
     box-shadow: 3px 3px 0px transparent;
     transition: 0.5s;
     }
+
+.pb_custom{
+    padding-right: 26px;
+    padding-left: 26px;
+}
+

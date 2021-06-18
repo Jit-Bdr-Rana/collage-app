@@ -117,7 +117,7 @@
 													<td>[[${student.registrationyear.name}]]</td>
 													<td><a th:href="@{'/admin/fee/form/'+${student.id}+'?page='+${currentPage}+'&sortField='+${sortField}+'&sortDir='+${sortDir}+'&year='+${year_id}+'&program='+${program_id}}" class="ml-3 "> <i
 															class="fa fa-edit btn btn-info btn-sm"></i></a>
-														 <a href=""	class="ml-3"><i	class="fas fa-money-bill btn btn-danger btn-sm"></i></a>
+														 <a th:href="@{'/admin/payment/'+${student.id}}"	class="ml-3"><i	class="fas fa-money-bill btn btn-danger btn-sm"></i></a>
 														  <a href=""	class="ml-3"><i	class="fa fa-history btn btn-danger btn-sm"></i></a>
 															
 												</td>
