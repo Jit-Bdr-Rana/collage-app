@@ -6,7 +6,8 @@ import com.college.model.Payment;
 
 public interface PaymentService {
 	
-	public void savePayment(Payment payment);
+	public Payment savePayment(Payment payment);
 	List<Payment> getAllPaymentByFeeId(Integer id);
+	List<Payment> getAllPaymentByFeeIdAndSemester(Integer id,Integer semester);
 
 }

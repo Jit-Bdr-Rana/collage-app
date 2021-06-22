@@ -22,8 +22,8 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public void saveStudent(Student student) {
-	    this.stuRepo.save(student);
+	public Student saveStudent(Student student) {
+	   return this.stuRepo.save(student);
 	}
 
 	@Override

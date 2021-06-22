@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.college.model.Fee;
 import com.college.model.Program;
 import com.college.model.Student;
 import com.college.model.User;
 import com.college.model.Year;
+import com.college.service.FeeService;
 import com.college.service.ProgramService;
 import com.college.service.StudentService;
 import com.college.service.UserService;
@@ -30,9 +33,14 @@ import com.college.service.YearService;
 @Controller
 @RequestMapping("/admin/")
 public class StudentController {
+	 private	long millis=System.currentTimeMillis();  
+	  private   Date date=new Date(millis); 
 
 @Autowired
 private StudentService studentService;
+
+@Autowired
+private FeeService feeService;
 
 @Autowired
 private ProgramService programService;
@@ -79,6 +87,7 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 	 
 	  if(student.getId()==null)
 	  {
+		  
 		  redirAttrs.addFlashAttribute("success", "Student has been added Successfully!.");  
 	  }else {
 		  
@@ -92,8 +101,12 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 		  redirAttrs.addFlashAttribute("success", "Student has been Updated Successfully!.");
 		  return "redirect:/admin/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir+"&year="+year+"&program="+program;
 	  }
+	  Fee fee =new Fee();
+	  fee.setCreatedAt(date);
+	  feeService.saveFee(fee);
+	  student.setFee(fee);
 	  this.studentService.saveStudent(student);
-	 
+	  
 	return "redirect:/admin/student";
 	
 }

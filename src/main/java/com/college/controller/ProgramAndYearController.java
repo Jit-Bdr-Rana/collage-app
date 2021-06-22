@@ -21,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.college.model.AdmissionFee;
 import com.college.model.Program;
+import com.college.model.SecurityFee;
 import com.college.model.Year;
 import com.college.repository.YearRepository;
+import com.college.service.AdmissionFeeService;
 import com.college.service.ProgramService;
+import com.college.service.SecurityFeeService;
 import com.college.service.YearService;
 
 @Controller
@@ -36,6 +39,12 @@ public class ProgramAndYearController {
     
 	@Autowired
 	private ProgramService programService;
+	
+	@Autowired
+	private AdmissionFeeService admissionFeeService;
+	
+	@Autowired 
+	private SecurityFeeService securityFeeService;
 	
 	@Autowired
 	private YearService yearService;
@@ -68,7 +77,7 @@ public class ProgramAndYearController {
 	
 	@PostMapping("/year/save")
 	public String saveYear(Year year,RedirectAttributes redirAttrs,Model model,HttpServletRequest  request) {
-	     year.setCreatedAt(this.date);
+	     year.setCreatedAt(date);
 	     year.setActive(false);
 		this.yearService.saveYear(year);
 		redirAttrs.addFlashAttribute("success", "Year has been Added Successfully!.");
@@ -84,7 +93,21 @@ public class ProgramAndYearController {
 			
 			if(program.getId()==null) {
 				program.setCreatedAt(date);
-				this.programService.saveProgram(program);
+				Program newProgram=this.programService.saveProgram(program);
+
+				SecurityFee securityFee=new SecurityFee();
+				securityFee.setAmount(0);
+				securityFee.setCreatedAt(date);
+				securityFee.setProgram(newProgram);
+				securityFeeService.saveSecurityFee(securityFee);
+				
+				AdmissionFee admissionFee=new AdmissionFee();
+				admissionFee.setAmount(0);
+				admissionFee.setCreatedAt(date);
+				admissionFee.setProgram(newProgram);
+				admissionFeeService.saveAdmissionFee(admissionFee);
+				
+				
 				redirAttrs.addFlashAttribute("success", "Program has been added Successfully!.");
 				return "redirect:/admin/program-year";
 			}else {

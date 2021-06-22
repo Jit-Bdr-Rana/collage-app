@@ -11,7 +11,7 @@ import com.college.model.Program;
 
 public interface ProgramService {
 
-	public void saveProgram(Program faculty);
+	public Program saveProgram(Program faculty);
 	public List<Program> showAllProgram();
 	public Program  programFindById(Integer id);
 	public void deleteProgram(Integer id);

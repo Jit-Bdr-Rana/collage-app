@@ -17,8 +17,8 @@ public class ProgramServiceImpl implements ProgramService {
 	private ProgramRepository programRepository;
 	
 	@Override
-	public void saveProgram(Program program) {
-	  this.programRepository.save(program);
+	public Program saveProgram(Program program) {
+	 return this.programRepository.save(program);
 	  
  
 	}

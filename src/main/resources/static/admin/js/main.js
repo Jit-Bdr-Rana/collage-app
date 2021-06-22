@@ -176,7 +176,7 @@
             }
             
            
-      //File upload hide and show 
+      //File upload hide and show  of fist semesteeer
 $(document).ready(function() {
   $("#checkMark1").click(function() {
     $("#form1").toggle("hide");
@@ -197,12 +197,9 @@ $('input[type="checkbox"]').on('change', function() {
    $('input[type="checkbox"]').not(this).prop('checked', false);
 });
 
-// payment form submission
-$("form1").submit(function(e){
-        e.preventDefault();
-    });
-    
+
 // first semester payment
+
 function pay_first(){
   var mode="cash";
   var amountFirst=$('#amount_first').val();
@@ -213,7 +210,8 @@ function pay_first(){
 
   
    if (!$('#checkMark11').is(":checked") && !$('#checkMark1').is(":checked") || !$('#amount_first').val())
-   { alert(11);
+   { 
+     sweet_alert("error","Make sure you have checked mode and insert amount!!!");
    }
    else
    {
@@ -222,15 +220,24 @@ function pay_first(){
         
         if( !$('#file_first').val()){
           
-            alert("no file");
+            sweet_alert("error","Insert File !!!");
            }
-         else{  
+         else{
+          
+            if(amountFirst>parseInt($('#semester_due').text())){
+             sweet_alert("error","Excess payment than Due!!");
+              exit(0); 
+            }
+            
+            
         var fd = new FormData();
         var files = $('#file_first')[0].files[0];
         fd.append("file",files);
         fd.append("mode",mode);
-        fd.append("amountFirst",amountFirst);
+        fd.append("amount",amountFirst);
         fd.append("feeId",feeId);
+        fd.append("enteredBy",enteredBy);
+          fd.append("semester",1);
        
            $.ajax({
          type: 'post',
@@ -239,19 +246,29 @@ function pay_first(){
          contentType: false,
          processData: false,
          dataType: "json",
-         success: function(response) {
+         success: function(res) {
+         sweet_alert("success","Payment has been made successfully");
+         $("#amount_first").val("");
+         $("#file_first").val("");
+         
+         populate_payment(1,res);
         
          }
         });
         
                    
          }  
-      }else{      var semester=1;
+      }else{  if(amountFirst>parseInt($('#semester_due').text())){
+             sweet_alert("error","Excess payment than Due!!");
+              exit(0); 
+            }  
+      
+                var semester=1;
                   var fd = new FormData();
                  fd.append("enteredBy",enteredBy);
                  fd.append("mode",mode);
                 fd.append("semester",1);
-                fd.append("amountFirst",amountFirst);
+                fd.append("amount",amountFirst);
                   fd.append("feeId",feeId);
                $.ajax({
                       type: 'post',
@@ -260,11 +277,18 @@ function pay_first(){
                        contentType: false,
                        processData: false,
                       dataType: "json",
-                      success: function(response) {
+                      success: function(res) {
+                        sweet_alert("success","Payment has been made successfully");
                        $("#amount_first").val("");
+                         populate_payment(semester,res);
+                    },
+                    error:function(err){
+                 
+                   
                     }
+                    
                  });
-        
+        	
       
      
           
@@ -273,4 +297,528 @@ function pay_first(){
    }
   
   
+}
+
+// populate payment  first sem
+
+function  populate_payment(semester,payment){
+ var totalDueVal=$('#totaldue_first').text();
+ 
+ var totalVal=$('#totalpaid_first').text();
+ if(totalVal==""){totalVal=0;
+ }
+var newTotal=parseInt(totalVal)+payment.amount;
+var newTotalDue=parseInt(totalDueVal);
+if((newTotalDue-newTotal)>0){
+$('#semester_due').text(newTotalDue-newTotal);
+}else if((newTotalDue-newTotal)<=0){
+
+ $('#payfirst_button').attr('disabled','true'); 
+  $('#semester_due').text(0);
+  $('#semester_over').text(newTotal-newTotalDue);
+   $('#due_sign').removeClass('fas fa-exclamation-triangle text-danger');
+        $('#due_sign').addClass('fa fa-check-circle text-success');
+}
+
+ 
+$('#totalpaid_first').text(newTotal);
+var data="";
+if(payment.mode=='voucher'){
+ data="<div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p>  <a class=' pb_custom'><i	class=' btn btn-success btn-sm'>Voucher</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}else{
+data="<div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p>  <a class=' pb_custom'><i	class=' btn btn-success btn-sm'>Cash</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}
+
+  
+    
+  
+$("#payment_log1").append(data);
+
+}
+
+
+// second semester start
+
+     //File upload hide and show  of fist semesteeer
+$(document).ready(function() {
+  $("#voucher_second").click(function() {
+    $("#form2").toggle("hide");
+  });
+    $("#cash_second").click(function() {
+    if($('#form2').is(':visible')) {
+    $("#form2").toggle("hide");
+  }
+  });
+ 
+
+});
+
+// second semester
+
+
+function pay_second(){
+  var mode="cash";
+  var amountSecond=$('#amount_second').val();
+  var fileFirst=$('#file_second').val();
+  var enteredBy=$('#entered_by').val();
+  var feeId=$('#fee_id').val();
+ 
+  
+   if (!$('#cash_second').is(":checked") && !$('#voucher_second').is(":checked") || !$('#amount_second').val())
+   { 
+    sweet_alert("error","Make sure you have checked mode and insert amount!!!");
+   }
+   else
+   {
+      if($('#voucher_second').is(":checked")){
+        var mode="voucher";
+        
+        if( !$('#file_second').val()){
+          
+             sweet_alert("error","Insert File !!!");
+           }
+         else{
+          
+            if(amountSecond>parseInt($('#totaldue_second').text())){
+             sweet_alert("error","Excess payment than Due!!!");
+              exit(0); 
+            }
+            
+            
+        var fd = new FormData();
+        var files = $('#file_second')[0].files[0];
+        fd.append("file",files);
+        fd.append("mode",mode);
+        fd.append("amount",amountSecond);
+        fd.append("feeId",feeId);
+        fd.append("enteredBy",enteredBy);
+          fd.append("semester",2);
+       
+           $.ajax({
+         type: 'post',
+         url: '/admin/payment/save/type-voucher',
+         data: fd,
+         contentType: false,
+         processData: false,
+         dataType: "json",
+         success: function(res) {
+         sweet_alert("success","Payment has been made successfully");
+         $("#amount_second").val("");
+         $("#file_second").val("");
+         
+         populate_payment_second(2,res);
+        
+         }
+        });
+             
+         }  
+      }else{   
+               if(amountSecond>parseInt($('#totaldue_second').text())){
+               sweet_alert("error","Excess payment than Due");
+              exit(0); 
+            }
+            
+                var semester=2;
+                  var fd = new FormData();
+                 fd.append("enteredBy",enteredBy);
+                 fd.append("mode",mode);
+                fd.append("semester",semester);
+                fd.append("amount",amountSecond);
+                  fd.append("feeId",feeId);
+               $.ajax({
+                      type: 'post',
+                      url: '/admin/payment/save/type-cash',
+                      data: fd,
+                       contentType: false,
+                       processData: false,
+                      dataType: "json",
+                      success: function(res) {
+                      sweet_alert("success","Payment has been made successfully");
+                        $("#amount_second").val("");
+        
+                         populate_payment_second(semester,res);
+                    },
+                    error:function(err){
+                 
+                   
+                    }
+                    
+                 });
+        	
+      
+     
+          
+      }
+   
+   }
+  
+  
+}
+	
+
+// populate payment  second sem
+
+function  populate_payment_second(semester,payment){
+var totalPaid;
+totalPaid=$('#totalpaid_second').text();
+var semesterDue=$('#semester_due_second').text();
+if(totalPaid==""){totalPaid=0;
+ }
+var newTotalPaid=parseInt(totalPaid)+payment.amount;
+var newSemesterDue=parseInt(semesterDue);
+ $('#totalpaid_second').text(newTotalPaid);
+if((newSemesterDue-newTotalPaid)>0){
+$('#semester_due_second').text(newSemesterDue-newTotalPaid);
+}else if((newSemesterDue-newTotalPaid)<=0){
+
+ $('#paysecond_button').attr('disabled','true'); 
+  $('#semester_due_second').text(0);
+  
+   $('#due_sign_second').removeClass('fas fa-exclamation-triangle text-danger');
+        $('#due_sign_second').addClass('fa fa-check-circle text-success');
+}
+
+ 
+var data="";
+if(payment.mode=='cash'){
+ data=" <div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p><a  class='pb_custom'><i class=' btn btn-success btn-sm mr-3'> Cash</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}else{
+data="<div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p> <a class='pb_custom'><i class='btn btn-success btn-sm'>Voucher</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}
+
+$("#payment_log_second").append(data);
+
+}
+// third semester start here
+
+
+     //File upload hide and show  of third semesteeer
+$(document).ready(function() {
+  $("#voucher_third").click(function() {
+    $("#form3").toggle("hide");
+  });
+    $("#cash_third").click(function() {
+    if($('#form3').is(':visible')) {
+    $("#form3").toggle("hide");
+   }
+  });
+ });
+
+function pay_third(){
+  var mode="cash";
+  var amountThird=$('#amount_third').val();
+  var enteredBy=$('#entered_by').val();
+  var feeId=$('#fee_id').val();
+ 
+  
+   if (!$('#cash_third').is(":checked") && !$('#voucher_third').is(":checked") || !$('#amount_third').val())
+   { sweet_alert("error","Make sure you have checked mode and insert amount!!!");
+   }
+   else
+   {
+      if($('#voucher_third').is(":checked")){
+        var mode="voucher";
+        
+        if( !$('#file_third').val()){
+          
+           sweet_alert("error","Insert File !!!");
+           }
+         else{
+          
+            if(amountThird>parseInt($('#totaldue_third').text())){
+              sweet_alert("error","Excess payment than Due!!!");
+              exit(0); 
+            }
+            
+            
+        var fd = new FormData();
+        var files = $('#file_third')[0].files[0];
+        fd.append("file",files);
+        fd.append("mode",mode);
+        fd.append("amount",amountThird);
+        fd.append("feeId",feeId);
+        fd.append("enteredBy",enteredBy);
+          fd.append("semester",3);
+       
+           $.ajax({
+         type: 'post',
+         url: '/admin/payment/save/type-voucher',
+         data: fd,
+         contentType: false,
+         processData: false,
+         dataType: "json",
+         success: function(res) {
+           sweet_alert("success","Payment has been made successfully");
+         $("#amount_third").val("");
+         $("#file_third").val("");
+         
+         populate_payment_third(3,res);
+        
+         }
+        });
+             
+         }  
+      }else{   
+               if(amountThird>parseInt($('#totaldue_third').text())){
+             sweet_alert("error","Excess payment than Due!!!");
+              exit(0); 
+            }
+            
+                var semester=3;
+                  var fd = new FormData();
+                 fd.append("enteredBy",enteredBy);
+                 fd.append("mode",mode);
+                fd.append("semester",semester);
+                fd.append("amount",amountThird);
+                  fd.append("feeId",feeId);
+               $.ajax({
+                      type: 'post',
+                      url: '/admin/payment/save/type-cash',
+                      data: fd,
+                       contentType: false,
+                       processData: false,
+                      dataType: "json",
+                      success: function(res) {
+                        sweet_alert("success","Payment has been made successfully");
+                        $("#amount_third").val("");
+        
+                         populate_payment_third(semester,res);
+                    },
+                    error:function(err){
+                 
+                   
+                    }
+                    
+                 });
+        	
+      
+     
+          
+      }
+   
+   }
+  
+  
+}
+	
+
+// populate payment  third sem
+
+function  populate_payment_third(semester,payment){
+var totalPaid;
+totalPaid=$('#totalpaid_third').text();
+var semesterDue=$('#semester_due_third').text();
+if(totalPaid==""){totalPaid=0;
+ }
+var newTotalPaid=parseInt(totalPaid)+payment.amount;
+var newSemesterDue=parseInt(semesterDue);
+ $('#totalpaid_third').text(newTotalPaid);
+if((newSemesterDue-newTotalPaid)>0){
+$('#semester_due_third').text(newSemesterDue-newTotalPaid);
+}else if((newSemesterDue-newTotalPaid)<=0){
+
+ $('#paythird_button').attr('disabled','true'); 
+  $('#semester_due_third').text(0);
+  
+   $('#due_sign_third').removeClass('fas fa-exclamation-triangle text-danger');
+        $('#due_sign_third').addClass('fa fa-check-circle text-success');
+}
+
+ 
+var data="";
+if(payment.mode=='cash'){
+ data=" <div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p><a  class='pb_custom'><i class=' btn btn-success btn-sm mr-3'> Cash</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}else{
+data="<div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p> <a class='pb_custom'><i class='btn btn-success btn-sm'>Voucher</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}
+
+$("#payment_log_third").append(data);
+
+}
+
+// Fourth semester start here
+ //File upload hide and show  of fourth semesteeer
+$(document).ready(function() {
+  $("#voucher_fourth").click(function() {
+    $("#form4").toggle("hide");
+  });
+    $("#cash_fourth").click(function() {
+    if($('#form4').is(':visible')) {
+    $("#form4").toggle("hide");
+   }
+  });
+ });
+
+function pay_fourth(){
+  var mode="cash";
+  var amountFourth=$('#amount_fourth').val();
+  var enteredBy=$('#entered_by').val();
+  var feeId=$('#fee_id').val();
+ 
+  
+   if (!$('#cash_fourth').is(":checked") && !$('#voucher_fourth').is(":checked") || !$('#amount_fourth').val())
+   { sweet_alert("error","Make sure you have checked mode and insert amount!!!");
+   }
+   else
+   {
+      if($('#voucher_fourth').is(":checked")){
+        var mode="voucher";
+        
+        if( !$('#file_fourth').val()){
+          
+           sweet_alert("error","Insert File !!!");
+           }
+         else{
+          
+            if(amountFourth>parseInt($('#totaldue_fourth').text())){
+              sweet_alert("error","Excess payment than Due!!!");
+              exit(0); 
+            }
+            
+            
+        var fd = new FormData();
+        var files = $('#file_fourth')[0].files[0];
+        fd.append("file",files);
+        fd.append("mode",mode);
+        fd.append("amount",amountFourth);
+        fd.append("feeId",feeId);
+        fd.append("enteredBy",enteredBy);
+          fd.append("semester",4);
+       
+           $.ajax({
+         type: 'post',
+         url: '/admin/payment/save/type-voucher',
+         data: fd,
+         contentType: false,
+         processData: false,
+         dataType: "json",
+         success: function(res) {
+           sweet_alert("success","Payment has been made successfully");
+         $("#amount_fourth").val("");
+         $("#file_fourth").val("");
+         
+         populate_payment_fourth(4,res);
+        
+         }
+        });
+             
+         }  
+      }else{   
+               if(amountFourth>parseInt($('#totaldue_fourth').text())){
+             sweet_alert("error","Excess payment than Due!!!");
+              exit(0); 
+            }
+            
+                var semester=4;
+                  var fd = new FormData();
+                 fd.append("enteredBy",enteredBy);
+                 fd.append("mode",mode);
+                fd.append("semester",semester);
+                fd.append("amount",amountFourth);
+                  fd.append("feeId",feeId);
+               $.ajax({
+                      type: 'post',
+                      url: '/admin/payment/save/type-cash',
+                      data: fd,
+                       contentType: false,
+                       processData: false,
+                      dataType: "json",
+                      success: function(res) {
+                        sweet_alert("success","Payment has been made successfully");
+                        $("#amount_fourth").val("");
+        
+                         populate_payment_fourth(semester,res);
+                    },
+                    error:function(err){
+                 
+                   
+                    }
+                    
+                 });
+        	
+      
+     
+          
+      }
+   
+   }
+  
+  
+}
+	
+
+// populate payment  fourth  sem
+
+function  populate_payment_fourth(semester,payment){
+var totalPaid;
+totalPaid=$('#totalpaid_fourth').text();
+var semesterDue=$('#semester_due_fourth').text();
+if(totalPaid==""){totalPaid=0;
+ }
+var newTotalPaid=parseInt(totalPaid)+payment.amount;
+var newSemesterDue=parseInt(semesterDue);
+ $('#totalpaid_fourth').text(newTotalPaid);
+if((newSemesterDue-newTotalPaid)>0){
+$('#semester_due_fourth').text(newSemesterDue-newTotalPaid);
+}else if((newSemesterDue-newTotalPaid)<=0){
+
+ $('#payfourth_button').attr('disabled','true'); 
+  $('#semester_due_fourth').text(0);
+  
+   $('#due_sign_fourth').removeClass('fas fa-exclamation-triangle text-danger');
+        $('#due_sign_fourth').addClass('fa fa-check-circle text-success');
+}
+
+ 
+var data="";
+if(payment.mode=='cash'){
+ data=" <div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p><a  class='pb_custom'><i class=' btn btn-success btn-sm mr-3'> Cash</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}else{
+data="<div class='log__dates1 mb-2'>"+
+    "<p>"+payment.createdAt+"</p>"+
+    "<p> <a class='pb_custom'><i class='btn btn-success btn-sm'>Voucher</i></a></p>"+
+    "<p>"+payment.amount+" </p>"+
+    "</div>";
+}
+
+$("#payment_log_fourth").append(data);
+
+}
+
+function sweet_alert(icon,title){
+ Swal.fire({
+  position: 'top-end',
+  icon: icon,
+  title: title,
+  showConfirmButton: false,
+  timer: 3000
+})
 }

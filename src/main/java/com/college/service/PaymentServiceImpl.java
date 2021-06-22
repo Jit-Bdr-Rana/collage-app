@@ -10,14 +10,17 @@ import com.college.repository.PaymentRepository;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
+	
+	
+	
     @Autowired
     private PaymentRepository paymentRepository;
 	
 	
 	@Override
-	public void savePayment(Payment payment) {
+	public Payment savePayment(Payment payment) {
 		
-		paymentRepository.save(payment);
+		return paymentRepository.save(payment);
 		
 	}
 
@@ -26,6 +29,12 @@ public class PaymentServiceImpl implements PaymentService {
 	public List<Payment> getAllPaymentByFeeId(Integer id) {
 		
 		return paymentRepository.fetchAllPaymentByFeeId(id);
+	}
+
+
+	@Override
+	public List<Payment> getAllPaymentByFeeIdAndSemester(Integer id, Integer semester) {
+		return paymentRepository.fetchAllPaymentByFeeIdAndSemester(id, semester);
 	}
 
 }

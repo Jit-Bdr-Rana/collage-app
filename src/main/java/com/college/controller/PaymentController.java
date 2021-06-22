@@ -1,7 +1,12 @@
 package com.college.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +31,8 @@ import com.college.service.StudentService;
 @Controller
 @RequestMapping("/admin/payment/")
 public class PaymentController {
+	
+	public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/admin/voucher";	
 	@Autowired
 	private FeeService feeService;
 	
@@ -49,20 +56,60 @@ public class PaymentController {
 		
 		
 		Student student=studentService.getStudentById(id);
-		List<Payment> paymentlists=paymentService.getAllPaymentByFeeId(student.getFee().getId());
+		List<Payment> paymentlistsFirst=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),1);
+		List<Payment> paymentlistsSecond=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),2);
+		List<Payment> paymentlistsThird=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),3);
+		List<Payment> paymentlistsFourth=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),4);
 		
-		model.addAttribute("paymentlists",paymentlists);
+		model.addAttribute("paymentlistsFirst",paymentlistsFirst);
+		model.addAttribute("paymentlistsSecond",paymentlistsSecond);
+		model.addAttribute("paymentlistsThird",paymentlistsThird);
+		model.addAttribute("paymentlistsFourth",paymentlistsFourth);
 		model.addAttribute("student",student);
 		return "admin/payment";
 	}
 	
   @PostMapping("/save/type-voucher")
-   @ResponseBody public void  savePaymentTypeVoucher(@RequestParam("file") MultipartFile file,@RequestParam("mode") String mode,@RequestParam("amountFirst") Integer amount) {
+   @ResponseBody public Payment  savePaymentTypeVoucher(@RequestParam("file") MultipartFile file,@RequestParam("mode") String mode,@RequestParam("amount") Integer amount,@RequestParam("enteredBy") String enteredBy,@RequestParam("feeId") Integer feeId,@RequestParam("semester") Integer semester) {
+	  Fee fee=feeService.getFeeById(feeId);
+	  Payment payment=new Payment();
+	  payment.setAmount(amount);
+	  payment.setFee(fee);
+	  payment.setCreatedAt(date);
+	  payment.setMode(mode);
+	  payment.setSemester(semester);
+	  payment.setUser(null);
+	  
+	  
+	  
+	  if(file.isEmpty()) {
+			
+		}else{
+				String fileName = System.currentTimeMillis()
+					+ file.getOriginalFilename().substring(file.getOriginalFilename().length() - 4);
+			Path fileAndPath = Paths.get(uploadDirectory, fileName);
+			try {
+				Files.write(fileAndPath, file.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		payment.setVoucher(fileName);
+		
+		 	
+		}
+	  Payment payReturn= paymentService.savePayment(payment);
+		 Payment paymentResponse=new Payment();
+		     paymentResponse.setAmount(payReturn.getAmount());
+		     paymentResponse.setCreatedAt(payReturn.getCreatedAt());
+		     paymentResponse.setMode(payReturn.getMode());
+		      return paymentResponse ;
+		 
 	 
   }
   
   @PostMapping("/save/type-cash")
-  @ResponseBody public Integer  savePaymentTypeCash(@RequestParam("mode") String mode,@RequestParam("amountFirst") Integer amount,@RequestParam("enteredBy") String enteredBy,@RequestParam("feeId") Integer feeId,@RequestParam("semester") Integer semester) {
+  @ResponseBody public Payment  savePaymentTypeCash(@RequestParam("mode") String mode,@RequestParam("amount") Integer amount,@RequestParam("enteredBy") String enteredBy,@RequestParam("feeId") Integer feeId,@RequestParam("semester") Integer semester) {
 	
 	  Fee fee=feeService.getFeeById(feeId);
 	  Payment payment=new Payment();
@@ -73,11 +120,15 @@ public class PaymentController {
 	  payment.setSemester(semester);
 	  payment.setUser(null);
 	  
-	  paymentService.savePayment(payment);
-	  
-	  return 1;
+	  Payment payReturn= paymentService.savePayment(payment);
+	 Payment paymentResponse=new Payment();
+	     paymentResponse.setAmount(payReturn.getAmount());
+	     paymentResponse.setCreatedAt(payReturn.getCreatedAt());
+	     paymentResponse.setMode(payReturn.getMode());
+	     
 	  
 	 
+			  return paymentResponse ;
 	 
  }
 

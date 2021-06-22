@@ -35,28 +35,28 @@ public class Fee {
 	}
 
 	@Column(name="semester_first" ,length=500)
-	private Integer semesterFirst;
+	private Integer semesterFirst=0;
 	
 	@Column(name="semester_second" ,length=500)
-	private Integer semesterSecond;
+	private Integer semesterSecond=0;
 	
 	@Column(name="semester_third" ,length=500)
-	private Integer semesterThird;
+	private Integer semesterThird=0;
 	
 	@Column(name="semester_fourth" ,length=500)
-	private Integer semesterFourth;
+	private Integer semesterFourth=0;
 	
 	@Column(name="semester_fifth" ,length=500)
-	private Integer semesterFifth;
+	private Integer semesterFifth=0;
 	
 	@Column(name="semester_sixth" ,length=500)
-	private Integer semesterSixth;
+	private Integer semesterSixth=0;
 	
 	@Column(name="semeter_seventh" ,length=500)
-	private Integer semesterSeventh;
+	private Integer semesterSeventh=0;
 	
 	@Column(name="semester_eight" ,length=500)
-	private Integer semesterEight;
+	private Integer semesterEight=0;
 	@Column(length=255)
 	private String document;
 	
