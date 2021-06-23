@@ -60,11 +60,19 @@ public class PaymentController {
 		List<Payment> paymentlistsSecond=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),2);
 		List<Payment> paymentlistsThird=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),3);
 		List<Payment> paymentlistsFourth=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),4);
+		List<Payment> paymentlistsSeventh=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),7);
+		List<Payment> paymentlistsFifth=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),5);
+		List<Payment> paymentlistsSixth=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),6);
+		List<Payment> paymentlistsEighth=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),8);
 		
 		model.addAttribute("paymentlistsFirst",paymentlistsFirst);
 		model.addAttribute("paymentlistsSecond",paymentlistsSecond);
 		model.addAttribute("paymentlistsThird",paymentlistsThird);
 		model.addAttribute("paymentlistsFourth",paymentlistsFourth);
+		model.addAttribute("paymentlistsFifth",paymentlistsFifth);
+		model.addAttribute("paymentlistsSixth",paymentlistsSixth);
+		model.addAttribute("paymentlistsSeventh",paymentlistsSeventh);
+		model.addAttribute("paymentlistsEighth",paymentlistsEighth);
 		model.addAttribute("student",student);
 		return "admin/payment";
 	}
