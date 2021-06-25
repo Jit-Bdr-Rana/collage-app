@@ -47,7 +47,7 @@
                                                 <i id="due_sign" th:if="${(student.program.securityFee.amount+student.fee.semesterFirst+student.program.admissionFee.amount)>(#aggregates.sum(paymentlistsFirst.![amount]))}"
                                                 
                                                 class="fas fa-exclamation-triangle text-danger" style="font-size:19px"></i></h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+1}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -191,7 +191,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+2}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -311,7 +311,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+3}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -431,7 +431,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+4}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -547,7 +547,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+5}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -663,7 +663,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+6}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -778,7 +778,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+7}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>
@@ -893,7 +893,7 @@
                                         
                                         
                                         </h4>
-                                        <a href="#" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
+                                        <a th:href="@{'/admin/payment/bill/'+${student.fee.id}+'?semester='+8}" class="btn btn-purple shadow-sm float-right mr-4 mb-1 btn-sm"><i
                                                 class="fas fa-receipt text-white mr-1"></i>
                                             Bill</a>
                                     </div>

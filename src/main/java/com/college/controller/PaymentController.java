@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,7 @@ import com.college.service.StudentService;
 @Controller
 @RequestMapping("/admin/payment/")
 public class PaymentController {
+	
 	
 	public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/admin/voucher";	
 	@Autowired
@@ -139,5 +142,69 @@ public class PaymentController {
 			  return paymentResponse ;
 	 
  }
+  
+  @GetMapping("/bill/{id}")
+  public String getBill(@PathVariable("id") Integer id,@RequestParam("semester") Integer semester,Model model ) {
+	  
+	  List<Payment> listOfPayment=paymentService.getAllPaymentByFeeId(id);
+	  Fee fee=feeService.getFeeById(id);
+	  List<Payment> listOfPaymentWithSpecificSemester=new ArrayList<>();
+	  for(Payment p :listOfPayment) {
+		  if(p.getSemester()==(semester)) {
+		
+				  
+			  listOfPaymentWithSpecificSemester.add(p);
+			  
+		  }
+	  }
+	  if(semester==1)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterFirst()*(0.6));
+		model.addAttribute("tuAmount",(fee.getSemesterFirst())*(0.4));
+	  }
+	  if(semester==2)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterSecond()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterSecond()*0.4);
+	  }
+	  if(semester==3)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterThird()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterThird()*0.4);
+	  }
+	  if(semester==4)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterFourth()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterFourth()*0.4);
+	  }
+	  if(semester==5)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterFifth()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterFifth()*0.4);
+	  }
+	  if(semester==6)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterSixth()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterSixth()*0.4);
+	  }
+	  if(semester==7)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterSeventh()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterSeventh()*0.4);
+	  }
+	  if(semester==8)
+	  {
+		  model.addAttribute("semAmount",fee.getSemesterEight()*0.6);
+		model.addAttribute("tuAmount",fee.getSemesterEight()*0.4);
+	  }
+	  System.out.println(listOfPayment);
+	  System.out.println(listOfPaymentWithSpecificSemester);
+	  model.addAttribute("listOfPaymentWithSpecificSemester",listOfPaymentWithSpecificSemester);
+	  model.addAttribute("fee",fee);
+	  model.addAttribute("date",date);
+	  model.addAttribute("semester",semester);
+	  return "admin/bill";
+  } 
+  
 
 }

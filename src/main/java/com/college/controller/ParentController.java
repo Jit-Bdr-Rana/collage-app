@@ -150,5 +150,12 @@ public class ParentController {
 		return "admin/parent";
 	}
 	
+	@GetMapping("/parent/show/{id}")
+	public String vewParentDetails(@PathVariable("id") Integer id,Model model) {
+		Student stu=studentService.getStudentById(id);
+		model.addAttribute("student",stu);
+		return "admin/parent_view";
+	}
+	
 	
 }
