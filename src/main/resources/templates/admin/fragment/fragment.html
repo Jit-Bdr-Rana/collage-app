@@ -83,6 +83,15 @@
 						class="fas fa-images text-white"></i> Calender Event
 				</a>
 				</li>
+				
+				<li class=""><a class="nav-link  text-left"
+					th:if="${result_link==null}"  role="button" th:href="@{/admin/result}">
+						<i class="fas fa-images text-white"></i> Result
+				</a> <a class="nav-link  text-left active" th:unless="${result_link==null}"
+					 role="button" th:href="@{/admin/result}"> <i
+						class="fas fa-images text-white"></i> Result
+				</a>
+				</li>
 				<li class=""><a class="nav-link text-left" role="button"> <i
 						class="fas fa-school text-white"></i> School
 				</a></li>

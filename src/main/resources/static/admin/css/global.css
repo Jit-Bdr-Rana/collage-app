@@ -589,3 +589,25 @@ margin-top: 34px;
 .cover-p{
     border-style: dashed;
 }
+.mar__1{
+ padding-left:60px;
+}
+.mar__2{
+ padding-left:60px;
+}
+.mar__3{
+ padding-left:55px;
+}
+.mar__4{
+ padding-left:107px;
+}
+.mar__5{
+ padding-left:105px;
+}
+.mar__6{
+ padding-left:10px;
+}
+
+.input__form > input{
+    height: 60px;
+}

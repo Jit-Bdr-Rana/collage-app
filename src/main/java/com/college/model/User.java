@@ -41,6 +41,10 @@ private Date createdAt;
 @Column(name="updated_at",nullable=true)
 private Date updatedAt;
 
+@OneToMany(targetEntity=ResultCategory.class,cascade=CascadeType.ALL)
+@JoinColumn(name="user_id", referencedColumnName="id")
+private List<ResultCategory> resultCategory;
+
 public Date getCreatedAt() {
 	return createdAt;
 }
