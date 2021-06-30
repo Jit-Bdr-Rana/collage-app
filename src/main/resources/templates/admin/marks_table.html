@@ -74,7 +74,7 @@
                                                  <td>[[${result.obtainMark}]]</td>
                                                 <td>
                                                   <center>
-                                                  <a href=""><i class="fas fa-edit btn btn-success btn-sm"></i></a>
+                                                  <a th:href="@{'/admin/result/edit/marks/'+${result.id}+'?category_id='+${result.resultCategory.id}}"><i class="fas fa-edit btn btn-success btn-sm"></i></a>
                                                   <a th:href="@{'/admin/result/delete/marks/'+${result.id}+'?category_id='+${result.resultCategory.id}}"><i class="fas fa-times btn btn-danger btn-sm"></i></a>
                                                   </center>
                                                 </td>

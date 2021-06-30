@@ -58,6 +58,12 @@ public class ResultServiceImpl implements ResultService {
 		resultRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public Result findResultById(Integer id) {
+		
+		return  resultRepository.findById(id).get();
+	}
 	
 
 }

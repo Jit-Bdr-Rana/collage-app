@@ -13,4 +13,5 @@ public interface ResultService {
    ResultCategory  findResultCategoryById(Integer id);
    void deleteResultCategory(Integer id);
    void  deleteMarks(Integer id);
+   Result  findResultById(Integer id);
 }

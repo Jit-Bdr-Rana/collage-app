@@ -36,6 +36,7 @@
                                       
                                         <!-- form start -->
                                         <form class="ml-5 mr-5" role="form" th:action="@{/admin/result/marks/save}"  th:object="${result}" method="post">
+                                          <input type="hidden" th:field="*{id}" th:value="*{id}" >
                                           <div class="box-body row mt-4">
                                             <div class="col-md-4">
                                               <div class="form-group">

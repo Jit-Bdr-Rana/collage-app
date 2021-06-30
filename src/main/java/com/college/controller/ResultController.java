@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.college.model.Program;
 import com.college.model.Result;
@@ -164,15 +165,32 @@ public class ResultController {
     	return "admin/marks_form";
     }
     
-    @PostMapping("/marks/save")
-    public String saveMarks(Result result,@RequestParam("category_id") Integer category_id,Model model ) {
+    @GetMapping("/edit/marks/{id}")
+    public String editMarks(@PathVariable(name="id") Integer id ,@RequestParam("category_id") Integer category_id  ,Model model) {
     	
-        ResultCategory resutlCategory=resultService.findResultCategoryById(category_id);
+    	Result result=resultService.findResultById(id);
+    	String result_link="active";
+    	model.addAttribute("result_link",result_link);
+    	model.addAttribute("category_id",category_id);
+    	model.addAttribute("result",result);
+    	return "admin/marks_form";
+    }
+    
+    @PostMapping("/marks/save")
+    public String saveMarks(Result result,@RequestParam("category_id") Integer category_id,Model model,RedirectAttributes redirAttr ) {
+    	ResultCategory resutlCategory=resultService.findResultCategoryById(category_id);
         result.setResultCategory(resutlCategory);
-        model.addAttribute("success","marks has been added ");
+        if(result.getId()!=null){
+        	redirAttr.addFlashAttribute("success","marks has been updated successfully ");
+        }else {
+        	
+            redirAttr.addFlashAttribute("success","marks has been added successfully");
+        }
+    	
+       
     	resultService.saveResult(result);
     	
-    	return viewMarksTable(category_id,model);
+    	return "redirect:/admin/result/view/"+category_id;
     }
     
     @GetMapping("/delete/category/{id}")
@@ -183,8 +201,9 @@ public class ResultController {
     }
 	
     @GetMapping("/delete/marks/{id}")
-    public String deleteMarks(@PathVariable(name="id")Integer id,@RequestParam("category_id")Integer category_id) {
+    public String deleteMarks(@PathVariable(name="id")Integer id,@RequestParam("category_id")Integer category_id,RedirectAttributes redirAttr) {
     	resultService.deleteMarks(id);
+    	 redirAttr.addFlashAttribute("success","marks has been deleted successfully ");
     	return "redirect:/admin/result/view/"+category_id;
     }
 }
