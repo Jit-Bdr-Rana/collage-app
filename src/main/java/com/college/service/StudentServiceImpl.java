@@ -67,4 +67,15 @@ public Student fetchStudentFromContact(String contact) {
 	return this.stuRepo.getStudentByContact(contact);
 }
 
+@Override
+public List<Student> fetchStudentByProgram(Integer id) {
+	return this.stuRepo.fetchStudentByProgram(id);
+}
+
+@Override
+public List<Student> fetchStudentByRegistrationYear(Integer id) {
+	
+	return this.stuRepo.fetchStudentByRegistrationYear(id);
+}
+
 }

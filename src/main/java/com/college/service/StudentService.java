@@ -13,6 +13,8 @@ public interface StudentService {
 	public Page<Student> fetchStudentByYearAndProgram(int pageNo, int pageSize, String sortField, String sortDirection,Integer year_id,Integer program_id);
 	 public Page<Student> findPaginate(int pageNo, int pageSize, String sortField, String sortDirection);
 	 public void deleteStudentById(Integer id);
+	 public List<Student> fetchStudentByProgram(Integer id);
+	 public List<Student> fetchStudentByRegistrationYear(Integer id);
 	 
 	 public Student fetchStudentFromContact(String contact);
 //	void deleteEmployeeById(long id);

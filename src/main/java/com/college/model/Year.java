@@ -57,8 +57,17 @@ public class Year {
 		this.updatedAt = updatedAt;
 	}
 	@Column(name="is_active")
-	private boolean isActive;
+	private boolean isActive=false;
 	
+	@Column(name="is_calender")
+	private boolean isCalender=false;
+	
+	public boolean isCalender() {
+		return isCalender;
+	}
+	public void setCalender(boolean isCalender) {
+		this.isCalender = isCalender;
+	}
 	@Column(name="created_at",nullable=true)
 	private Date createdAt;
 	@Column(name="updated_at",nullable=true)

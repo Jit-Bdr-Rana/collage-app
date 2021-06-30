@@ -5,7 +5,7 @@
         });
         
         
-        function changes(id)
+function changes(id)
 {
    
       if($('#active'+id).hasClass('btn-success'))
@@ -32,7 +32,63 @@
 
     }
     });
+    
+    
    
+}
+function changeCalender(id){
+if($('#calender'+id).hasClass('btn-success'))
+      {
+        $('#calender'+id).removeClass('btn-success');
+        $('#calender'+id).addClass('btn-danger');
+        $('#calender'+id).html('Disable');
+      }
+       else
+      {
+        $('#calender'+id).removeClass('btn-danger');
+        $('#calender'+id).addClass('btn-success');
+        $('#calender'+id).html('Show');
+      }
+
+ $.ajax({
+
+
+        type: 'get',
+        url: '/admin/getAllCalender',
+        data: { id: id },
+        dataType: "json",
+        success: function(response) {
+           for(var i=0;i<response.length;i++){
+             if(id!=response[i]){
+             changeCalenderClass(response[i]);
+             }
+           }
+    }
+    });
+  $.ajax({
+
+
+        type: 'get',
+        url: '/admin/setCalender',
+        data: { id: id },
+        dataType: "json",
+        success: function(response) {
+           
+    }
+    });
+  
+
+}
+
+function changeCalenderClass(id){
+ 
+if($('#calender'+id).hasClass('btn-success')){
+     
+        $('#calender'+id).removeClass('btn-success');
+        $('#calender'+id).addClass('btn-danger');
+        $('#calender'+id).html('Disable');
+      }
+
 }
 
 // Js for Auto Add Semester fees-content

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.college.model.Program;
+import com.college.model.Student;
 import com.college.repository.ProgramRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class ProgramServiceImpl implements ProgramService {
     @Autowired
 	private ProgramRepository programRepository;
 	
+    @Autowired
+    private StudentService studentService;
+    
 	@Override
 	public Program saveProgram(Program program) {
 	 return this.programRepository.save(program);
@@ -56,6 +60,17 @@ public class ProgramServiceImpl implements ProgramService {
 	@Override
 	public Program fetchProgramFromName(String name) {
 		  return this.programRepository.getProgramByName(name);
+	}
+
+	@Override
+	public boolean checkIfDeleteble(Integer id) {
+		List<Student> listOfStudent= studentService.fetchStudentByProgram(id);
+		if(listOfStudent.isEmpty()) {
+			return true;	
+		}else {
+			return false;
+		}
+		
 	}	
 
 }

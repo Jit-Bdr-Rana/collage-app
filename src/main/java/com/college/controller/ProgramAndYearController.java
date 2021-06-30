@@ -1,7 +1,7 @@
 package com.college.controller;
 
 import java.sql.Date;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,8 +79,28 @@ public class ProgramAndYearController {
 	public String saveYear(Year year,RedirectAttributes redirAttrs,Model model,HttpServletRequest  request) {
 	     year.setCreatedAt(date);
 	     year.setActive(false);
-		this.yearService.saveYear(year);
-		redirAttrs.addFlashAttribute("success", "Year has been Added Successfully!.");
+	     Year matchedYear=yearService.findYearByName(year.getName());
+	     if(matchedYear==null) {
+	    	 if(year.getId()!=null) {
+	    		
+	 	 		redirAttrs.addFlashAttribute("success", "Year has been updated Successfully!.");
+	 		 
+	    	 }else {
+	    		 
+		 	 		redirAttrs.addFlashAttribute("success", "Year has been added Successfully!.");
+	    	 }
+	    	 this.yearService.saveYear(year);
+	    }else {
+	    	 if(year.getId()!=matchedYear.getId()) {
+	    		
+	    		
+	    		 redirAttrs.addFlashAttribute("yearError", "Year "+year.getName()+" has been matched!!!");
+	    		 
+               return "redirect:/admin/year-form";
+	    	 }
+	    	 
+	     }
+		
 		return "redirect:/admin/program-year";
 		
 	}
@@ -158,18 +178,32 @@ public class ProgramAndYearController {
 		
 	}
 	@GetMapping("/program/delete/{id}")
-	public String deleteFaculty(@PathVariable(value="id")Integer id,RedirectAttributes redirAttrs) {
+	public String deleteProgam(@PathVariable(value="id")Integer id,RedirectAttributes redirAttrs) {
+		if(programService.checkIfDeleteble(id)==true) {
+			this.programService.deleteProgram(id);
+			redirAttrs.addFlashAttribute("success", "Program has been deleted Successfully!.");
+		}else {
+			
+			redirAttrs.addFlashAttribute("error", "Program Cannot be deleted as It have student enrolled!.");
+		}
 		
-		this.programService.deleteProgram(id);
-		redirAttrs.addFlashAttribute("success", "Program has been deleted Successfully!.");
 		return "redirect:/admin/program-year";
 	}
 	
-	@GetMapping("/program/findbyid")
-	public String getProgram()
-	{ 
-		return "jit";
+	@GetMapping("/year/delete/{id}")
+	public String deleteYear(@PathVariable(value="id")Integer id,RedirectAttributes redirAttrs) {
+		if(yearService.checkIfDeleteble(id)==true) {
+			this.yearService.deleteProgram(id);
+			redirAttrs.addFlashAttribute("success", "Year has been deleted Successfully!.");
+		}else {
+			
+			redirAttrs.addFlashAttribute("error", "Year Cannot be deleted as It have student enrolled!.");
+		}
+		
+		return "redirect:/admin/program-year";
 	}
+	
+	
 	
 	@GetMapping("/activePassive")
 	public @ResponseBody  void  activePassive(@RequestParam("id") Integer id) {
@@ -185,6 +219,36 @@ public class ProgramAndYearController {
 		this.yearService.saveYear(year);
 		
 	}
+	
+	@GetMapping("/setCalender")
+	public @ResponseBody void setCalender(@RequestParam("id") Integer id) {
+		yearService.setAllIsCalender(false,id);
+		
+		Year year=this.yearService.getById(id);
+		if(year.isCalender()==true)
+		{
+			year.setCalender(false);
+		}
+		else {
+			year.setCalender(true);
+		}
+		
+		this.yearService.saveYear(year);
+	}
+	
+	@GetMapping("/getAllCalender")
+	public @ResponseBody List<Integer> getAllCalender() {
+		List<Year> yearlist=yearService.getYear();
+		List<Integer> yearIdList=new ArrayList<>();
+		for(Year year:yearlist) {
+			yearIdList.add(year.getId());
+		}
+		
+		return  yearIdList;
+		
+	}
+	
+	
 	
 	
 }

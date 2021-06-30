@@ -23,17 +23,16 @@
 					<!-- Topbar -->
 					<th:block th:replace="~{admin/fragment/fragment :: topbar}"></th:block>
 					<!-- End of Topbar -->
+					
                       <div class="container-fluid px-lg-4">
+                      <div class="alert alert-danger mt-3" role="alert" th:if="${error!=null}"	th:text="${error}"
+									 ></div>
+					 <div class="alert alert-primary mt-3" role="alert"
+								th:if="${success!=null}"	th:text="${success}" ></div>
                         <div class="row">
-                            
-                       <div class="col-md-12 mt-3" th:if="${success}">
-                                <div class="card">
-                                <div class="alert alert-primary mt-3" role="alert"
-									th:text="${success}" ></div>
-                               </div>
-                               </div>
+                      
                             <!-- column start -->
-                            <div class="col-md-12 mt-4">
+                            <div class="col-md-12 mt-3">
                                 <div class="card">
                                     <div class="container">
                                     <div class="col-md-12 mt-lg-4 ">
@@ -97,6 +96,7 @@
                                                         <th>SN</th>
                                                         <th>Name</th>
                                                         <th>Active</th>
+                                                        <th>Show Calender</th>
                                                         <th class="text-center">Action</th>
                                                     </tr>
                                                 </thead>
@@ -108,8 +108,13 @@
                                                     <button type="button" class="btn btn-danger btn-sm"th:unless="${year.isActive==true}" th:id="@{'active'+${year.id}}" th:onclick="changes([[${year.id}]])">Passive</button>
                                                     </td>
                                                     <td>
+                                                    <button type="button" class="btn btn-success btn-sm" th:if="${year.isCalender==true}" th:id="@{'calender'+${year.id}}" th:onclick="changeCalender([[${year.id}]])">Show</button>
+                                                    <button type="button" class="btn btn-danger btn-sm"th:unless="${year.isCalender==true}" th:id="@{'calender'+${year.id}}" th:onclick="changeCalender([[${year.id}]])">Disable</button>
+                                                    
+                                                    </td>
+                                                    <td>
                                                       <center><a th:href="@{'/admin/year/update/'+${year.id}}" > <i class="fa fa-edit btn btn-info btn-sm"></i></a>
-                                                      <a href=""><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a></center>
+                                                      <a th:href="@{'/admin/year/delete/'+${year.id}}" ><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a></center>
                                                     </td>
                                                 </tr>
                                                   		<tr th:if="${listYears.isEmpty}"  >

@@ -92,6 +92,17 @@
 						class="fas fa-images text-white"></i> Result
 				</a>
 				</li>
+				
+				
+				<li class=""><a class="nav-link  text-left"
+					th:if="${news_link==null}"  role="button" th:href="@{/admin/newAndAnnouncement}">
+						<i class="fas fa-images text-white"></i> News and Announcement
+				</a> <a class="nav-link  text-left active" th:unless="${news_link==null}"
+					 role="button" th:href="@{/admin/newAndAnnouncement}"> <i
+						class="fas fa-images text-white"></i> News and Announcement
+				</a>
+				</li>
+				
 				<li class=""><a class="nav-link text-left" role="button"> <i
 						class="fas fa-school text-white"></i> School
 				</a></li>

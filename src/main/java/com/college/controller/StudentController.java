@@ -83,7 +83,7 @@ public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpSer
 	  
 	 
         student.getUser().setRole("student");
-        student.setRegistrationYear("2020");
+       
 	 
 	  if(student.getId()==null)
 	  {

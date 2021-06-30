@@ -17,6 +17,7 @@ public interface ProgramService {
 	public void deleteProgram(Integer id);
 	public String validaeForm(Program program,RedirectAttributes redirAttrs);
 	public Program fetchProgramFromName(String name);
+	public boolean checkIfDeleteble(Integer id);
     
 
 }

@@ -38,8 +38,7 @@ public class Student {
  @Column(length=100,nullable=true,unique=false)
  private String image;
 
- @Column(name="registration_year" ,length=20,nullable=false,unique=false)
- private String registrationYear;
+ 
 // @DateTimeFormat(pattern = "mm/dd/yyyy")
  private Date dob;
  
@@ -113,8 +112,9 @@ public void setParent(Parent parent) {
 @Override
 public String toString() {
 	return "Student [id=" + id + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
-			+ ", contact=" + contact + ", image=" + image + ", registrationYear=" + registrationYear + ", dob=" + dob
-			+ ", gender=" + gender + ", program=" + program + ",]";
+			+ ", contact=" + contact + ", image=" + image + ", dob=" + dob + ", gender=" + gender + ", program="
+			+ program + ", registrationyear=" + registrationyear + ", parent=" + parent + ", fee=" + fee
+			+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", user=" + user + "]";
 }
 
 public User getUser() {
@@ -142,14 +142,6 @@ public void setGender(String gender) {
 }
 
 
-
-public String getRegistrationYear() {
-	return registrationYear;
-}
-
-public void setRegistrationYear(String registrationYear) {
-	this.registrationYear = registrationYear;
-}
 
 
 

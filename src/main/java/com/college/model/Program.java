@@ -38,10 +38,10 @@ public class Program {
 	private java.sql.Date createdAt;
 	 @Column(name="updated_at",nullable=true)
 	 private java.sql.Date updatedAt;
-	 @OneToOne(targetEntity = AdmissionFee.class, mappedBy = "program")	    
+	 @OneToOne(targetEntity = AdmissionFee.class, mappedBy = "program",cascade=CascadeType.ALL)	    
 	 private AdmissionFee admissionFee;
 	 
-	 @OneToOne(targetEntity = SecurityFee.class, mappedBy = "program")	    
+	 @OneToOne(targetEntity = SecurityFee.class, mappedBy = "program",cascade=CascadeType.ALL)	    
 	 private SecurityFee securityFee;
 	 
 	 @Column(name="has_fee")
