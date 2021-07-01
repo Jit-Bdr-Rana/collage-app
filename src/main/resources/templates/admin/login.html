@@ -1,0 +1,84 @@
+
+<!doctype html>
+
+<html xmlns:th="www.thymeleaf.org">
+<title>Student</title>
+<head>
+<th:block th:insert="~{admin/fragment/fragment :: css}"></th:block>
+</head>
+<style type="text/css">
+    /* Common css */
+
+html,
+body {
+    height: 100%;
+}
+
+
+/* Login form css */
+.global-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222e3c;
+}
+
+form {
+    padding-top: 10px;
+    font-size: 14px;
+    margin-top: 30px;
+    font-weight: bold;
+    padding-bottom: 2px;
+}
+
+.form-group>input {
+    padding: 13px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+.login-form {
+    width: 430px;
+    margin: 20px;
+}
+
+
+</style>
+
+<body>
+    <!-- Login section start here -->
+    <div class="global-container">
+        <div class="card login-form">
+            <div class="card-body">
+                <h3 class="card-title text-center ">Admin Panel</h3>
+                <div class="card-text">
+                    	<form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Username</label>
+                            <input type="email" class="form-control" placeholder="username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                        </div>
+                        <center><button type="submit" name="button" class="btn btn-success btn-block"> Log In </button></center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of login section -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+
+</html>

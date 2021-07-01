@@ -22,9 +22,7 @@ html {
     height: 100%;
 }
 
-
 /* Login form css */
-
 .global-container {
     height: 100%;
     display: flex;
@@ -610,4 +608,9 @@ margin-top: 34px;
 
 .input__form > input{
     height: 60px;
+}
+.user-registration-form{
+  width:600px;
+  margin-left: 250px;
+  margin-top: 80px;
 }

@@ -80,10 +80,6 @@ public String showStudentTable(Model model,HttpServletRequest response) {
 @PostMapping("/student/save")
 public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpServletRequest request) {
 	
-	  
-	 
-        student.getUser().setRole("student");
-       
 	 
 	  if(student.getId()==null)
 	  {
