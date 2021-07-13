@@ -119,6 +119,34 @@ if($('#calender'+id).hasClass('btn-success')){
      
 });
 
+function changeUserPermission(id){
+
+ if($('#user_'+id).hasClass('btn-success'))
+      {
+        $('#user_'+id).removeClass('btn-success');
+        $('#user_'+id).addClass('btn-danger');
+        $('#user_'+id).html('Disable');
+      }
+       else
+      {
+        $('#user_'+id).removeClass('btn-danger');
+        $('#user_'+id).addClass('btn-success');
+        $('#user_'+id).html('Allow');
+      }
+      
+       $.ajax({
+
+
+        type: 'get',
+        url: '/admin/user/changePermission',
+        data: { id: id },
+        dataType: "json",
+        success: function(response) {
+           
+    }
+    });
+
+}
  $(document).ready(function(){
  
    if ($('#full_schoolarship').is(":checked")){

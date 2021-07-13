@@ -6,51 +6,7 @@
 <head>
 <th:block th:insert="~{admin/fragment/fragment :: css}"></th:block>
 </head>
-<style type="text/css">
-    /* Common css */
 
-html,
-body {
-    height: 100%;
-}
-
-
-/* Login form css */
-.global-container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #222e3c;
-}
-
-form {
-    padding-top: 10px;
-    font-size: 14px;
-    margin-top: 30px;
-    font-weight: bold;
-    padding-bottom: 2px;
-}
-
-.form-group>input {
-    padding: 13px;
-    margin-bottom: 10px;
-}
-
-.card-title {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-
-
-.login-form {
-    width: 430px;
-    margin: 20px;
-}
-
-
-</style>
 
 <body>
     <!-- Login section start here -->
@@ -67,6 +23,9 @@ form {
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control" placeholder="Password" name="password">
+                        </div>
+                        <div class="form-group">
+                           <small style=" color:red;font-size:15px;" ></small>
                         </div>
                         <center><button type="submit" name="button" class="btn btn-success btn-block"> Log In </button></center>
                     </form>

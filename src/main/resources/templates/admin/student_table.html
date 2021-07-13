@@ -1,6 +1,7 @@
 <!doctype html>
 
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <title>Student</title>
 <head>
     <th:block  th:insert="~{admin/fragment/fragment :: css}"></th:block>
@@ -111,7 +112,7 @@
                                                     
                                                       <td >[[${student.firstName}]]  [[${student.middleName}]]  [[${student.lastName}]]</td>
                                                       <td>[[${student.contact}]]</td>
-                                                       <td>[[${student.user.email}]]</td>
+                                                       <td>[[${student.email}]]</td>
                                                         <td>[[${student.registrationyear.name}]]</td>
                                                          <td>[[${student.gender}]]</td>
                                                          <td>[[${student.program.name}]]</td>

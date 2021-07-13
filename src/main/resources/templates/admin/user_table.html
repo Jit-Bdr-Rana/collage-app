@@ -57,11 +57,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr th:each="user,iState:${listOfUsers}">
-                                                        <td>[[${iState.count}]]</td>
+                                                    <tr th:each="user,iState:${listOfUsers}" th:if="${user.id!=1}"> 
+                                                        <td>[[${(iState.count)-1}]]</td>
                                                         <td>[[${user.email}]]</td>
                                                         <td>[[${user.role.name}]]</td>
-                                                        <td><a class="btn btn-sm btn-success">Allow</a></a></td>
+                                                        <td>
+                                                         <button type="button" class="btn btn-success btn-sm" th:if="${user.isEnabled==true}" th:id="@{'user_'+${user.id}}" th:onclick="changeUserPermission([[${user.id}]])">Allow</button>
+                                                    <button type="button" class="btn btn-danger btn-sm"th:unless="${user.isEnabled==true}" th:id="@{'user_'+${user.id}}" th:onclick="changeUserPermission([[${user.id}]])">Disable</button>
+                                                        
+                                                        </td>
                                                         <td>
                                                             <a th:href="@{'/admin/user/edit/'+${user.id}}"><i
                                                                     class="fa fa-edit btn btn-info btn-sm"></i></a>

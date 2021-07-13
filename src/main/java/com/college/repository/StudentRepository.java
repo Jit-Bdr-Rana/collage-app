@@ -18,6 +18,9 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
 	@Query("SELECT s FROM Student s where s.contact=?1")
 	public Student getStudentByContact(String contact);
 	
+	@Query("SELECT s FROM Student s where s.email=?1")
+	public Student getStudentByEmail(String email);
+	
 	@Query("SELECT s FROM Student s where s.program.id=?1")
 	 public List<Student> fetchStudentByProgram(Integer id);
 	

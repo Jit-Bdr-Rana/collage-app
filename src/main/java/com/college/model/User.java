@@ -39,9 +39,6 @@ private String password;
 @Column(nullable=false,length=60,name="unhased_password")
 private String unHashedPassword;
 
-@OneToOne(mappedBy = "user")
-private Student student;
-
 
 @OneToMany(targetEntity=Payment.class,cascade=CascadeType.ALL)
 @JoinColumn(name="user_id", referencedColumnName="id")
@@ -79,7 +76,8 @@ public void setUpdatedAt(Date updatedAt) {
 @Override
 public String toString() {
 	return "User [id=" + id + ", email=" + email + ", password=" + password + ", unHashedPassword=" + unHashedPassword
-			+ ", student=" + student + ", isEnabled=" + isEnabled + "]";
+			+ ", payment=" + payment + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", isEnabled="
+			+ isEnabled + ", resultCategory=" + resultCategory + ", role=" + role + "]";
 }
 
 public Integer getId() {
@@ -101,19 +99,19 @@ public String getEmail() {
 	return email;
 }
 
-public User(Integer id, String email, String password, Student student) {
+public User(Integer id, String email, String password) {
 	super();
 	this.id = id;
 	this.email = email;
 	this.password = password;
-	this.student = student;
+	
 }
 
-public User( String email, String password, Student student) {
+public User( String email, String password) {
 	super();
 	this.email = email;
 	this.password = password;
-	this.student = student;
+	
 }
 
 public void setEmail(String email) {
@@ -153,7 +151,7 @@ public void setPayment(List<Payment> payment) {
 }
 
 public void setEnabled(boolean isEnabled) {
-	this.isEnabled = isEnabled;
+	this.isEnabled = true;
 }
 
 public void setResultCategory(List<ResultCategory> resultCategory) {
@@ -168,12 +166,5 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
-public Student getStudent() {
-	return student;
-}
-
-public void setStudent(Student student) {
-	this.student = student;
-}
 
 }

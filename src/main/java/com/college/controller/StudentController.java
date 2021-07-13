@@ -52,14 +52,19 @@ private UserService userService;
 private YearService yearService;
 
 @GetMapping("/student/form")
-public String showStudentForm(Model model) {
+public String showStudentForm(Model model,Student student) {
 	String stu_link="active";
 	List<Program> listPrograms = programService.showAllProgram();
 	List<Year> listYears = yearService.getYear();
 	model.addAttribute("stu_link",stu_link);
-	model.addAttribute("student",new Student());
 	model.addAttribute("listPrograms",listPrograms);
 	model.addAttribute("listYears",listYears);
+	
+	if(student!=null) {
+		model.addAttribute("student",student);
+	}else {
+		model.addAttribute("student",new Student());
+	}
 	
 	return "admin/student_form";
 }
@@ -78,11 +83,23 @@ public String showStudentTable(Model model,HttpServletRequest response) {
 			
 }
 @PostMapping("/student/save")
-public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpServletRequest request) {
-	
+public String saveStudent(Student student,RedirectAttributes redirAttrs, HttpServletRequest request,Model model ) {
+	System.out.println("ada");
+	System.out.println(student);
 	 
 	  if(student.getId()==null)
 	  {
+		 if(studentService.checkIfEmailAlreadExist(student.getContact())==true ||studentService.checkIfContactAlreadExist(student.getContact())==true ) {
+			 if(studentService.checkIfEmailAlreadExist(student.getEmail())==true) {
+				 model.addAttribute("emailError", "Email Alrady Exist!!!");
+            }
+			 if(studentService.checkIfContactAlreadExist(student.getContact())==true) {
+				 model.addAttribute("contactError", "contact  Alrady Exist!!!");
+	    		 System.out.println("contact match");
+	              
+			 }			 
+			 return showStudentForm(model,student);
+		 }
 		  
 		  redirAttrs.addFlashAttribute("success", "Student has been added Successfully!.");  
 	  }else {

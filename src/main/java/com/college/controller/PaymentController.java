@@ -56,7 +56,7 @@ public class PaymentController {
 	
 	@GetMapping("/{id}")
 	public String viewPaymentForm(@PathVariable(name="id") Integer id,Model model) {
-		
+		String fee_link="active";
 		
 		Student student=studentService.getStudentById(id);
 		List<Payment> paymentlistsFirst=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(),1);
@@ -77,6 +77,7 @@ public class PaymentController {
 		model.addAttribute("paymentlistsSeventh",paymentlistsSeventh);
 		model.addAttribute("paymentlistsEighth",paymentlistsEighth);
 		model.addAttribute("student",student);
+		model.addAttribute("fee_link",fee_link);
 		return "admin/payment";
 	}
 	

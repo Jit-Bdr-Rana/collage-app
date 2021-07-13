@@ -1,0 +1,259 @@
+<!doctype html>
+
+<html xmlns:th="www.thymeleaf.org">
+<title>Calender Event</title>
+<head>
+<th:block th:insert="~{admin/fragment/fragment :: css}"></th:block>
+</head>
+
+
+<body>
+
+	<div id="wrapper">
+		<div class="overlay"></div>
+		<!-- Sidebar Start -->
+
+		<!-- Sidebar-wrapper -->
+
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper" class="toggled">
+			<div id="content">
+				<th:block th:insert="~{admin/fragment/fragment :: sidebar}"></th:block>
+				<div class="container-fluid p-0 px-lg-0 px-md-0">
+					<!-- Topbar -->
+					<th:block th:replace="~{admin/fragment/fragment :: topbar}"></th:block>
+					<!-- End of Topbar -->
+
+					<div class="container-fluid px-lg-4">
+                        <div class="row">
+                            <!--    Form start -->
+                            <div class="col-md-12  mt-4">
+                                <div class="card pt-4 pb-2">
+                                    <div class="box box-primary">
+                                        <h1 class="h3 mb-0 text-dark-800 float-left ml-5">Calender Setup</h1>
+                                        <!-- form start -->
+                                        <form class="ml-5 mr-5" role="form">
+                                          <div class="box-body row mt-4">
+                                            <div class="col-md-2">
+                                                <label>Month</label>
+                                                <h5>Baisakh</h5>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>No Of Days</label>
+                                                    <input type="text" class="form-control" id="no__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                              <div class="form-group">
+                                                 <label>Days of Week</label>
+                                                   <select class="form-control" name="days__week" >
+                                                     <option value="0" selected="true" disabled="true">---Choose---</option>
+                                                     <option value="">Sunday</option>
+                                                     <option value="">Monday</option>
+                                                     <option value="">Tuesday</option>
+                                                     <option value="">Wednesday</option>
+                                                     <option value="">Thursday</option>
+                                                     <option value="">Friday</option>
+                                                     <option value="">Saturday</option>
+                                                  </select>
+                                               </div>
+                                            </div>
+
+                                            <div class="col-md-2">                
+                                              <div class="form-group">
+                                                 <label>English Months</label>
+                                                   <select class="form-control" name="days" >
+                                                     <option value="0" selected="true" disabled="true">---Choose---</option>
+                                                     <option value="">Jan</option>
+                                                     <option value="">Feb</option>
+                                                     <option value="">Mar</option>
+                                                     <option value="">Apr</option>
+                                                     <option value="">May</option>
+                                                     <option value="">Jun</option>
+                                                     <option value="">July</option>
+                                                     <option value="">Aug</option>
+                                                     <option value="">Sep</option>
+                                                     <option value="">Oct</option>
+                                                     <option value="">Nov</option>
+                                                     <option value="">Dec</option>
+                                                     <option value="">Jan</option>
+                                                 </select>
+                                               </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Starting Days</label>
+                                                    <input type="text" class="form-control" id="starting__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Ending Days</label>
+                                                    <input type="text" class="form-control" id="ending__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-2">                
+                                                   <select class="form-control" name="days" >
+                                                     <option value="0" selected="true" disabled="true">---Choose---</option>
+                                                     <option value="">Jan</option>
+                                                     <option value="">Feb</option>
+                                                     <option value="">Mar</option>
+                                                     <option value="">Apr</option>
+                                                     <option value="">May</option>
+                                                     <option value="">Jun</option>
+                                                     <option value="">July</option>
+                                                     <option value="">Aug</option>
+                                                     <option value="">Sep</option>
+                                                     <option value="">Oct</option>
+                                                     <option value="">Nov</option>
+                                                     <option value="">Dec</option>
+                                                     <option value="">Jan</option>
+                                                 </select>
+                                               </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="starting__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="ending__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="box-body row mt-4">
+                                            <div class="col-md-2">
+                                                <label>Month</label>
+                                                <h5>Baisakh</h5>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>No Of Days</label>
+                                                    <input type="text" class="form-control" id="no__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                              <div class="form-group">
+                                                 <label>Days of Week</label>
+                                                   <select class="form-control" name="days__week" >
+                                                     <option value="0" selected="true" disabled="true">---Choose---</option>
+                                                     <option value="">Sunday</option>
+                                                     <option value="">Monday</option>
+                                                     <option value="">Tuesday</option>
+                                                     <option value="">Wednesday</option>
+                                                     <option value="">Thursday</option>
+                                                     <option value="">Friday</option>
+                                                     <option value="">Saturday</option>
+                                                  </select>
+                                               </div>
+                                            </div>
+
+                                            <div class="col-md-2">                
+                                              <div class="form-group">
+                                                 <label>English Months</label>
+                                                   <select class="form-control" name="days" >
+                                                     <option value="0" selected="true" disabled="true">---Choose---</option>
+                                                     <option value="">Jan</option>
+                                                     <option value="">Feb</option>
+                                                     <option value="">Mar</option>
+                                                     <option value="">Apr</option>
+                                                     <option value="">May</option>
+                                                     <option value="">Jun</option>
+                                                     <option value="">July</option>
+                                                     <option value="">Aug</option>
+                                                     <option value="">Sep</option>
+                                                     <option value="">Oct</option>
+                                                     <option value="">Nov</option>
+                                                     <option value="">Dec</option>
+                                                     <option value="">Jan</option>
+                                                 </select>
+                                               </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Starting Days</label>
+                                                    <input type="text" class="form-control" id="starting__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Ending Days</label>
+                                                    <input type="text" class="form-control" id="ending__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-2">                
+                                                   <select class="form-control" name="days" >
+                                                     <option value="0" selected="true" disabled="true">---Choose---</option>
+                                                     <option value="">Jan</option>
+                                                     <option value="">Feb</option>
+                                                     <option value="">Mar</option>
+                                                     <option value="">Apr</option>
+                                                     <option value="">May</option>
+                                                     <option value="">Jun</option>
+                                                     <option value="">July</option>
+                                                     <option value="">Aug</option>
+                                                     <option value="">Sep</option>
+                                                     <option value="">Oct</option>
+                                                     <option value="">Nov</option>
+                                                     <option value="">Dec</option>
+                                                     <option value="">Jan</option>
+                                                 </select>
+                                               </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="starting__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="ending__days" placeholder="Enter Days">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                            <!-- /.box-body -->
+
+                                            <div class="box-footer mb-5 ml-3">
+                                                <button type="submit" class="btn btn-primary mt-2">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+				<!-- container-fluid -->
+			</div>
+		</div>
+	</div>
+	<!--page-content-wrapper -->
+	</div>
+	<!--wrapper -->
+
+
+	<!-- js -->
+	<th:block th:insert="~{admin/fragment/fragment :: js}"></th:block>
+
+	<!-- end js -->
+
+
+</body>
+
+</html>

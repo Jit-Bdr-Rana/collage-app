@@ -17,6 +17,8 @@ public interface StudentService {
 	 public List<Student> fetchStudentByRegistrationYear(Integer id);
 	 
 	 public Student fetchStudentFromContact(String contact);
+	 public boolean checkIfEmailAlreadExist(String email);
+	 public boolean checkIfContactAlreadExist(String contact);
 //	void deleteEmployeeById(long id);
 //	Page<Employee> findPaginate(int pageNo,int pageSize,String sortField,String sortDirection);
 }

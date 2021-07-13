@@ -37,6 +37,11 @@ public class Student {
 
  @Column(length=100,nullable=true,unique=false)
  private String image;
+ 
+ @Column(length=100)
+ private String email;
+ @Column(length=255)
+ private String password;
 
  
 // @DateTimeFormat(pattern = "mm/dd/yyyy")
@@ -102,9 +107,6 @@ public void setParent(Parent parent) {
 	this.parent = parent;
 }
 
-@OneToOne(cascade = CascadeType.ALL)
- @JoinColumn(name = "user_id", referencedColumnName = "id")
- private User user;
 
  
  
@@ -112,18 +114,12 @@ public void setParent(Parent parent) {
 @Override
 public String toString() {
 	return "Student [id=" + id + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
-			+ ", contact=" + contact + ", image=" + image + ", dob=" + dob + ", gender=" + gender + ", program="
-			+ program + ", registrationyear=" + registrationyear + ", parent=" + parent + ", fee=" + fee
-			+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", user=" + user + "]";
+			+ ", contact=" + contact + ", image=" + image + ", email=" + email + ", password=" + password + ", dob="
+			+ dob + ", gender=" + gender + ", program=" + program + ", registrationyear=" + registrationyear
+			+ ", parent=" + parent + ", fee=" + fee + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 }
 
-public User getUser() {
-	return user;
-}
 
-public void setUser(User user) {
-	this.user = user;
-}
 
 public Program getProgram() {
 	return program;
@@ -145,6 +141,22 @@ public void setGender(String gender) {
 
 
 
+
+public String getEmail() {
+	return email;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
 
 public String getImage() {
 	return image;

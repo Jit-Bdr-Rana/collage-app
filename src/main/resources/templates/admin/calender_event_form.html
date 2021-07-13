@@ -1,0 +1,141 @@
+<!doctype html>
+
+<html xmlns:th="www.thymeleaf.org">
+<title>Calender Event</title>
+<head>
+<th:block th:insert="~{admin/fragment/fragment :: css}"></th:block>
+</head>
+
+
+<body>
+
+	<div id="wrapper">
+		<div class="overlay"></div>
+		<!-- Sidebar Start -->
+
+		<!-- Sidebar-wrapper -->
+
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper" class="toggled">
+			<div id="content">
+				<th:block th:insert="~{admin/fragment/fragment :: sidebar}"></th:block>
+				<div class="container-fluid p-0 px-lg-0 px-md-0">
+					<!-- Topbar -->
+					<th:block th:replace="~{admin/fragment/fragment :: topbar}"></th:block>
+					<!-- End of Topbar -->
+
+					 <!-- Begin Page Content -->
+                    <div class="container-fluid px-lg-4">
+                        <div class="row">
+                            <!--    Form start -->
+                            <div class="col-md-12  mt-4">
+                                <div class="card pt-4 pb-2">
+                                    <div class="box box-primary">
+                                        <h1 class="h3 mb-0 text-dark-800 float-left ml-5">Add Event</h1>
+                                        <!-- form start -->
+                                        <form class="ml-5 mr-5" role="form">
+                                          <div class="box-body row mt-4">
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                 <label>Month</label>
+                                                   <select class="form-control" name="month" >
+                                                     <option value="0" selected="true" disabled="true">Month</option>
+                                                     <option value="">Baishak</option>
+                                                     <option value="">Jesth</option>
+                                                     <option value="">Aasar</option>
+                                                     <option value="">Shrawn</option>
+                                                     <option value="">Bhadra</option>
+                                                     <option value="">Ashoj</option>
+                                                     <option value="">Kartik</option>
+                                                     <option value="">Mangsir</option>
+                                                     <option value="">Poush</option>
+                                                     <option value="">Magh</option>
+                                                     <option value="">Falgun</option>
+                                                  </select>
+                                               </div>
+                                            </div>
+
+                                            <div class="col-md-6">                
+                                              <div class="form-group">
+                                                 <label>Day</label>
+                                                   <select class="form-control" name="days" >
+                                                     <option value="0" selected="true" disabled="true">Day</option>
+                                                     <option value="">1</option>
+                                                     <option value="">2</option>
+                                                     <option value="">3</option>
+                                                     <option value="">4</option>
+                                                     <option value="">5</option>
+                                                     <option value="">6</option>
+                                                     <option value="">7</option>
+                                                     <option value="">8</option>
+                                                     <option value="">9</option>
+                                                     <option value="">10</option>
+                                                     <option value="">11</option>
+                                                     <option value="">12</option>
+                                                     <option value="">13</option>
+                                                     <option value="">14</option>
+                                                     <option value="">15</option>
+                                                     <option value="">16</option>
+                                                     <option value="">17</option>
+                                                     <option value="">18</option>
+                                                     <option value="">19</option>
+                                                     <option value="">20</option>
+                                                     <option value="">21</option>
+                                                     <option value="">22</option>
+                                                     <option value="">23</option>
+                                                     <option value="">24</option>
+                                                     <option value="">25</option>
+                                                     <option value="">26</option>
+                                                     <option value="">27</option>
+                                                     <option value="">28</option>
+                                                     <option value="">29</option>
+                                                     <option value="">30</option>
+                                                     <option value="">31</option>
+                                                 </select>
+                                               </div>
+                                            </div>
+                                              <div class="col-md-12 ">
+                                                <div class="form-group">
+                                                    <label for="exampleInputTextarea1">Title (<samll>must be short for calendar</samll>)</label>
+                                                    <input type="text" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group">
+                                                    <label for="exampleInputTextarea1">Event</label>
+                                                    <textarea class="form-control" id="exampleInputTextarea1" placeholder="Enter The Event Description"></textarea> </textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-- /.box-body -->
+
+                                            <div class="box-footer mb-5 ml-3">
+                                                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                            </div>
+                        </div>
+					
+				</div>
+				<!-- container-fluid -->
+			</div>
+		</div>
+	</div>
+	<!--page-content-wrapper -->
+	</div>
+	<!--wrapper -->
+
+
+	<!-- js -->
+	<th:block th:insert="~{admin/fragment/fragment :: js}"></th:block>
+
+	<!-- end js -->
+
+
+</body>
+
+</html>

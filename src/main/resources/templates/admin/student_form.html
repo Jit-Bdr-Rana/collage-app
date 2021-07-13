@@ -49,7 +49,7 @@
 											<div class="box-body row">
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="exampleInputTitle1">First Name</label> <input
+														<label for="exampleInputTitle1">First Name</label> <input required
 															type="text" class="form-control" id="exampleInputTitle1"
 															placeholder="First Name" th:field="*{firstName}">
 													</div>
@@ -63,28 +63,49 @@
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="exampleInputDate1">Last Name</label> <input
+														<label for="exampleInputDate1">Last Name</label> <input required
 															type="text" class="form-control" id="exampleInputDate1"
 															placeholder="Last Name" th:field="*{lastName}">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="exampleInputDes1">Contact</label> <input
+														<label for="exampleInputDes1">Contact</label> 
+														<span th:if="*{id==null}">
+														<input required
 															type="text" class="form-control" id="exampleInputDes1"
 															placeholder="9807590188" th:field="*{contact}">
+													   </span>
+													   <span th:unless="*{id==null}">
+														<input required
+															type="text" disabled class="form-control" id="exampleInputDes1"
+															placeholder="9807590188" th:field="*{contact}">
+															<input type="hidden" value="*{contact}" th:field="*{contact}">
+													   </span>
+															<small style="color:red;font-style:itallic;" th:if="${contactError!=null}" th:text="${contactError}"></small>
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="exampleInputDes1">Email</label> <input
+														<label for="exampleInputDes1">Email</label> 
+														<span th:if="*{id==null}">
+														<input required
 															type="text" class="form-control" id="exampleInputDes1"
-															placeholder="Email" name="email" th:field="${student.user.email}">
+															placeholder="Email" name="email" th:field="${student.email}">
+														</span>
+														<span th:unless="*{id==null}">
+														<input required
+															type="text" disabled class="form-control" id="exampleInputDes1"
+															placeholder="Email" name="email" th:field="${student.email}">
+															<input type="hidden" value="*{email}" th:field="*{email}">
+															<input type="hidden"  th:field="*{fee.id}">
+														</span>
+															<small style="color:red;font-style:itallic;" th:if="${emailError!=null}" th:text="${emailError}"></small>
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="exampleInputDes1">D.O.B</label> <input
+														<label for="exampleInputDes1">D.O.B</label> <input required
 															type="date" class="form-control" id="exampleInputDes1"
 															placeholder="2021-11-4" th:field="*{dob}">
 													</div>
@@ -118,16 +139,16 @@
 														<label for="exampleInputDes1">Password</label> 
 														
 														<th:block th:if="${student.id==null}">
-														<input
+														<input required
 															type="password" class="form-control"
-															id="password" placeholder="password"  name="password" th:field="${student.user.password}">
+															id="password" placeholder="password"  name="password" th:field="${student.password}">
 															
 														</th:block>
 														<th:block th:unless="${student.id==null}">
-														<input type="hidden" th:field="${student.user.id}" th:value="${student.user.id}">
+														
 														<input
 															type="text" class="form-control"
-															id="password" placeholder="password"  name="password" th:field="${student.user.password}">
+															id="password" placeholder="password"  name="password" th:field="${student.password}">
 															
 														</th:block>
 														
@@ -138,7 +159,7 @@
 												<div class="col-md-6">
 													<label>Gender</label>
 													<div class="checkbox flex-column">
-														<label class="mr-2"> <input type="radio" name="gender" value="male" th:field="*{gender}">
+														<label class="mr-2"> <input type="radio"  name="gender" value="male" th:field="*{gender}" checked="true">
 															Male
 														</label> <label class="mr-2"> <input type="radio" name="gender"  value="female" th:field="*{gender}">
 															Female 

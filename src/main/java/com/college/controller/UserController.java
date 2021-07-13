@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.college.model.Role;
 import com.college.model.User;
-
+import com.college.model.Year;
 import com.college.service.RoleService;
 import com.college.service.UserService;
 import com.college.service.YearService;
@@ -58,16 +60,18 @@ public class UserController {
 	@PostMapping("/save")
 	public String saveUser(User user) {
 		if(user.getId()!=null) {
-			System.out.println("user");
-			System.out.println(user);		
+			
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String encoded = encoder.encode(user.getUnHashedPassword());
+			user.setPassword(encoded);
 		}else {
 		    user.setEnabled(false);
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encoded = encoder.encode(user.getUnHashedPassword());
 			user.setPassword(encoded);
-			userService.saveUser(user);
+			
 		}
-	
+		userService.saveUser(user);
 	
 		return "redirect:/admin/user";
 	}
@@ -83,5 +87,20 @@ public class UserController {
 		return "admin/user_register_form";
 		
 	}
-	
+	@GetMapping("/changePermission")
+	public @ResponseBody void changePermission(@RequestParam("id") Integer id) {
+		
+		User user=userService.findUserById(id);
+		
+		
+		if(user.isEnabled()==true)
+		{
+			user.setEnabled(false);
+		}
+		else {
+			user.setEnabled(true);
+		}
+		
+		this.userService.saveUser(user);
+	}
 }

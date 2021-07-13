@@ -43,13 +43,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http.authorizeRequests()
-	            .antMatchers("/save").permitAll()
-	            .antMatchers("/register").permitAll()
-	            .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-	            .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
-	            .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-	            .antMatchers("/delete/**").hasAuthority("ADMIN")
-	            .anyRequest().authenticated()
+	            .antMatchers("/admin/*").permitAll()
+//	            .antMatchers("/admin/user").hasAnyAuthority("SUPERADMIN")
+	                    
+	            .antMatchers("/admin/css/global.css").permitAll()
+//	            .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
+//	            .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
+//	            .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
+//	            .antMatchers("/delete/**").hasAuthority("ADMIN")
+//	            .anyRequest().authenticated()
 	            .and()
 	            .formLogin().loginPage("/login").defaultSuccessUrl("/admin/student", true).permitAll()
 	            .and()

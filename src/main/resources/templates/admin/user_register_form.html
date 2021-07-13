@@ -59,6 +59,10 @@
                                                 <label for="exampleInputPassword1">Password</label>
                                                 <input type="password" class="form-control" placeholder="Password" th:field="*{unHashedPassword}">
                                             </div>
+                                               <div class="form-group" th:unless="*{id==null}">
+                                                <label for="exampleInputPassword1">Password</label>
+                                                <input type="text" class="form-control" placeholder="Password" th:field="*{unHashedPassword}">
+                                            </div>
 
                                             <button type="submit" class="btn btn-primary mt-2 form-control" >Regsiter</button>
                                           </div>

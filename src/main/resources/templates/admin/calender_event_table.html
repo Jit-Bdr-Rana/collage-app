@@ -25,98 +25,100 @@
 					<th:block th:replace="~{admin/fragment/fragment :: topbar}"></th:block>
 					<!-- End of Topbar -->
 
-					<!-- Begin Page Content -->
 					<div class="container-fluid px-lg-4">
+                        <div class="row">
+                            <!-- column start -->
+                            <div class="col-md-12 mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h1 class="h3 mb-0 text-dark-800 float-left">Event and Holiday</h1>
 
-						<div class="row">
-							<!-- column start -->
-							<div class="col-md-12 mt-4">
-								<div class="card">
-									<!-- column start -->
+                                        <div class="float-right">
+                                            <a th:href="@{'/admin/calender/form'}"
+                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                    class="fas fa-plus text-white mr-1"></i>
+                                                Add Event</a>
+                                            <a th:href="@{'/admin/calender/setup'}"
+                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                    class="fas fa-plus text-white mr-1"></i>
+                                                SetupCalender</a>
+                                        </div>
 
-									<div class="container table-responsive mt-2">
-											<div class="d-sm-flex align-items-center justify-content-between mt- mb-0 box-header">
-											<h1 class="h3 mb-0 text-gray-800 ">Events and Holiday</h1>
-											<a href>8</a>
-											      <a th:href="@{/admin/program-form}"
-                                        class=" btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus text-white mr-1"></i>
-                                        Setup Calender</a>
-                                        
-                                        
-    								</div>
-										
-								
-								<div class="alert alert-primary" role="alert"
-									th:text="${success}" th:if="${success}"></div>	
-								<div class="alert alert-danger" role="alert" th:text="${error}"
-									th:if="${error}"></div>
-										<form th:action="@{'/admin/fee/page/'+${currentPage}}"
-											method="get" class="mt-0">
-											<input type="hidden" name="sortField" th:value="${sortField}">
-											<input type="hidden" name="sortDir" th:value="${sortDir}">
-											<div class="row ml-5 mr-5 ">
-												
-											
-													<div class="col-md-4 mt-2">
-													<div class="form-group ">
-														<label></label> <select class="form-control"
-															name="program">
-															<option value="0" selected="true" disabled="true">Select Month</option>
-															  <option value="1">Baishak</option>
-															   <option value="2">Jesth</option>
-															    <option value="3">AaSar</option>
-															   <option value="4">Shrawn</option>
-															   <option value="5">Bhadra</option>
-															    <option value="6">Asoj</option>
-															    <option value="7">Kartik</option>
-															    <option value="8">Mangshir</option>
-															    <option value="9">Poush</option>
-															    <option value="10">Maghk</option>
-															    <option value="11">Falgun</option>
-															    <option value="12">Chaitra</option>
-														</select>
-													</div>
-												</div>
+                                        <!-- column start -->
+                                    <div class="container table-responsive mt-4">
+                                      <div class="row mt-5">
+                                        <div class="col-md-4">
+                                               <div class="form-group ">
+                                                 <label>Select Year</label>
+                                                   <select class="form-control" name="year" >
+                                                     <option value="0" selected="true" disabled="true">Year</option>
+                                                     <option value="">2017</option>
+                                                     <option value="">2018</option>
+                                                     <option value="">2019</option>
+                                                     <option value="">2020</option>
+                                                     <option value="">2021</option>
+                                                     <option value="">2022</option>
+                                                  </select>
+                                                </div>
+                                          </div>
+                                        <div class="col-md-4">
+                                               <div class="form-group">
+                                                 <label>Select Month</label>
+                                                   <select class="form-control" name="month" >
+                                                     <option value="0" selected="true" disabled="true">Month</option>
+                                                     <option value="">Basishak</option>
+                                                     <option value="">Jesth</option>
+                                                     <option value="">Aasar</option>
+                                                     <option value="">Shrawn</option>
+                                                     <option value="">Bhadra</option>
+                                                     <option value="">Ashoj</option>
+                                                     <option value="">Kartik</option>
+                                                     <option value="">Mangsir</option>
+                                                     <option value="">Push</option>
+                                                     <option value="">Magh</option>
+                                                     <option value="">Falgun</option>
+                                                     
+                                                     <option value="">Chaitra</option>
+                                                  </select>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-4 go_button">
+                                            <button class="btn btn-primary btn-danger">GO</button>
+                                        </div>
 
-												
-											
-												<div class="col-md-4 go_button">
-													<button class="btn btn-primary btn-danger">
-														<i class="fa fa-search"></i>
-													</button>
-												</div>
-										</form>
-
-										<table class="table table-bordered table-hover ml-3">
-											<thead class="thead-default">
-												<tr>
-													<th scope="col">SN</th>
-													<th scope="col">Name</th>
-													<th scope="col">Batch</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr >
-												
-													<th colspan=4 class="text-center">no data</th>
-															
-												</td>
-												</tr>
-												
-												
-												
-											</tbody>
-										</table>
-									
-									</div>
-									<!-- column end -->
-
-								</div>
-							</div>
-						</div>
-					</div>
+                                        <table class="table table-bordered table-hover ml-3">
+                                            <thead class="thead-default">
+                                                <tr>
+                                                    <th scope="col">SN</th>
+                                                    <th width="120" scope="col">Date</th>
+                                                    <th scope="col">Descripton</th>
+                                                    <th width="103px" scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>1-Jan-2020</td>
+                                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                    </td>
+                                                    <td>
+                                                          <a href=""><i class="fa fa-eye btn btn-info btn-sm"></i></a>
+                                                          <a href=""><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                 <!-- column end -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- column end -->
+                        </div>
+                    </div>
+                </div>
+					
 				</div>
 				<!-- container-fluid -->
 			</div>

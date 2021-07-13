@@ -78,4 +78,25 @@ public List<Student> fetchStudentByRegistrationYear(Integer id) {
 	return this.stuRepo.fetchStudentByRegistrationYear(id);
 }
 
+public boolean checkIfEmailAlreadExist(String email) {
+
+	if(stuRepo.getStudentByEmail(email)!=null) {
+		return true;
+	}else {
+		return false;
+	}
+	
+	
+}
+
+@Override
+public boolean checkIfContactAlreadExist(String contact) {
+	
+	if(stuRepo.getStudentByContact(contact)!=null) {
+		return true;
+	}else {
+		return false;
+	}
+}
+
 }

@@ -37,7 +37,7 @@
                                     <div class="main- fees-content flex">
                                         <p class="ml-4 float-left">Name: [[${student.firstName+' '+student.middleName+' '+student.lastName}]]</p>
                                         <p class="mr-4 float-right">Program: [[${student.program.name}]]</p>
-                                        <p class=" text-center"> Batch: [[${student.registrationYear}]]</p>
+                                        <p class=" text-center"> Batch: [[${student.registrationyear.name}]]</p>
                                     </div>
                                    <form  th:action="@{/admin/fee/save}" method="post" enctype="multipart/form-data" th:object="${fee}">
                                       <input type="hidden" name="student_id" th:value="${student_id}" >
