@@ -1,6 +1,7 @@
 package com.college.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,11 +24,20 @@ public class Year {
 	@Column(name="name",length=10)
 	private String name;
 	
+	@OneToMany(targetEntity=Calendar.class,cascade=CascadeType.ALL)
+	 @JoinColumn(name="year_id", referencedColumnName="id")
+	private List<Calendar> calendar;
+	
 	@OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="year_id", referencedColumnName="id")
 	
 	public Integer getId() {
 		return id;
+	}
+	@Override
+	public String toString() {
+		return "Year [id=" + id + ", name=" + name + ", calendar=" + calendar + ", isActive=" + isActive
+				+ ", isCalender=" + isCalender + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	public void setId(Integer id) {
 		this.id = id;

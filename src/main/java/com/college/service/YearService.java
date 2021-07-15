@@ -13,4 +13,5 @@ public interface YearService {
 	public boolean checkIfDeleteble(Integer id);
 	public void deleteProgram(Integer id);
 	public Year  findYearByName(String name);
+	public Year  findYearByIsCalender();
 }

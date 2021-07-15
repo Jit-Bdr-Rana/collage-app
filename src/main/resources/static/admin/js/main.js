@@ -1484,3 +1484,58 @@ function sweet_alert(icon,title){
   timer: 3000
 })
 }
+
+//calender part
+let change_days=(day,id,type)=>{
+  
+    $('#no__day'+id).val(day);
+}
+
+
+
+
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+$('input').on('keypress', function (event) {
+    var regex = new RegExp("^[a-zA-Z0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+       event.preventDefault();
+       return false;
+    }
+});
+
+
+const calculate_days=(id,type)=>{
+if(type===1){
+let start;
+ let end;
+ start=$('#starting__day'+id).val();
+ end=$('#ending__day1'+id).val();
+change_days(Math.abs(end-start)+1,id,type)
+
+}else{
+let start;
+ let end;
+  let start1;
+ let end1;
+ start=$('#starting__day'+id).val();
+ end=$('#ending__day'+id).val();
+ 
+ start1=$('#starting__day'+id+'2').val();
+ end1=$('#ending__day'+id+'2').val();
+change_days((Math.abs(end-start)+1)+(Math.abs(end1-start1)+1),id,type)
+}
+ 
+ 
+ }
+
+

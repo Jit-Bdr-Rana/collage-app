@@ -18,5 +18,8 @@ public interface YearRepository extends JpaRepository<Year, Integer> {
 	
 	@Query("SELECT y FROM Year y where y.name=?1")
 	public Year  findYearByName(String name);
+	
+	@Query("SELECT y FROM Year y where y.isCalender=true")
+	public Year  findYearByIsCalender();
 
 }

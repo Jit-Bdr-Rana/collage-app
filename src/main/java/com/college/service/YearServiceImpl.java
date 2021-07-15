@@ -57,4 +57,10 @@ public class YearServiceImpl implements YearService {
 		return this.yearRepo.findYearByName(name);
 	}
 
+	@Override
+	public Year findYearByIsCalender() {
+		
+		return yearRepo.findYearByIsCalender();
+	}
+
 }
