@@ -61,5 +61,9 @@ public class CalendarList {
 	public String toString() {
 		return "CalendarList [id=" + id + ", calenders=" + calenders + "]";
 	}
+	
+	public String calculate() {
+		return null;
+	}
 
 }

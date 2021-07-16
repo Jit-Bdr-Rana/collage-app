@@ -1537,5 +1537,32 @@ change_days((Math.abs(end-start)+1)+(Math.abs(end1-start1)+1),id,type)
  
  
  }
-
+ 
+ $('#selected_month').change(()=>{
+   
+   const id=$('#selected_month').val();
+   
+    fetch("/admin/event/getmonth/"+id)
+   .then(response => response.json())
+   .then (function(repos){
+   fillMonth(repos);
+   })
+   
+ })
+ 
+ const fillMonth=(result)=>{
+ $('#day_from_selected_month').text("");
+ let i;
+ let final=``;
+ for(i=0;i<result;i++){
+   final=final+`
+    <option value="${i+1}">${i+1}</option>  
+    `;
+ }
+ $('#day_from_selected_month').append(final);
+ 
+ 
+ }
+ 
+ 
 

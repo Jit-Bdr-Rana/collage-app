@@ -34,6 +34,7 @@
                                         <h1 class="h3 mb-0 text-dark-800 float-left ml-5">Calender Setup</h1>
                                         <!-- form start -->
                                         <form class="ml-5 mr-5" role="form" method="post"  th:action="@{'/admin/calendar/save'}" th:object="${calendarList}">
+                                      
                                         <input type="hidden" th:field="*{yearId}">
                                   <th:block th:each="calendar ,iStat:*{calenders}">
                                        <input type="hidden" th:field="*{calenders[__${iStat.index}__].id}">
