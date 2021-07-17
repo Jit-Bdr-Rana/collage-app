@@ -30,18 +30,23 @@
                         <div class="row">
                             <!--    Form start -->
                             <div class="col-md-12  mt-4">
-                                <div class="card pt-4 pb-2">
+                                <div class="card  ">
+                                    <div class="container ml-0 pb-3">
+                                <a href="/admin/calender-event"  class="float-left btn btn-sm btn-info mt-0"><i
+											class="fas fa-arrow-left"></i> Back</a>
+                                </div>
                                     <div class="box box-primary">
                                         <h1 class="h3 mb-0 text-dark-800 float-left ml-5">Add Event</h1>
                                         <!-- form start -->
-                                        <form class="ml-5 mr-5" role="form">
+                                        <form class="ml-5 mr-5" role="form" th:action="@{'/admin/calendar/event/save'}" method="post" th:object="${calendarEvent}">
+                                          
+                                          <input type="hidden" th:field="*{id}">
                                           <div class="box-body row mt-4">
                                             <div class="col-md-6">
                                               <div class="form-group">
                                                  <label>Month</label>
-                                                   <select class="form-control" name="month" id="selected_month" >
-                                                   <option selected="true" disabled>------choose month----</option>
-                                                     <option th:each="month:${listOfMonths}" th:value="${month.id}"   >[[${month.name}]]</option>
+                                                   <select class="form-control"  required id="selected_month"  th:field="*{month}">
+                                                     <option th:each="month:${listOfMonths}" th:value="${month.id}" >[[${month.name}]]</option>
                                                      </select>
                                                </div>
                                             </div>
@@ -49,21 +54,21 @@
                                             <div class="col-md-6">                
                                               <div class="form-group">
                                                  <label>Day</label>
-                                                   <select class="form-control" name="days" id="day_from_selected_month" >
-                                                     
+                                                   <select class="form-control" required name="days" id="day_from_selected_month"th:field="*{day}" >
+                                                     <option th:each="i: ${#numbers.sequence(1, firstMonthDays)}" th:value="${i}" >[[${i}]]</option>
                                                  </select>
                                                </div>
                                             </div>
-                                              <div class="col-md-12 ">
+                                              <!--<div class="col-md-12 ">
                                                 <div class="form-group">
                                                     <label for="exampleInputTextarea1">Title (<samll>must be short for calendar</samll>)</label>
-                                                    <input type="number" maxlength = "20" class="form-control" >
+                                                    <input type="text" maxlength = "30" class="form-control" th:field="*{title}" >
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="col-md-12 ">
                                                 <div class="form-group">
                                                     <label for="exampleInputTextarea1">Event</label>
-                                                    <textarea class="form-control" id="exampleInputTextarea1" placeholder="Enter The Event Description"></textarea> </textarea>
+                                                    <textarea required class="form-control" id="exampleInputTextarea1" placeholder="Enter The Event Description" th:field="*{event}"></textarea> </textarea>
                                                 </div>
                                             </div>
 

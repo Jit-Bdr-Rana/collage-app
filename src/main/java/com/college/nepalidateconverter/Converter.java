@@ -3,6 +3,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.DurationFieldType;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,6 +13,9 @@ import java.util.List;
  * Created by nabin_khadka on 11/18/16.
  */
 public class Converter {
+	
+	private	long millis=System.currentTimeMillis();  
+	private   Date date=new Date(millis);
 
     //Change this when you get more previous database.
     public static final int START_ENGLISH_YEAR = 1953;
@@ -142,5 +146,12 @@ public class Converter {
     	NepaliDate nepaliDate=new NepaliDate();
     	return nepaliDate.numberOfDaysPerYear[nYear-START_NEPALI_YEAR][nMonth-1];
     }
+    
+    public int getCurrentNepliYear() {
+		String dateInString=date.toString();
+		String dateInArray[]=dateInString.split("-");
+		NepaliDate nepaliDate=getNepaliDate(Integer.parseInt(dateInArray[0]),Integer.parseInt(dateInArray[1]),Integer.parseInt(dateInArray[2]));
+        return nepaliDate.getSaal();
+	}
 
 }

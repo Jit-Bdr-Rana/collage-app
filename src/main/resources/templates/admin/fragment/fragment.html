@@ -143,6 +143,18 @@
 		</ul>
 	</nav>
 	<!-- end of topbar -->
+	   <script th:fragment="js-to-disable">
+	   $('input').on('keypress', function (event) {
+		    var regex = new RegExp("^[a-zA-Z0-9]+$");
+		    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+		    if (!regex.test(key)) {
+		       event.preventDefault();
+		       return false;
+		    }
+		});
+
+	   </script>
+	
 
 	<th:block th:fragment="js">
 		<!-- js link -->

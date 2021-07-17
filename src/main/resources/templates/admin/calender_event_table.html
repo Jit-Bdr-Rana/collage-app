@@ -26,11 +26,16 @@
 					<!-- End of Topbar -->
 
 					<div class="container-fluid px-lg-4">
+					
                         <div class="row">
                             <!-- column start -->
                             <div class="col-md-12 mt-4">
-                                <div class="card mb-4">
+                                <div class="card ">
+                            
                                     <div class="card-body">
+                                    
+											
+                                    
                                         <h1 class="h3 mb-0 text-dark-800 float-left">Event and Holiday</h1>
 
                                         <div class="float-right">
@@ -38,6 +43,11 @@
                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                     class="fas fa-plus text-white mr-1"></i>
                                                 Add Event</a>
+                                                
+                                             <a th:href="@{'/admin/calender/setup'}"
+                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                    class="fas fa-plus text-white mr-1"></i>
+                                                Calendar Title</a>
                                           <!--    <a th:href="@{'/admin/calender/setup'}"
                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                     class="fas fa-plus text-white mr-1"></i>
@@ -46,45 +56,60 @@
 
                                         <!-- column start -->
                                     <div class="container table-responsive mt-4">
-                                      <div class="row mt-5">
+                                      <form class="row mt-5" method="post" th:action="@{'/admin/calendar/event/getmonth'}">
                                         
                                         <div class="col-md-4">
                                                <div class="form-group">
                                                  <label>Select Month</label>
-                                                   <select class="form-control" name="month" >
-                                                     <option value="0" selected="true" disabled="true">Month</option>
-                                                      <option th:each="month:${listOfMonths}" th:value="${month.id}"   >[[${month.name}]]</option>
+                                                   <select class="form-control" name="month" id="selected__month" >
+                                                     <!--<option value="0" selected="true" disabled="true">Month</option>-->
+                                                     <th:block th:each="month:${listOfMonths}" >
+                                                      <option  th:value="${month.id}"  th:if="${selectedMonth==month.id}"  selected >[[${month.name}]]</option>
+                                                      <option  th:value="${month.id}"  th:if="${selectedMonth!=month.id}"   >[[${month.name}]]</option>
+                                                     </th:block>
                                                   </select>
                                                 </div>
                                         </div>
-                                        <div class="col-md-4 go_button">
-                                            <button class="btn btn-primary btn-danger">GO</button>
+                                        
+                                          <div class="col-md-4 go_button">
+                                            <button class="btn btn-primary btn-danger" type="submit">GO</button>
                                         </div>
+                                    
 
                                         <table class="table table-bordered table-hover ml-3">
                                             <thead class="thead-default">
                                                 <tr>
                                                     <th scope="col">SN</th>
-                                                    <th width="120" scope="col">Date</th>
-                                                    <th scope="col">Descripton</th>
+                                                    <th width="120" scope="col">Day</th>
+                                                    <th scope="col">Event</th>
                                                     <th width="103px" scope="col">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>1-Jan-2020</td>
-                                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                            <tbody id="calendar_event_data">
+                                                <tr th:each="item ,iStat:${groupingEventByDay}" >
+                                                    <th scope="row">[[${iStat.count}]]</th>
+                                                    <td>[[${item.key}]]</td>
+                                                    <td>
+                                                        <table style="table-layout: fixed;">
+                                                            <tbody>
+                                                             <tr th:each="calendarEvent:${item.value}" class="p-3" >
+                                                             <td><i class="fas fa-check text-success"></i></td> 
+                                                             <td style="width:500px;">  [[${calendarEvent.event}]] </td>
+                                                             
+                                                             <td><a href="#"><i class="fas fa-edit text-info ml-2"></i></a><a th:href="@{'/admin/calendar/event/deleteById?month='+${calendarEvent.month.id} +'&&id='+${calendarEvent.id}}"><i class="text-danger ml-2 far fa-trash-alt"></i></a></td>
+                                                             </tr>
+                                                        
+                                                          </tbody>
+                                                        </table>
                                                     </td>
                                                     <td>
-                                                          <a href=""><i class="fa fa-eye btn btn-info btn-sm"></i></a>
+                                                         
                                                           <a href=""><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </form>
                                  <!-- column end -->
                                     </div>
                                 </div>

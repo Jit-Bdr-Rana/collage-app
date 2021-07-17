@@ -1504,14 +1504,6 @@ $(document).ready(function() {
   });
 });
 
-$('input').on('keypress', function (event) {
-    var regex = new RegExp("^[a-zA-Z0-9]+$");
-    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-    if (!regex.test(key)) {
-       event.preventDefault();
-       return false;
-    }
-});
 
 
 const calculate_days=(id,type)=>{
@@ -1565,4 +1557,25 @@ change_days((Math.abs(end-start)+1)+(Math.abs(end1-start1)+1),id,type)
  }
  
  
+ // for event 
+ $('#selected__month').change(()=>{
+ const id=$('#selected__month').val()
+ 
+ /*  fetch("/admin/event/month/"+id)
+   .then(response => response.json())
+   .then (function(repos){
+    populate_calendar_event(repos);
+   })
+  */
+ 
+ })
+
+const populate_calendar_event=(result)=>{
+console.log(result)
+/* $('#calendar_event_data').append(final_result);*/
+}
+
+ const goBack=()=>{
+  window.history.back();
+ }
 

@@ -28,6 +28,10 @@ public class Year {
 	 @JoinColumn(name="year_id", referencedColumnName="id")
 	private List<Calendar> calendar;
 	
+	@OneToMany(targetEntity=CalendarEvent.class,cascade=CascadeType.ALL)
+	 @JoinColumn(name="year_id", referencedColumnName="id")
+	private List<CalendarEvent> calendarEvent;
+	
 	@OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="year_id", referencedColumnName="id")
 	
