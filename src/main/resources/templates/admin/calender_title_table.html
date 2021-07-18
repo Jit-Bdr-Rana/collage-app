@@ -36,18 +36,15 @@
                                     
 											
                                     
-                                        <h1 class="h3 mb-0 text-dark-800 float-left">Event and Holiday[[${success}]]</h1>
+                                        <h1 class="h3 mb-0 text-dark-800 float-left">Event Title</h1>
 
                                         <div class="float-right">
-                                            <a th:href="@{'/admin/calender/form'}"
+                                            <a th:href="@{'/admin/calendar/title/form'}"
                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                     class="fas fa-plus text-white mr-1"></i>
-                                                Add Event</a>
+                                                Add Event title</a>
                                                 
-                                             <a th:href="@{'/admin/calendar/title'}"
-                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                    class="fas fa-plus text-white mr-1"></i>
-                                                Calendar Title</a>
+
                                           <!--    <a th:href="@{'/admin/calender/setup'}"
                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                     class="fas fa-plus text-white mr-1"></i>
@@ -85,33 +82,23 @@
                                                 <tr>
                                                     
                                                     <th width="120" scope="col">Day</th>
-                                                    <th scope="col">Event</th>
+                                                    <th scope="col">Title</th>
                                                     <th width="103px" scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="calendar_event_data">
-                                                <tr th:each="item ,iStat:${groupingEventByDay}" >
+                                                <tr  >
                                                     
-                                                    <td>[[${item.key}]]</td>
+                                                    <td></td>
                                                     <td>
-                                                        <table style="table-layout: fixed;">
-                                                            <tbody>
-                                                             <tr th:each="calendarEvent:${item.value}" class="p-3" >
-                                                             <td><i class="fas fa-check text-success"></i></td> 
-                                                             <td style="width:500px;">  [[${calendarEvent.event}]] </td>
-                                                             
-                                                             <td><a th:href="@{'/admin/calender/form?id='+${calendarEvent.id}}"><i class="fas fa-edit text-info ml-2"></i></a><a th:href="@{'/admin/calendar/event/deleteById?month='+${calendarEvent.month.id} +'&&id='+${calendarEvent.id}}"><i class="text-danger ml-2 far fa-trash-alt"></i></a></td>
-                                                             </tr>
-                                                        
-                                                          </tbody>
-                                                        </table>
+                                                       
                                                     </td>
                                                     <td>
                                                          
-                                                          <a th:href="@{'/admin/calendar/event/deleteByDay?day='+${item.key}+'&&month='+${selectedMonth}}"><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a>
+                                                          <a href=""><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a>
                                                     </td>
                                                 </tr>
-                                                <tr th:if="${groupingEventByDay.isEmpty()}">
+                                                <tr >
                                                 <td colspan="3" class="text-center">No Event On This Month</td>
                                                 </tr>
                                             </tbody>

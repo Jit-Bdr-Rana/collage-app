@@ -4,9 +4,12 @@ package com.college.controller;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.college.model.Calendar;
 import com.college.model.CalendarEvent;
@@ -38,7 +42,7 @@ import com.college.service.YearService;
 
 @Controller
 @RequestMapping("/admin")
-public class CalenderAndEvent {
+public class CalenderEventController {
 	private	long millis=System.currentTimeMillis();  
 	private   Date date=new Date(millis); 
 	@Autowired
@@ -60,23 +64,31 @@ public class CalenderAndEvent {
 	private CalendarEventService calendarEventService;
 	
 	@GetMapping("/calender-event")
-	public String showCalenderEvent(Model model,Integer month) {
-		int Month=1;
+	public String showCalenderEvent(Model model,HttpServletRequest response) {
 		this.seedMonth();
-		 Map<Integer, List<CalendarEvent>> groupingEventByDay = new HashMap<>();
+		int month=1;
+		Map<Integer, List<CalendarEvent>> groupingEventByDay;
+		Map<Integer, List<CalendarEvent>> groupingEventByDayAferSorting;
 		List<CalendarEvent> allMonthEvent=new ArrayList<>();
-		if(month==null) {
-			 allMonthEvent=calendarEventService.getAllMonthEvent(1);
-		}else {
-			Month=month;
-			 allMonthEvent=calendarEventService.getAllMonthEvent(month);
-		}
+	      try{
+	    	   month=Integer.parseInt(response.getParameter("month"));
+	    	   allMonthEvent=calendarEventService.getAllMonthEvent(month);
+	      }catch(Exception e) {
+	    	  allMonthEvent=calendarEventService.getAllMonthEvent(month);    	  
+	      }
 	   
 		groupingEventByDay =  allMonthEvent.stream().collect(Collectors.groupingBy(CalendarEvent::getDay));
+		groupingEventByDayAferSorting=groupingEventByDay
+				.entrySet()
+				.stream()
+			    .sorted(Map.Entry.comparingByKey()) 			
+			    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+			    (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+						
 		List<Month> listOfMonths=monthService.showAllMonth();
-		model.addAttribute("selectedMonth",Month);
+		model.addAttribute("selectedMonth",month);
 		model.addAttribute("listOfMonths",listOfMonths);
-		model.addAttribute("groupingEventByDay",groupingEventByDay);
+		model.addAttribute("groupingEventByDay",groupingEventByDayAferSorting);
 		String calender_link="active";
 		model.addAttribute("calender_link",calender_link);
 		
@@ -84,18 +96,25 @@ public class CalenderAndEvent {
 		return "admin/calender_event_table";
 	}
 	
-	@PostMapping("/calendar/event/getmonth")
-	public String getEachMonthEvent(@RequestParam("month")int month,Model model) {
-	  return showCalenderEvent(model, month);
-	}
-	
+
 	@GetMapping("/calender/form")
-	public String showCalenderEventForm(Model model) {
-       CalendarEvent calendarEvent =new CalendarEvent();
+	public String showCalenderEventForm(Model model,HttpServletRequest response) {
+		 CalendarEvent calendarEvent;
+	       int month=1;
+		try{
+			String id=response.getParameter("id");
+			calendarEvent=calendarEventService.getCalendarEventById(Integer.parseInt(id));
+			month=calendarEvent.getMonth().getId();
+			System.out.println("no Exception");
+		}catch(Exception e) {
+			calendarEvent=new CalendarEvent();
+			System.out.println("Exception");
+		}
+		
+      
 		List<Month> listOfMonths=monthService.showAllMonth();
 		String calender_link="active";
-		int firstMonthDays=getDaysFromMonth(1);
-		model.addAttribute("firstMonthDays",firstMonthDays);
+		model.addAttribute("firstMonthDays",getDaysFromMonth(month));
 		model.addAttribute("listOfMonths",listOfMonths);
 		model.addAttribute("calender_link",calender_link);
 		model.addAttribute("calendarEvent",calendarEvent);
@@ -145,7 +164,7 @@ public class CalenderAndEvent {
 	}
 	
 	@PostMapping("/calendar/save")
-	public String saveCalendar(CalendarList calendarList,Model model) {
+	public String saveCalendar(CalendarList calendarList,Model model,RedirectAttributes redirectAttr) {
 		
 		Year year=yearService.getById(calendarList.getYearId());
 		for(Calendar calendar:calendarList.getCalenders()) {
@@ -153,34 +172,66 @@ public class CalenderAndEvent {
 			calendarService.saveCalendar(calendar);
 		}
 		
+		
+		
 		return "redirect:/admin/calender-event";
 		
 	}
 	
 	
 	@PostMapping("/calendar/event/save")
-	public String saveCalendarEvent(CalendarEvent calendarEvent,Model model) {
+	public String saveCalendarEvent(CalendarEvent calendarEvent,RedirectAttributes redirectAttr) {
 		Converter converter =new Converter();
 		calendarEvent.setYear(converter.getCurrentNepliYear());
 	
 		calendarEventService.saveCalendarEvent(calendarEvent);
+		if(calendarEvent.getId()==null) {
+			redirectAttr.addFlashAttribute("success","Event has been added successfully");
+		}else {
+			redirectAttr.addFlashAttribute("success","Event has been updated successfully");
+		}
 	  
-		return showCalenderEvent(model,calendarEvent.getMonth().getId());
+		return "redirect:/admin/calender-event?month="+calendarEvent.getMonth().getId();
 		
 	}
 	
 	
 	@GetMapping("/calendar/event/deleteById")
-	public String deleteCalendarEventById(@RequestParam("month")String month,@RequestParam("id")String id,Model model) {
+	public String deleteCalendarEventById(@RequestParam("month")String month,@RequestParam("id")String id,Model model,RedirectAttributes redirectAttr ) {
 		if(isNumeric(month)==true && isNumeric(id)==true) {
-//			calendarEventService.deleteCalendarEventByid(Integer.parseInt(id));
-			return showCalenderEvent(model,Integer.parseInt(month));
+		   try { calendarEventService.deleteCalendarEventByid(Integer.parseInt(id));
+		   redirectAttr.addFlashAttribute("success","Event has been deleted successfully");
+		   }
+		   catch(Exception e) {
+			  return "admin/";
+		   }
+		   return "redirect:/admin/calender-event?month="+Integer.parseInt(month);
 		}else {
-			return "redirect:admin/calendar/event/deleteById?month="+month+"&id="+id;
+			  return "redirect:/admin/calender-event?month="+Integer.parseInt(month);
 		}
-		
-		
-	}
+  }
+	
+	
+
+	
+	
+	
+	// delete part
+	
+	@GetMapping("/calendar/event/deleteByDay")
+	public String deleteCalendarEventByDay(@RequestParam("month")String month,@RequestParam("day")String day,Model model,RedirectAttributes redirectAttr ) {
+		if(isNumeric(month)==true && isNumeric(day)==true) {
+		   try { calendarEventService.deleteCalendarEventByDay(Integer.parseInt(day));
+		   redirectAttr.addFlashAttribute("success","Event has been deleted successfully");
+		   }
+		   catch(Exception e) {
+			  return "admin/";
+		   }
+		   return "redirect:/admin/calender-event?month="+Integer.parseInt(month);
+		}else {
+			return "redirect:/admin/calender-event?month="+Integer.parseInt(month);
+		}
+  }
 	
 	public static boolean isNumeric(String strNum) {
 	    if (strNum == null) {

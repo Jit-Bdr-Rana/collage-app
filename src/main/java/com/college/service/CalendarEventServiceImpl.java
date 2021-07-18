@@ -38,6 +38,12 @@ public class CalendarEventServiceImpl implements CalendarEventService {
 		
 	}
 
+	@Override
+	public CalendarEvent getCalendarEventById(Integer id) {
+		
+		return 	calendarEventRepository.findById(id).get();
+	}
+
 	
 
 }

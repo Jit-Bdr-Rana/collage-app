@@ -9,7 +9,8 @@ import com.college.model.ListMonthEvent;
 public interface CalendarEventService {
 
 	public void saveCalendarEvent(CalendarEvent calendarEvent);
-	public List<CalendarEvent> getAllMonthEvent(int month);  
+	public List<CalendarEvent> getAllMonthEvent(int month);
+	public CalendarEvent getCalendarEventById(Integer id);
 	public void  deleteCalendarEventByDay(int day);
 	public void  deleteCalendarEventByid(int id);
 	

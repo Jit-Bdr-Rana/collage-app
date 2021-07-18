@@ -30,6 +30,11 @@ public class Month {
 	@OneToMany(targetEntity=CalendarEvent.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="month_id", referencedColumnName="id")
 	private List<CalendarEvent> calendarEvent;
+	
+	
+	@OneToMany(targetEntity=CalendarTitle.class,cascade=CascadeType.ALL)
+	 @JoinColumn(name="month_id", referencedColumnName="id")
+	private List<CalendarEvent> calendarTitle;
 
 
 	public Integer getId() {
