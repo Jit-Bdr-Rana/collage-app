@@ -141,10 +141,28 @@ public class Converter {
          return nYear-START_NEPALI_YEAR;
     	
     }
+    public int getBar(int nYear,int nMonth,int nDay) {
+         EnglishDate engDate=this.getEnglishDate(nYear,nMonth,nDay);
+         NepaliDate nepaliDate=this.getNepaliDate(engDate.getYear(), engDate.getMonth(), engDate.getDate());
+         
+        return nepaliDate.getBarIndex() ;
+    
+    }
     
     public int getNepaliMonthFromYear(int nYear,int nMonth) {
     	NepaliDate nepaliDate=new NepaliDate();
     	return nepaliDate.numberOfDaysPerYear[nYear-START_NEPALI_YEAR][nMonth-1];
+    }
+    
+    public boolean isDateToday(int nYear,int nMonth,int nDay) {
+    	String dateInString=date.toString();
+		String dateInArray[]=dateInString.split("-");
+		NepaliDate nepaliDate=getNepaliDate(Integer.parseInt(dateInArray[0]),Integer.parseInt(dateInArray[1]),Integer.parseInt(dateInArray[2]));
+		if(nDay==nepaliDate.getGatey() && nMonth==nepaliDate.getMahina() && nYear==nepaliDate.getSaal()) {
+			return true;
+		}else {
+			return false;
+		}
     }
     
     public int getCurrentNepliYear() {

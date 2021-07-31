@@ -9,5 +9,6 @@ public interface CalendarTitleService {
     public CalendarTitle getCalendarTitleById(Integer id);
     public void deleteCalendarTitleById(Integer id);
     public List<CalendarTitle> getAllCalendarTitle();
+    public CalendarTitle  findCalendarTitleByYearMonthDay(int year,int month,int day);
 
 }

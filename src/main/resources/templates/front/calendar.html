@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{'front/css/style.css'}">
+    
+    <title>Collage App</title>
+  </head>
+  <body>
+
+ <!-- ------------------------------------------------------------------- -----------------------------------------------------------------------------------------
+                                             Header Section start
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+ <th:block th:insert="~{front/fragment/fragment :: header}"></th:block>
+
+ <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+                                               Header Section end 
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+<!-- -------------------------------------------------------main part ----------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+<!-- Calender start here -->
+<h1 class="text-center text-uppercase title_calender mb-3">Academic Calendar [[${noOfDay}]]  =>[[${firstDayBar}]] lastbar[[${lastDayBar}]] </h1>
+<div class="container">
+<form>
+<div>
+  <a th:href="@{'/calendar?mahina='+${currentMahina-1}+'&saal='+${currentSal}}" class="arrows prev text-dark "><i class="fas fa-angle-double-left fa-2x"></i></a>
+<select class="form-select choose_date">
+
+  <option th:each="i: ${#numbers.sequence(2010, 2090)}" value="[[${i}]]">[[${i}]]</option>
+  
+</select>
+
+<select class="form-select choose_date">
+  
+  <option th:each="month:${monthList}" th:value="${month.id}">[[${month.name}]]</option>
+  
+</select>
+  <a th:href="@{'/calendar?mahina='+${currentMahina+1}+'&saal='+${currentSal}}" class="arrows prev text-dark "><i class="fas fa-angle-double-right fa-2x"></i></a>
+  <h5 class="float-right">[[${currentSal}]] साउन | Jul/Aug 2021</h5>
+</div>
+</form>
+  <section id="calendar" class="collectonme">
+    <div id="day-labels">
+    <div class="label">Sunday</div>
+    <div class="label">Monday</div>
+    <div class="label">Tuesday</div>
+    <div class="label">Wednesday</div>
+    <div class="label">Thursday</div>
+    <div class="label">Friday</div>
+    <div class="label">Saturday</div>
+  </div>
+
+<!-- Week one start from here -->
+
+  <div id="one" class="week" >
+  <div class="day disabled" th:unless="${firstDayBar==1}"  th:each="bar:${#numbers.sequence(1, firstDayBar-1)}">
+      <span class="date"></span>
+        <h5 class="large_date text-center"></h5>
+    </div>
+    
+    <th:block th:each="groupOfDateEventMonth:${listGroupOfDateEventMonth}">
+   
+    <div  th:classappend="${groupOfDateEventMonth.isDateToday(currentSal,currentMahina,groupOfDateEventMonth.nepaliDay)}?'day current-day':' day '"  >
+        <div th:classappend="${groupOfDateEventMonth.bar==7}?'saturday_data':''">
+      <h3 class="event" th:if="${groupOfDateEventMonth.calendarTitle}" >[[${groupOfDateEventMonth.calendarTitle.title}]]</h3>
+      <span class="date">[[${groupOfDateEventMonth.englishDay}]]</span>
+      <h5 class="large_date text-center">[[${groupOfDateEventMonth.nepaliDay}]]</h5>
+    </div>
+    </div>
+        
+    </th:block>
+  <div class="day disabled" th:unless="${lastDayBar==7}" th:each="bar:${#numbers.sequence(1, 7-lastDayBar)}" >
+      <span class="date"></span>
+        <h5 class="large_date text-center"></h5>
+    </div>
+    
+    
+<!-- Week one end here -->
+ </section>
+</div>
+ <!-- Table code start here -->
+ <div class="container mb-4">
+   <h5 class="text-center mb-4">The list of events</h5>
+    <div class="row">
+     <div class="col-md-12">
+      <ul class="list-group">
+
+         <li class="list-group-item"><span class="mr-2 badge badge-danger pt-4 pb-4 pr-4 pl-4">5</span><b class="mr-3">Tuesday</b><h5 class="mt-3">There will be Regular Classes</h5> <p>Some Extra Activities</p> <span class="float-right">July 16, 2021</span></li>
+
+         <li class="list-group-item"><span class="mr-2 badge badge-danger pt-4 pb-4 pr-4 pl-4">5</span><b class="mr-3">Tuesday</b><h5 class="mt-3">There will be Regular Classes</h5> <span class="float-right">July 16, 2021</span></li>
+
+         <li class="list-group-item"><span class="mr-2 badge badge-danger pt-4 pb-4 pr-4 pl-4">5</span><b class="mr-3">Tuesday</b><h5 class="mt-3">There will be Regular Classes</h5> <span class="float-right">July 16, 2021</span></li>
+
+         <li class="list-group-item"><span class="mr-2 badge badge-danger pt-4 pb-4 pr-4 pl-4">5</span><b class="mr-3">Tuesday</b><h5 class="mt-3">There will be Regular Classes</h5><span class="float-right">July 16, 2021</span></li>
+      </ul>
+     </div>
+   </div>
+ </div>
+
+
+   <!--------------------------------------------------------------------- main part end here --------------------------------------------------------------------------
+   
+   ----------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+   <!--------------------------------------------------------------------- footer --------------------------------------------------------------------------
+   
+   ----------------------------------------------------------------------------------------------------------------------------------------------------------->
+    
+    <th:block th:insert="~{front/fragment/fragment :: footer}"></th:block>
+    
+    <!-- -------------------------------------------------------------------footer ---------------------------------------------------------------------------
+    
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

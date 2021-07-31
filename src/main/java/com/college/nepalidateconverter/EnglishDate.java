@@ -38,6 +38,13 @@ public class EnglishDate {
         return englishDate.getYear() + " / " + englishDate.getMonthOfYear() + " / " +
                 englishDate.getDayOfMonth() + " " + WEEK_DAYS[englishDate.getDayOfWeek()];
     }
+    
+    public int getDayOfWeek() {
+      return	englishDate.getDayOfWeek();
+    }
+    public int getMonthOfYear() {
+    	return englishDate.getMonthOfYear();
+    }
 
     public static int getWeekIndex(String weekDay) {
         return Arrays.asList(WEEK_DAYS).indexOf(weekDay) + 1;

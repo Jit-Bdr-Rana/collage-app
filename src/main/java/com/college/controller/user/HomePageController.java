@@ -1,4 +1,4 @@
-package com.college.controller;
+package com.college.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

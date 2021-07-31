@@ -6,6 +6,9 @@ public class NepaliDate {
 
     private int mahina, gatey, saal;
     private String baar;
+    public static final String WEEK_DAYS[] = {"Sunday", "Monday", "Tuesday",
+            "Wednesday", "Thursday", "Friday", "Saturday"};
+
     public static final String MONTHS[] = {"Baisakh", "Jestha", "Ashar", "Shrawan",
             "Bhadra", "Ashoj", "Kartik", "Mangsir",
             "Poush", "Magh", "Falgun", "Chaitra"};
@@ -131,6 +134,28 @@ public class NepaliDate {
 
     public String toString(){
         return saal + " / " + mahina + " / " + gatey + " " + baar ;
+    }
+    
+    public int getBarIndex() {
+    
+    	
+    	
+    	if(this.getBaar().equals(WEEK_DAYS[0])) {
+    		return 1;
+    	}else if(this.getBaar().equals(WEEK_DAYS[1])) {
+    		return 2;
+    	}else if(this.getBaar().equals(WEEK_DAYS[2])) {
+    		return 3;
+    	}else if(this.getBaar().equals(WEEK_DAYS[3])) {
+    		return 4;
+    	}else if(this.getBaar().equals(WEEK_DAYS[4])) {
+    		return 5;
+    	}else if(this.getBaar().equals(WEEK_DAYS[5])) {
+    		return 6;
+    	}else  {
+    		return 7;
+    	}
+    	
     }
 
 

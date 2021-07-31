@@ -26,14 +26,6 @@ public class Fee {
 	
 
 
-	public boolean isSchoolarship() {
-		return schoolarship;
-	}
-
-	public void setSchoolarship(boolean schoolarship) {
-		this.schoolarship = schoolarship;
-	}
-
 	@Column(name="semester_first" ,length=500)
 	private Integer semesterFirst=0;
 	
@@ -60,6 +52,8 @@ public class Fee {
 	@Column(length=255)
 	private String document;
 	
+
+	
 	@Column(name="created_at",nullable=true)
 	private Date createdAt;
 	
@@ -82,6 +76,16 @@ public class Fee {
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", student=" + student + "]";
 	}
 
+
+
+	public boolean isSchoolarship() {
+		return schoolarship;
+	}
+
+	public void setSchoolarship(boolean schoolarship) {
+		this.schoolarship = schoolarship;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

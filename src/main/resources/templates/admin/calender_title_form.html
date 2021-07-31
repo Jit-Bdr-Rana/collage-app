@@ -56,7 +56,7 @@
                                               <div class="form-group">
                                                  <label>Day</label>
                                                    <select class="form-control" required name="days" id="day_from_selected_month" field="*{day}" >
-                                                   <option each="i: ${#numbers.sequence(1, firstMonthDays)}" value="${i}" ></option>
+                                                   <option th:each="i: ${#numbers.sequence(1, firstMonthDays)}" value="${i}" ></option>
                                                  </select>
                                                </div>
                                             </div>

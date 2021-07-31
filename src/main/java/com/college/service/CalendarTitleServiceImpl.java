@@ -36,4 +36,9 @@ public class CalendarTitleServiceImpl implements CalendarTitleService {
 		return calendarTitleRepository.findAll();
 	}
 
+	@Override
+	public CalendarTitle findCalendarTitleByYearMonthDay(int year, int month, int day) {
+		 return calendarTitleRepository.findCalendarTitleByYearMonthDay(year, month, day);
+	}
+
 }
