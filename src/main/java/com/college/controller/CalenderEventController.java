@@ -34,6 +34,7 @@ import com.college.nepalidateconverter.Converter;
 import com.college.nepalidateconverter.NepaliDate;
 import com.college.service.CalendarEventService;
 import com.college.service.CalendarService;
+import com.college.service.CalendarTitleService;
 import com.college.service.EnglishMonthService;
 import com.college.service.MonthService;
 import com.college.service.WeekService;
@@ -63,10 +64,15 @@ public class CalenderEventController {
 	@Autowired
 	private CalendarEventService calendarEventService;
 	
+	@Autowired
+	private CalendarTitleService calendarTitleService;
+	
 	
 	@GetMapping("/calender-event")
 	public String showCalenderEvent(Model model,HttpServletRequest response) {
 		this.seedMonth();
+		Converter converter=new Converter();
+		
 		int month=1;
 		Map<Integer, List<CalendarEvent>> groupingEventByDay;
 		Map<Integer, List<CalendarEvent>> groupingEventByDayAferSorting;
@@ -87,13 +93,14 @@ public class CalenderEventController {
 			    (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 						
 		List<Month> listOfMonths=monthService.showAllMonth();
+		model.addAttribute("calendarTitleService",calendarTitleService);
 		model.addAttribute("selectedMonth",month);
+		model.addAttribute("selectedYear",converter.getCurrentNepliYear());
 		model.addAttribute("listOfMonths",listOfMonths);
 		model.addAttribute("groupingEventByDay",groupingEventByDayAferSorting);
 		String calender_link="active";
 		model.addAttribute("calender_link",calender_link);
 		
-	
 		return "admin/calender_event_table";
 	}
 	
@@ -221,6 +228,13 @@ public class CalenderEventController {
 	
 	@GetMapping("/calendar/event/deleteByDay")
 	public String deleteCalendarEventByDay(@RequestParam("month")String month,@RequestParam("day")String day,Model model,RedirectAttributes redirectAttr ) {
+		try {
+			 Converter converter=new Converter();
+			calendarTitleService.deleteCalendarTitle(converter.getCurrentNepliYear(), Integer.parseInt(month), Integer.parseInt(day));
+		}catch(Exception e) {
+			
+		}
+		
 		if(isNumeric(month)==true && isNumeric(day)==true) {
 		   try { calendarEventService.deleteCalendarEventByDay(Integer.parseInt(day));
 		   redirectAttr.addFlashAttribute("success","Event has been deleted successfully");

@@ -44,6 +44,7 @@ public class CalendarController {
 		   }
 		   
 	   }catch(Exception e) {
+		   
 		   month=1;
 		   currentSal=converter.getCurrentNepliYear();
 	   }

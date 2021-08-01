@@ -36,7 +36,7 @@
                                     
 											
                                     
-                                        <h1 class="h3 mb-0 text-dark-800 float-left">Event and Holiday[[${success}]]</h1>
+                                        <h1 class="h3 mb-0 text-dark-800 float-left">Event and Holiday</h1>
 
                                         <div class="float-right">
                                             <a th:href="@{'/admin/calender/form'}"
@@ -44,10 +44,7 @@
                                                     class="fas fa-plus text-white mr-1"></i>
                                                 Add Event</a>
                                                 
-                                             <a th:href="@{'/admin/calendar/title'}"
-                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                    class="fas fa-plus text-white mr-1"></i>
-                                                Calendar Title</a>
+                                             
                                           <!--    <a th:href="@{'/admin/calender/setup'}"
                                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                     class="fas fa-plus text-white mr-1"></i>
@@ -84,7 +81,8 @@
                                             <thead class="thead-default">
                                                 <tr>
                                                     
-                                                    <th width="120" scope="col">Day</th>
+                                                    <th  scope="col">Day</th>
+                                                    <th width="120">Title</th>
                                                     <th scope="col">Event</th>
                                                     <th width="103px" scope="col">Action</th>
                                                 </tr>
@@ -93,6 +91,7 @@
                                                 <tr th:each="item ,iStat:${groupingEventByDay}" >
                                                     
                                                     <td>[[${item.key}]]</td>
+                                                    <td>[[${calendarTitleService.findCalendarTitleNameByYearMonthDay(selectedYear,selectedMonth,item.key)}]]</td>
                                                     <td>
                                                         <table style="table-layout: fixed;">
                                                             <tbody>
@@ -109,6 +108,7 @@
                                                     <td>
                                                          
                                                           <a th:href="@{'/admin/calendar/event/deleteByDay?day='+${item.key}+'&&month='+${selectedMonth}}"><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a>
+                                                          <a th:href="@{'/admin/calendar/title/form?day='+${item.key}+'&&month='+${selectedMonth}}"><i class="fa fa-edit btn btn-primary btn-sm"></i></a>
                                                     </td>
                                                 </tr>
                                                 <tr th:if="${groupingEventByDay.isEmpty()}">

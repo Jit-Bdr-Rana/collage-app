@@ -33,37 +33,27 @@
                                 <div class="card  ">
                                     <div class="container ml-0 pb-3">
                               
-							  <a  href=""  class="float-left btn btn-sm btn-info mt-0  "><i
+							  <a  th:href="@{'/admin/calender-event?month='+${month_id}}"  class="float-left btn btn-sm btn-info mt-0  "><i
 											class="fas fa-arrow-left"></i> Back</a>
                                 </div>
                                     <div class="box box-primary">
                                         <h1 class="h3 mb-0 text-dark-800 float-left ml-5">Add Event Title</h1>
                                         <!-- form start -->
-                                        <form class="ml-5 mr-5" role="form" th:action="@{'/admin/calendar/title/save'}" method="post" object="${calendarEvent}">
+                                        <form class="ml-5 mr-5" role="form" th:action="@{'/admin/calendar/title/save'}" method="post" th:object="${calendarTitle}">
                                           
-                                          <input type="hidden" field="*{id}">
+                                          <input type="hidden" th:field="*{id}">
                                           <div class="box-body row mt-4">
-                                            <div class="col-md-6">
-                                              <div class="form-group">
-                                                 <label>Month</label>
-                                                   <select class="form-control"  required id="selected_month"  field="*{month}">
-                                                     <option th:each="month:${listOfMonths}" th:value="${month.id}" >[[${month.name}]]</option>
-                                                     </select>
-                                               </div>
-                                            </div>
+                                            
+                                               <input type="hidden" th:field="*{day}" >
+                                               <input type="hidden" th:field="*{year}" >
+                                               <input type="hidden" th:value="${month_id}" name="month_id" >
+                                               
 
-                                            <div class="col-md-6">                
-                                              <div class="form-group">
-                                                 <label>Day</label>
-                                                   <select class="form-control" required name="days" id="day_from_selected_month" field="*{day}" >
-                                                   <option th:each="i: ${#numbers.sequence(1, firstMonthDays)}" value="${i}" ></option>
-                                                 </select>
-                                               </div>
-                                            </div>
+                                            
                                               <div class="col-md-12 ">
                                                 <div class="form-group">
                                                     <label for="exampleInputTextarea1">Title (<samll>must be short for calendar</samll>)</label>
-                                                    <input type="text" maxlength = "30" class="form-control" field="*{title}" >
+                                                    <input type="text" maxlength = "30" class="form-control" th:field="*{title}" >
                                                 </div>
                                             </div>
                                            

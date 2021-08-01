@@ -30,4 +30,9 @@ public class MonthServiceImpl implements MonthService {
 		return (int) monthRepository.count();
 	}
 
+	@Override
+	public Month getMonthById(Integer id) {
+		return monthRepository.findById(id).get();
+	}
+
 }

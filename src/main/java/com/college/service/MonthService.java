@@ -9,5 +9,6 @@ public interface MonthService {
 	public List<Month> showAllMonth();
 	public void saveMonth(Month month);
 	public Integer countMonth();
+	public Month getMonthById(Integer id);
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.college.model.CalendarEvent;
 import com.college.model.CalendarTitle;
 import com.college.repository.CalendarTitleRepository;
 
@@ -39,6 +40,33 @@ public class CalendarTitleServiceImpl implements CalendarTitleService {
 	@Override
 	public CalendarTitle findCalendarTitleByYearMonthDay(int year, int month, int day) {
 		 return calendarTitleRepository.findCalendarTitleByYearMonthDay(year, month, day);
+	}
+
+	@Override
+	public List<CalendarTitle> getAllMonthEventTitle(int month) {
+		
+		return calendarTitleRepository.getAllMonthEventTitle(month);
+	}
+
+	@Override
+	public String findCalendarTitleNameByYearMonthDay(int year, int month, int day) {
+		 String title="";
+	     try {
+	    	 title=calendarTitleRepository.findCalendarTitleByYearMonthDay(year, month, day).getTitle();
+	     }catch(Exception e){
+	    	 title="";
+	     }
+	     
+		 return title;		
+	}
+
+	@Override
+	public void deleteCalendarTitle(int year, int month, int day) {
+		try { CalendarTitle calendarTitle= calendarTitleRepository.findCalendarTitleByYearMonthDay(year, month, day);
+		      calendarTitleRepository.deleteById(calendarTitle.getId());
+		 }catch(Exception e) {
+			
+		}
 	}
 
 }

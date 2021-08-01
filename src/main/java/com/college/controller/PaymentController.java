@@ -121,7 +121,7 @@ public class PaymentController {
   }
   
   @PostMapping("/save/type-cash")
-  @ResponseBody public Payment  savePaymentTypeCash(@RequestParam("mode") String mode,@RequestParam("amount") Integer amount,@RequestParam("enteredBy") String enteredBy,@RequestParam("feeId") Integer feeId,@RequestParam("semester") Integer semester) {
+  @ResponseBody public int  savePaymentTypeCash(@RequestParam("mode") String mode,@RequestParam("amount") Integer amount,@RequestParam("enteredBy") String enteredBy,@RequestParam("feeId") Integer feeId,@RequestParam("semester") Integer semester) {
 	
 	  Fee fee=feeService.getFeeById(feeId);
 	  Payment payment=new Payment();
@@ -140,7 +140,7 @@ public class PaymentController {
 	     
 	  
 	 
-			  return paymentResponse ;
+			  return 0 ;
 	 
  }
   

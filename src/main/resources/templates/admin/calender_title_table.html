@@ -87,18 +87,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="calendar_event_data">
-                                                <tr  >
+                                                <tr th:each="calendarTitle,iStat:${listofCalendarTitle}"  >
                                                     
-                                                    <td></td>
+                                                    <td>[[${calendarTitle.day}]]</td>
                                                     <td>
-                                                       
+                                                       [[${calendarTitle.title}]]
                                                     </td>
                                                     <td>
-                                                         
+                                                          <a href=""><i class="fa fa-edit btn btn-primary btn-sm"></i></a>
                                                           <a href=""><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a>
+                                                          
                                                     </td>
                                                 </tr>
-                                                <tr >
+                                                <tr th:if="${listofCalendarTitle.isEmpty()}">
                                                 <td colspan="3" class="text-center">No Event On This Month</td>
                                                 </tr>
                                             </tbody>

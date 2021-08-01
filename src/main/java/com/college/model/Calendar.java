@@ -46,14 +46,7 @@ public class Calendar {
 	 @Column(name="ending_day_english_month_two")
 	 private Integer endingDayEnglishMonthTwo=0;
 	 
-	 @Override
-	public String toString() {
-		return "Calendar [id=" + id + ", noOfDays=" + noOfDays + ", month=" + month + ", week=" + week
-				+ ", englishMonth1=" + englishMonth1 + ", startingDayEnglishMonthOne=" + startingDayEnglishMonthOne
-				+ ", endingDayEnglishMonthOne=" + endingDayEnglishMonthOne + ", englishMonth2=" + englishMonth2
-				+ ", startingDayEnglishMonthTwo=" + startingDayEnglishMonthTwo + ", endingDayEnglishMonthTwo="
-				+ endingDayEnglishMonthTwo + ", year=" + year + "]";
-	}
+	
 
 	public Integer getId() {
 		return id;
