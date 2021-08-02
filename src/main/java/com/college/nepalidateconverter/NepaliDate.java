@@ -12,6 +12,7 @@ public class NepaliDate {
     public static final String MONTHS[] = {"Baisakh", "Jestha", "Ashar", "Shrawan",
             "Bhadra", "Ashoj", "Kartik", "Mangsir",
             "Poush", "Magh", "Falgun", "Chaitra"};
+    public static String monthInNepali[]= {"वैशाख","जेठ","असार","साउन","भदौ","असोज" ,"कात्तिक" ,"मंसिर ","पुष ","माघ","फागुन" ,"चैत"};
 
     int[][] numberOfDaysPerYear = {
             {31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30},

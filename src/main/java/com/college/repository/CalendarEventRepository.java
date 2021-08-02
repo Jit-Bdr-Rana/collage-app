@@ -14,8 +14,8 @@ import com.college.model.ListMonthEvent;
 
 public interface CalendarEventRepository  extends JpaRepository<CalendarEvent,Integer>{
 
-	@Query("SELECT c FROM CalendarEvent c WHERE c.month.id=?1  ORDER BY c.day DESC ")
-	public List<CalendarEvent> getAllMonthEvent(int month); 
+	@Query("SELECT c FROM CalendarEvent c WHERE c.month.id=?1 and c.year=?2 ORDER BY c.day DESC ")
+	public List<CalendarEvent> getAllMonthEvent(int month,int saal); 
 	
 	@Modifying
 	@Transactional

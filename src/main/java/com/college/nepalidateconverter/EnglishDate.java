@@ -35,9 +35,12 @@ public class EnglishDate {
     }
 
     public String toString(){
-        return englishDate.getYear() + " / " + englishDate.getMonthOfYear() + " / " +
-                englishDate.getDayOfMonth() + " " + WEEK_DAYS[englishDate.getDayOfWeek()];
+//        return englishDate.getYear() + " / " + englishDate.getMonthOfYear() + " / " +
+//                englishDate.getDayOfMonth() + " " + WEEK_DAYS[englishDate.getDayOfWeek()];
+    	  return englishDate.monthOfYear().getAsText()+ " " +  englishDate.getDayOfMonth()+","+englishDate.getYear();
     }
+    
+   
     
     public int getDayOfWeek() {
       return	englishDate.getDayOfWeek();

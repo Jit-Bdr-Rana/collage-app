@@ -171,5 +171,11 @@ public class Converter {
 		NepaliDate nepaliDate=getNepaliDate(Integer.parseInt(dateInArray[0]),Integer.parseInt(dateInArray[1]),Integer.parseInt(dateInArray[2]));
         return nepaliDate.getSaal();
 	}
+    public int getCurrentNepliMonth() {
+		String dateInString=date.toString();
+		String dateInArray[]=dateInString.split("-");
+		NepaliDate nepaliDate=getNepaliDate(Integer.parseInt(dateInArray[0]),Integer.parseInt(dateInArray[1]),Integer.parseInt(dateInArray[2]));
+        return nepaliDate.getMahina();
+	}
 
 }

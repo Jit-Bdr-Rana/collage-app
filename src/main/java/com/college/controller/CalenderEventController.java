@@ -79,9 +79,9 @@ public class CalenderEventController {
 		List<CalendarEvent> allMonthEvent=new ArrayList<>();
 	      try{
 	    	   month=Integer.parseInt(response.getParameter("month"));
-	    	   allMonthEvent=calendarEventService.getAllMonthEvent(month);
+	    	   allMonthEvent=calendarEventService.getAllMonthEvent(month,converter.getCurrentNepliYear());
 	      }catch(Exception e) {
-	    	  allMonthEvent=calendarEventService.getAllMonthEvent(month);    	  
+	    	  allMonthEvent=calendarEventService.getAllMonthEvent(month,converter.getCurrentNepliYear());    	  
 	      }
 	   
 		groupingEventByDay =  allMonthEvent.stream().collect(Collectors.groupingBy(CalendarEvent::getDay));
@@ -275,7 +275,7 @@ public class CalenderEventController {
 	  Map<Integer, List<CalendarEvent>> groupingEventByDay = new HashMap<>();
 		List<CalendarEvent> allMonthEvent=new ArrayList<>();  
 	
-		allMonthEvent=calendarEventService.getAllMonthEvent(3);
+		allMonthEvent=calendarEventService.getAllMonthEvent(3,2078);
 		groupingEventByDay =  allMonthEvent.stream().collect(Collectors.groupingBy(CalendarEvent::getDay));
 		return groupingEventByDay;
 	  
