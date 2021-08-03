@@ -12,11 +12,14 @@
 # 4)Go to com.college run this file
                  application.java 
 # 5)Open browser with 
-                  http://localhost:8080/admin/student
-# 6)Default login 
+                  http://localhost:8080 => userSide
+                  http://localhost:8080/admin/login =>adminLogin
+# 6)Default admin login 
                    id=> admin@gmail.com
                    pw=> admin
-                   
+  
+# 7) Screen shot
+
 
 <br>
   <p>Special thanks to <a href="https://github.com/anupjungkarki">anup karki</a> for User Interface design 
