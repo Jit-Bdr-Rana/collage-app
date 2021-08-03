@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.college.nepalidateconverter.Converter;
+
 @Entity(name="NewsAndAnnouncement")
 @Table(name="news_and_announcement")
 public class NewsAndAnnouncement {
@@ -64,4 +66,9 @@ public class NewsAndAnnouncement {
 		this.updatedAt = updatedAt;
 	}
 	
+	public String convertIntoNepaliDate(int eYear,int eMonth,int day) {
+		Converter converter=new Converter();
+		return converter.getNepaliDate(eYear, eMonth, day).toString();
+		
+	}
 }

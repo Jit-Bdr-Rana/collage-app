@@ -389,3 +389,98 @@ Calender Css Start From here*/
 #calendar .week .saturday_data .date{
   color: #ef5151;
 }
+
+/* result page section  */
+.result-page-section{
+  margin-top: 80px;
+}
+
+.form-input{
+    margin-bottom: 30px;
+}
+.form-input label{
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    text-transform: capitalize;
+}
+.select-icon{
+    position: relative;
+}
+.select-icon:before{
+    content: '\f078';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+.input-field input[type="date"]{
+    padding: 9px 15px;
+}
+.select-icon select{
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px ;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.select-icon select option{
+    padding: 10px;
+}
+.input-field input{
+    width: 100%;
+    padding: 10px 15px;
+}
+.submit-btn input[type="submit"]{
+    padding: 10px 30px;
+    background: #08202e;
+    color: #fff;
+    border: 2px solid #08202e;
+}
+.submit-btn input[type="submit"]:hover{
+    background: #red;
+    color: #ffff;
+}
+
+.result-layout{
+    margin-top: 40px;
+    background-color: #f8f9fa;
+    padding: 30px;
+}
+.student-info > div{
+    padding: 0 15px;
+    flex: auto;
+    -ms-flex: auto;
+    max-width: inherit;
+}
+.student-info{
+    margin: 0 -15px 30px ;
+}
+.student-info .title{
+    font-size: 16px;
+    text-transform: capitalize;
+    margin-right: 10px;
+
+}
+.pass-fail-content{
+    margin-top: 30px;
+}
+.pass-fail-content .pass{
+    color: #0da06e;
+}
+.pass-fail-content p{
+    font-size: 20px;
+    margin-bottom: 0;
+}
+.footer_margin{
+  margin-bottom: 100px;
+}
+/* End result page section  */
