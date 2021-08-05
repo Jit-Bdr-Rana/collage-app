@@ -23,7 +23,7 @@ public class LoginController {
 	 @Autowired
 	 private RoleService roleService;
 	
-	@GetMapping("/login")
+	@GetMapping("/admin/login")
 	public String loginPage() {
 		this.seedUser();
 		return "admin/login";

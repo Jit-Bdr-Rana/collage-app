@@ -99,4 +99,10 @@ public boolean checkIfContactAlreadExist(String contact) {
 	}
 }
 
+@Override
+public Student getStudentByEmail(String email) {
+
+	return stuRepo.getStudentByEmail(email);
+}
+
 }
