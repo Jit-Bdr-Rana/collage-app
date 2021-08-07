@@ -23,9 +23,7 @@ public class Month {
 	@Column(length=20,nullable=true)
 	private String name;
 	
-	@OneToMany(targetEntity=Calendar.class,cascade=CascadeType.ALL,mappedBy="month")
 	
-	private List<Calendar> calendar;
 	
 	@OneToMany(targetEntity=CalendarEvent.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="month_id", referencedColumnName="id")

@@ -24,9 +24,7 @@ public class Year {
 	@Column(name="name",length=10)
 	private String name;
 	
-	@OneToMany(targetEntity=Calendar.class,cascade=CascadeType.ALL)
-	 @JoinColumn(name="year_id", referencedColumnName="id")
-	private List<Calendar> calendar;
+	
 	
 	@OneToMany(targetEntity=CalendarEvent.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="year_id", referencedColumnName="id")
@@ -40,7 +38,7 @@ public class Year {
 	}
 	@Override
 	public String toString() {
-		return "Year [id=" + id + ", name=" + name + ", calendar=" + calendar + ", isActive=" + isActive
+		return "Year [id=" + id + ", name=" + name  + ", isActive=" + isActive
 				+ ", isCalender=" + isCalender + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	public void setId(Integer id) {

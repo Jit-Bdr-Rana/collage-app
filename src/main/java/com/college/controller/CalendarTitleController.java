@@ -16,11 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.college.model.CalendarTitle;
 import com.college.model.Month;
 import com.college.nepalidateconverter.Converter;
-import com.college.service.CalendarService;
+
 import com.college.service.CalendarTitleService;
-import com.college.service.EnglishMonthService;
+
 import com.college.service.MonthService;
-import com.college.service.WeekService;
+
 import com.college.service.YearService;
 
 @Controller
@@ -32,17 +32,11 @@ public class CalendarTitleController {
 	@Autowired
 	private MonthService monthService;
 
-	@Autowired
-	private EnglishMonthService englishMonthService;
-
-	@Autowired
-	private WeekService weekService;
-
+	
 	@Autowired
 	private YearService yearService;
 
-	@Autowired
-	private CalendarService calendarService;
+	
 
 	@Autowired
 	private CalendarTitleService calendarTitleService;

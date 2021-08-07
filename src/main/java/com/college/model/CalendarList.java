@@ -14,7 +14,7 @@ public class CalendarList {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private List<Calendar> calenders=new ArrayList<>();
+	
 	private Integer yearId;
 	
 	public Integer getYearId() {
@@ -40,28 +40,9 @@ public class CalendarList {
 	}
 
 
-	public void setCalenders(List<Calendar> calenders) {
-		this.calenders = calenders;
-	}
-
-
 	
 
-	public  void addCalendar(Calendar calendar)	{ 	
-		this.calenders.add(calendar);
-	}
-	
-	
-	public List<Calendar> getCalenders(){
-		return calenders;
-	}
 
-
-	@Override
-	public String toString() {
-		return "CalendarList [id=" + id + ", calenders=" + calenders + "]";
-	}
-	
 	public String calculate() {
 		return null;
 	}
