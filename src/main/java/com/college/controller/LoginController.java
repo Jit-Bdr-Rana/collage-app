@@ -51,8 +51,8 @@ public class LoginController {
 		if(roleService.countRole()<=0) {
 			
 			 Role role1 = roleService.saveRole(new Role("SUPERADMIN"));
-			 Role role2=roleService.saveRole(new Role("ACCOUNTANT"));
-			 Role role3=roleService.saveRole(new Role("ADMIN"));
+			 Role role2=roleService.saveRole(new Role("ADMIN"));
+			 Role role3=roleService.saveRole(new Role("TEACHER"));
 			
 			 return role1 ;
 		}

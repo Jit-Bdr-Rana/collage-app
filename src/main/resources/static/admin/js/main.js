@@ -280,7 +280,55 @@ $(document).ready(function() {
 $('input[type="checkbox"]').on('change', function() {
    $('input[type="checkbox"]').not(this).prop('checked', false);
 });
+//ajax call for smester payment
 
+  const call_sem=(mode,semester,amount,feeId,enteredBy)=>{
+         $.ajax({
+                      type: 'get',
+                      url: `/admin/payment/save/type-cash?mode=${mode}&&semester=${semester}&&amount=${amount}&&feeId=${feeId}&&enteredBy=${enteredBy}`,
+                       contentType: false,
+                       processData: false,
+                      dataType: "json",
+                      success: function(res) {
+                        sweet_alert("success","Payment has been made successfully");
+                        if(semester==1)
+                        {
+                         $("#amount_first").val("");
+                         populate_payment(semester,res);
+                        }else if(semester==2){
+                        $("#amount_second").val("");
+                        populate_payment_second(semester,res);
+        
+                        }else if(semester==3){
+                        $("#amount_third").val("");
+                         populate_payment_third(3,res);
+
+                        }else if(semester==4){
+                         $("#amount_fourth").val("");
+                         populate_payment_fourth(semester,res);
+                        }else if(semester==5){
+                         $("#amount_fifth").val("");
+                         populate_payment_fifth(semester,res);
+                        }else if(semester==6){
+                         $("#amount_sixth").val("");
+                         populate_payment_sixth(semester,res);
+                        }else if(semester==7){
+                         $("#amount_seventh").val("");
+                         populate_payment_seventh(semester,res);
+                        }else if(semester==8){
+                         $("#amount_eight").val("");
+                         populate_payment_eighth(semester,res);
+                        }
+                        
+                      
+                    },
+                    error:function(err){
+                 
+                   
+                    }
+                    
+                 });   
+  }
 
 // first semester payment
 
@@ -347,33 +395,10 @@ function pay_first(){
               exit(0); 
             }  
       
-                var semester=1;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",1);
-                fd.append("amount",amountFirst);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                       $("#amount_first").val("");
-                         populate_payment(semester,res);
-                    },
-                    error:function(err){
-                 
-                   
-                    }
-                    
-                 });
-        	
-      
+                
+               
+        	     call_sem(mode,1,amountFirst,feeId,enteredBy)
+               
      
           
       }
@@ -510,32 +535,8 @@ function pay_second(){
               exit(0); 
             }
             
-                var semester=2;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountSecond);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                      sweet_alert("success","Payment has been made successfully");
-                        $("#amount_second").val("");
-        
-                         populate_payment_second(semester,res);
-                    },
-                    error:function(err){
-                 
-                   
-                    }
-                    
-                 });
+               
+                  call_sem(mode,2,amountSecond,feeId,enteredBy)
         	
       
      
@@ -664,36 +665,8 @@ function pay_third(){
               exit(0); 
             }
             
-                var semester=3;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountThird);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                        $("#amount_third").val("");
-        
-                         populate_payment_third(semester,res);
-                    },
-                    error:function(err){
-                 
-                   
-                    }
-                    
-                 });
-        	
-      
-     
-          
+                    	call_sem(mode,3,amountThird,feeId,enteredBy)
+            
       }
    
    }
@@ -817,32 +790,7 @@ function pay_fourth(){
               exit(0); 
             }
             
-                var semester=4;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountFourth);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                        $("#amount_fourth").val("");
-        
-                         populate_payment_fourth(semester,res);
-                    },
-                    error:function(err){
-                 
-                   
-                    }
-                    
-                 });
+               call_sem(mode,4,amountFourth,feeId,enteredBy)
         	
       
      
@@ -958,7 +906,7 @@ function pay_fifth(){
          $("#amount_fifth").val("");
          $("#file_fifth").val("");
          
-         populate_payment_fifth(4,res);
+         populate_payment_fifth(5,res);
         
          }
         });
@@ -970,29 +918,7 @@ function pay_fifth(){
               exit(0); 
             }
             
-                var semester=5;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountFifth);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                        $("#amount_fifth").val("");
-        
-                         populate_payment_fifth(semester,res);
-                    },
-                    error:function(err){
-                 }               
-                 });
+                    call_sem(mode,5,amountFifth,feeId,enteredBy)
         }
    
    }
@@ -1115,29 +1041,7 @@ function pay_sixth(){
               exit(0); 
             }
             
-                var semester=6;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountSixth);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                        $("#amount_sixth").val("");
-        
-                         populate_payment_sixth(semester,res);
-                    },
-                    error:function(err){
-                 }               
-                 });
+                call_sem(mode,6,amountSixth,feeId,enteredBy)
         }
    
    }
@@ -1259,29 +1163,7 @@ function pay_seventh(){
               exit(0); 
             }
             
-                var semester=7;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountSeventh);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                        $("#amount_seventh").val("");
-        
-                         populate_payment_seventh(semester,res);
-                    },
-                    error:function(err){
-                 }               
-                 });
+                  call_sem(mode,7,amountSeventh,feeId,enteredBy)
         }
    
    }
@@ -1403,29 +1285,7 @@ function pay_eighth(){
               exit(0); 
             }
             
-                var semester=8;
-                  var fd = new FormData();
-                 fd.append("enteredBy",enteredBy);
-                 fd.append("mode",mode);
-                fd.append("semester",semester);
-                fd.append("amount",amountEighth);
-                  fd.append("feeId",feeId);
-               $.ajax({
-                      type: 'post',
-                      url: '/admin/payment/save/type-cash',
-                      data: fd,
-                       contentType: false,
-                       processData: false,
-                      dataType: "json",
-                      success: function(res) {
-                        sweet_alert("success","Payment has been made successfully");
-                        $("#amount_eighth").val("");
-        
-                         populate_payment_eighth(semester,res);
-                    },
-                    error:function(err){
-                 }               
-                 });
+               call_sem(mode,8,amountEighth,feeId,enteredBy)
         }
    
    }

@@ -9,6 +9,8 @@ public class HomePageController {
 	
 	@RequestMapping("")
 	public String homePage(Model model) {
+		String active="home";
+		model.addAttribute("active",active);
 		return "front/index";
 	}
 

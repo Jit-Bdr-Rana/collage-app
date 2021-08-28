@@ -446,7 +446,7 @@ Calender Css Start From here*/
     border: 2px solid #08202e;
 }
 .submit-btn input[type="submit"]:hover{
-    background: #red;
+    background: red;
     color: #ffff;
 }
 
@@ -484,3 +484,13 @@ Calender Css Start From here*/
   margin-bottom: 100px;
 }
 /* End result page section  */
+
+.nav-item a:hover{
+	color:red !important;
+}
+.nav-item .active{
+	color:red !important;
+}
+
+
+

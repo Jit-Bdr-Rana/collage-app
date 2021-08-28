@@ -67,11 +67,14 @@ public class ProgramAndYearController {
 	@GetMapping("/program-year")
 	public String showFaculty(Model model) {
 		String po_link = "active";
+		
 		List<Program> listPrograms = programService.showAllProgram();
 		List<Year> listYears = yearService.getYear();
+		
 		model.addAttribute("po_link", po_link);
 		model.addAttribute("listPrograms", listPrograms);
 		model.addAttribute("listYears", listYears);
+		
 		return "admin/program_and-year_table";
 	}
 	

@@ -108,7 +108,7 @@ public class FeeController {
 	
 	@GetMapping("/fee/page/{pageNo}")
 	public String findPaginated(@PathVariable(value="pageNo")int pageNo ,@RequestParam("sortField") String sortField,@RequestParam("sortDir") String sortDir,Model model,HttpServletRequest response) {
-		int pageSize=2;
+		int pageSize=10;
 	    List<Student> listStudents;
 	    Page<Student> page;
 		String year=response.getParameter("year");

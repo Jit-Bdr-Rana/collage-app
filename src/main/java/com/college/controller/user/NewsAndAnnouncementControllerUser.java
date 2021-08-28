@@ -17,9 +17,11 @@ public class NewsAndAnnouncementControllerUser {
 
 	@GetMapping("/newsAndAnnouncement")
 	public String newsAndAnnouncementShow(Model model) {
+		String active="news";
 		List<NewsAndAnnouncement> listOfNewsAndAnnouncements=newsAndAnnouncementService.getAllNewsAndAnnouncement();
 	
-	    model.addAttribute("listOfNewsAndAnnouncements",listOfNewsAndAnnouncements);
+		model.addAttribute("listOfNewsAndAnnouncements",listOfNewsAndAnnouncements);
+	    model.addAttribute("active",active);
 		
 		return "front/news_and_announcement";
 	}

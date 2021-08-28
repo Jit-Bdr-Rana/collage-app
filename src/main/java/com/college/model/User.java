@@ -77,7 +77,7 @@ public void setUpdatedAt(Date updatedAt) {
 public String toString() {
 	return "User [id=" + id + ", email=" + email + ", password=" + password + ", unHashedPassword=" + unHashedPassword
 			+ ", payment=" + payment + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", isEnabled="
-			+ isEnabled + ", resultCategory=" + resultCategory + ", role=" + role + "]";
+			+ isEnabled + ", resultCategory=" + resultCategory + "]";
 }
 
 public Integer getId() {

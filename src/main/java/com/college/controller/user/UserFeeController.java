@@ -35,7 +35,8 @@ public class UserFeeController {
 	
 	@GetMapping("/fee")
 	public String showFee(Model model) {
-		
+		String active="fee";
+		model.addAttribute("active",active);
 		return "front/fee";
 				
 	}

@@ -32,7 +32,7 @@ public class CalendarController {
 
 	@GetMapping("/calendar")
 	public String  showCalendar(Model model,HttpServletRequest request) {
-		
+		String active="calendar";
 		List<Month> monthList=monthService.showAllMonth();
 	    Converter converter=new Converter();
 	    int month;
@@ -68,7 +68,7 @@ public class CalendarController {
 		model.addAttribute("monthInNepali",calendarEventService.getMonthInNepli(month));
 		model.addAttribute("listGroupOfDateEventMonth",calendarEventService.getAllCalendarDataWithTitle(currentSal, month, noOfDay));
      	model.addAttribute("listGroupOfEventDetailDayBar",calendarEventService.getAllCalendarDataWithDetail(currentSal, month, noOfDay));
-		
+		model.addAttribute("active",active);
      	for(GroupOfEventDetailDayBar li:calendarEventService.getAllCalendarDataWithDetail(currentSal, month, noOfDay)) {
      		System.out.println(li);
      	}

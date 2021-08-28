@@ -29,6 +29,7 @@ public class NewsAndAnnouncementController {
 		 List<NewsAndAnnouncement> listOfNewsAndAnnouncements=newsAndAnnouncementService.getAllNewsAndAnnouncement();
 		String news_link="active";
 		model.addAttribute("news_link",news_link);
+		
 	    model.addAttribute("listOfNewsAndAnnouncements",listOfNewsAndAnnouncements);
 		return "admin/news_and_announcement_table";
 		

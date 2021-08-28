@@ -14,6 +14,7 @@ import com.college.repository.ProgramRepository;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
+	
     @Autowired
 	private ProgramRepository programRepository;
 	
@@ -24,7 +25,7 @@ public class ProgramServiceImpl implements ProgramService {
 	public Program saveProgram(Program program) {
 	 return this.programRepository.save(program);
 	  
- 
+	 
 	}
 
 	@Override

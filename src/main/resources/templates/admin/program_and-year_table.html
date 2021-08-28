@@ -96,7 +96,6 @@
                                                         <th>SN</th>
                                                         <th>Name</th>
                                                         <th>Active</th>
-                                                        <th>Show Calender</th>
                                                         <th class="text-center">Action</th>
                                                     </tr>
                                                 </thead>
@@ -107,11 +106,11 @@
                                                     <button type="button" class="btn btn-success btn-sm" th:if="${year.isActive==true}" th:id="@{'active'+${year.id}}" th:onclick="changes([[${year.id}]])">Active</button>
                                                     <button type="button" class="btn btn-danger btn-sm"th:unless="${year.isActive==true}" th:id="@{'active'+${year.id}}" th:onclick="changes([[${year.id}]])">Passive</button>
                                                     </td>
-                                                    <td>
+                                                    <!--  <td>
                                                     <button type="button" class="btn btn-success btn-sm" th:if="${year.isCalender==true}" th:id="@{'calender'+${year.id}}" th:onclick="changeCalender([[${year.id}]])">Show</button>
                                                     <button type="button" class="btn btn-danger btn-sm"th:unless="${year.isCalender==true}" th:id="@{'calender'+${year.id}}" th:onclick="changeCalender([[${year.id}]])">Disable</button>
                                                     
-                                                    </td>
+                                                    </td>-->
                                                     <td>
                                                       <center><a th:href="@{'/admin/year/update/'+${year.id}}" > <i class="fa fa-edit btn btn-info btn-sm"></i></a>
                                                       <a th:href="@{'/admin/year/delete/'+${year.id}}" ><i class="fa fa-trash-alt btn btn-danger btn-sm"></i></a></center>

@@ -25,20 +25,22 @@ public class Program {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	
 	@Column(length=30,nullable=false,unique=true)
-	
-	
-	@NotEmpty(message = "Field can't be empty!")
 	private String name;
 	
-	@OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
+	
+	 @OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="program_id", referencedColumnName="id")
-	private List<Student> student;
+	 private List<Student> student;
 	
 	@Column(name="created_at",nullable=true)
 	private java.sql.Date createdAt;
+	
 	 @Column(name="updated_at",nullable=true)
 	 private java.sql.Date updatedAt;
+	 
 	 @OneToOne(targetEntity = AdmissionFee.class, mappedBy = "program",cascade=CascadeType.ALL)	    
 	 private AdmissionFee admissionFee;
 	 
