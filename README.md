@@ -19,6 +19,17 @@
                    pw=> admin
   
 # 7) Screen shot
+### Index
+![](pic/index.PNG)
+### Calender
+![](pic/calender.PNG)
+### Fee
+![](pic/fee.PNG)
+### Result
+![](pic/result.PNG)
+### Backend Index
+![](pic/backendindex.PNG)
+
 
 
 <br>
