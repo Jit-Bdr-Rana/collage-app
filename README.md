@@ -1,4 +1,4 @@
-# Collage-app 
+# College-app 
 ```
 [spring boot,thymeleaf templete,spring web,sql,jpaRepository,Spring security]
 ```
