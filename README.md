@@ -30,21 +30,28 @@ application.java
 ```
 ![](pic/run.PNG)
 # 5)Open browser with 
+#### User Side
 ```
-http://localhost:8080 => userSide
+http://localhost:8080  
 ```
                   
 ![](pic/frontend.PNG)
 
+#### AdmnPannel
+
 ```
-http://localhost:8080/admin/login =>adminLogin
+http://localhost:8080/admin/login  
 ```
               
 ![](pic/backend.PNG)
 # 6)Default admin login 
+#### Username
 ```
-id=> admin@gmail.com
-pw=> admin
+admin@gmail.com
+```
+#### Password
+```
+admin
 ```
                    
 ![](pic/backend.PNG)
