@@ -26,6 +26,9 @@
       </li>
 
       <li class="nav-item">
+        <a th:class="${active=='gallery'}?'nav-link active':'nav-link' " th:href="@{/gallery}">Gallery</a>
+      </li>
+       <li class="nav-item">
         <a th:class="${active=='result'}?'nav-link active':'nav-link' " th:href="@{/result}">Result</a>
       </li>
       <li class="nav-item">

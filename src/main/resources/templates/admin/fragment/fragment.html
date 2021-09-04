@@ -103,16 +103,16 @@
 				</a>
 				</li>
 				
-				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a class="nav-link  text-left"
-					: role="button" th:href="@{/admin/user}">
-						<i class="fas fa-images text-white"></i>Assignment
+				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a th:class="${gallery_link}?'nav-link  text-left active':'nav-link  text-left'"
+					: role="button" th:href="@{/admin/gallery}">
+						<i class="fas fa-images text-white"></i>Gallery
 						</a>
 				
 				</li>
 				
 				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a class="nav-link  text-left"
 					: role="button" th:href="@{/admin/user}">
-						<i class="fas fa-images text-white"></i>Gallery
+						<i class="fas fa-images text-white"></i>Assignment
 						</a>
 				
 				</li>

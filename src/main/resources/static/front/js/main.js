@@ -14,3 +14,24 @@ $(function(){
   });
 });
 
+
+$('.gallery_wrapper').on('mouseenter mouseleave', function(e) {
+  
+})
+ 
+const toggleTitle=(id)=>{
+   $(".title"+id).toggleClass('d-none');
+}
+
+const prev_img=(id)=>{
+$('#myModal').addClass('d-block');
+ document.getElementById("modelimg").src=$('#img'+id).attr('src');
+ 
+var modalimg = document.getElementById("modalimg");
+var img = document.getElementById("img"+id);
+modalimg.src = img.src;
+}
+
+$('.close').click(()=>{
+   $('#myModal').removeClass('d-block');  
+})

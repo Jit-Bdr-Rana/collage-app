@@ -48,7 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	             .authorizeRequests()
 	            
 //	            .antMatchers("/admin/user").hasAnyAuthority("SUPERADMIN")
-	                    
+	             .antMatchers("/admin/gallery/*").permitAll()     
+	             .antMatchers("/front/css/style.css").permitAll()
 	             .antMatchers("/admin/css/global.css").permitAll()
 	             .antMatchers("/admin/**").authenticated()
 	             .antMatchers("/admin/user").hasAnyAuthority("SUPERADMIN")
