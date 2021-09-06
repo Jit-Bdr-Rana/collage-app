@@ -73,4 +73,6 @@ admin
 <br>
   <p>Special thanks to <a href="https://github.com/anupjungkarki">anup karki</a> for User Interface design 
   https://github.com/anupjungkarki/College-App-Fontend</p>
+  
+  <p>Special thanks to Seazone Joshi for his experties in various field and his guidance</p>
 
