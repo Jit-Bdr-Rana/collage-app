@@ -58,7 +58,7 @@
                                         <tbody>
                                             <tr th:each="resultCategory,iState :${listOfResulCategories}">
                                                 <td>[[${iState.count}]]</td>
-                                                <td>[[${resultCategory.program}]]</td>
+                                                <td>[[${resultCategory.program.name}]]</td>
                                                 <td>[[${resultCategory.semester}]]</td>
                                                <td>[[${resultCategory.term}]]</td>
                                               <td>[[${resultCategory.subject}]]</td>

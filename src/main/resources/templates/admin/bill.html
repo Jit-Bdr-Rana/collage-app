@@ -66,7 +66,7 @@
                                     <td>Rs.[[${tuAmount+semAmount}]]</td>
                                 
                                 </tr>
-                                 <tr  th:unless="${semester==1}">
+                                 <tr>
                                     <td>Total paid</td>
                                     <td>Rs.[[${(#aggregates.sum(listOfPaymentWithSpecificSemester.![amount]))}]]</td>
                                 

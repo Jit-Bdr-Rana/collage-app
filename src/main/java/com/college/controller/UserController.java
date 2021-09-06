@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.college.model.Role;
 import com.college.model.User;
 import com.college.model.Year;
+import com.college.repository.UserRepository;
 import com.college.service.RoleService;
 import com.college.service.UserService;
 import com.college.service.YearService;
@@ -34,7 +35,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;	
 	
-
+    
+	@Autowired
+	private UserRepository userRepo;
 	
 
 	@GetMapping("")
@@ -102,5 +105,11 @@ public class UserController {
 		}
 		
 		this.userService.saveUser(user);
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id")int id) {
+		userRepo.deleteById(id);
+		return "redirect:/admin/user";
 	}
 }

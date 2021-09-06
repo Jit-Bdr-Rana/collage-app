@@ -35,7 +35,7 @@
         <div class="content-wrapper">
             <div class="main-title">
                 <h3 class="title txt-black mt-5">Result</h3>
-                <p class="txt-black">Select faculty , Program , Semester ,Exam year and enter your Registration
+                <p class="txt-black">Enter the form correctly to get your result
                     Number to View the result
                     .</p>
             </div>
@@ -109,7 +109,7 @@
                     <div class="col-md-6">
                         <div class="form-input">
                             <label for="">
-                                Exam Term :
+                                Exam Term : [[${showResult}]]
                             </label>
 
 
@@ -128,10 +128,10 @@
                     </div>
                 </div>
                 <div class="submit-btn footer_margin">
-                    <input type="submit" value="Check Gar">
+                    <input type="submit" value="Check ">
                 </div>
             </form>
-            <div class="result-layout mb-3">
+            <div class="result-layout mb-3 " th:if="${showResult}">
                 <div class="student-info d-flex flex-wrap">
 
                         <div class="form-input-info student-name d-flex  align-items-center">
@@ -139,23 +139,40 @@
                                 Name :
                             </div>
                             <div class="content">
-                                Xyz Pk
+                                [[${student.firstName}]][[${student.lastName}]]
                             </div>
                         </div>
+                      
                         <div class="form-input-info student-sem d-flex  align-items-center">
                             <div class="title">
-                                Semester :
+                               Email  :
                             </div>
                             <div class="content">
-                               6th
+                               [[${student.email}]]
                             </div>
                         </div>
                     <div class="form-input-info student-roll d-flex align-items-center">
                         <div class="title">
-                            roll :
+                            Semester :
                         </div>
                         <div class="content">
-                        36
+                         [[${semester}]]
+                        </div>
+                    </div>
+                    <div class="form-input-info student-roll d-flex align-items-center">
+                        <div class="title">
+                            Symbol no :
+                        </div>
+                        <div class="content">
+                        [[${symbolno}]]
+                        </div>
+                    </div>
+                    <div class="form-input-info student-roll d-flex align-items-center">
+                        <div class="title">
+                            Term :
+                        </div>
+                        <div class="content">
+                        [[${term}]]
                         </div>
                     </div>
                 </div>
@@ -165,34 +182,23 @@
                             <tr>
                                 <th scope="col">Subject</th>
                                 <th scope="col">Grade</th>
-
+                                
+                              <th scope="col">Remaks</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><b>Java</b></td>
-                                <td class="Fail text-danger">F</td>
+                            <tr th:each="result:${studentResult}">
+                                <td><b>[[${result.key}]]</b></td>
+                                <td th:class="${result.value.passMark<=result.value.obtainMark}?'pass text-dark':'Fail text-danger'">[[${result.value.obtainMark}]]</td>
+                               
                             </tr>
-                            <tr>
-                                <td><b>Data Mining</b></td>
-                                <td class="pass">A</td>
-                            </tr>
-                            <tr>
-                                <td><b>Networking</b></td>
-                                <td class="pass">B+</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
 
                 </div>
-                <div class="pass-fail-content text-center">
-                    <p class="Fail text-danger">
-                       Sorry You are Fail Better luck next time
-                    </p>
-                    <p class="pass  d-none ">
-                       <b> Congratulations</b> on your well-deserved success
-                    </p>
-                </div>
+              
             </div>
         </div>
     </div>

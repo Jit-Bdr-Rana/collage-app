@@ -64,6 +64,18 @@ public class ResultServiceImpl implements ResultService {
 		
 		return  resultRepository.findById(id).get();
 	}
+
+	@Override
+	public Result findResultByCategorySymbolStudent(int category_id, String symbolNo, int id) {
+		
+		return  resultRepository.findResultByCategorySymbolStudent(category_id, symbolNo, id);
+	}
+
+	@Override
+	public List<ResultCategory> findResultCategoryByProgramSemesterTerm(int program_id, int semester, int term) {
+		
+		return resultCategoryRepository.findResultCategoryByProgramSemesterTerm(program_id, semester, term);
+	}
 	
 
 }

@@ -43,7 +43,7 @@
                                                    <select class="form-control" name="program" >
                                                      <option value="0" selected="true" disabled="true">Program</option>
                                                      
-                                                     <option th:each="program:${listOfPrograms}" th:value="${program.name}">[[${program.name}]]</option>
+                                                     <option th:each="program:${listOfPrograms}" th:value="${program.id}">[[${program.name}]]</option>
                                                      
                                                   </select>
                                                </div>

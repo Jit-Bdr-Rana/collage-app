@@ -34,6 +34,10 @@ public class Program {
 	 @OneToMany(targetEntity=Student.class,cascade=CascadeType.ALL)
 	 @JoinColumn(name="program_id", referencedColumnName="id")
 	 private List<Student> student;
+	 
+	 @OneToMany(targetEntity=ResultCategory.class,cascade=CascadeType.ALL)
+	 @JoinColumn(name="program_id", referencedColumnName="id")
+	 private List<ResultCategory> resultCategory;
 	
 	@Column(name="created_at",nullable=true)
 	private java.sql.Date createdAt;

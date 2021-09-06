@@ -1,6 +1,7 @@
 package com.college.controller.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.college.model.Payment;
 import com.college.model.Student;
 import com.college.service.AdmissionFeeService;
 import com.college.service.FeeService;
+import com.college.service.PaymentService;
 import com.college.service.SecurityFeeService;
 import com.college.service.StudentService;
 
@@ -33,6 +36,8 @@ public class UserFeeController {
 	@Autowired 
 	private AdmissionFeeService admissionFeeService;
 	
+	@Autowired 
+	private PaymentService paymentService;
 	@GetMapping("/fee")
 	public String showFee(Model model) {
 		String active="fee";
@@ -75,6 +80,22 @@ public class UserFeeController {
 			  mapOffee.put("Admission fee",student.getProgram().getAdmissionFee().getAmount());
 			  mapOffee.put("security fee",student.getProgram().getSecurityFee().getAmount());
 		  }
+		  int totalPaid=0;
+		  int totalDue=0;
+		   List<Payment> listOfPayment=paymentService.getAllPaymentByFeeIdAndSemester(student.getFee().getId(), semester);
+		   if(!listOfPayment.isEmpty()) {
+			  for(Payment p:listOfPayment) {
+				  totalPaid+=p.getAmount();
+			  }
+			 
+		   }
+			   for (Map.Entry<String,Integer> entry : mapOffee.entrySet()) {
+				   totalDue+=entry.getValue();
+			   }
+			   
+		   
+		   redir.addFlashAttribute("totalDue",totalDue);
+		   redir.addFlashAttribute("totalPaid",totalPaid);
 		  redir.addFlashAttribute("mapOffee",mapOffee);
 		  redir.addFlashAttribute("show","true");
 		}catch(Exception e) {

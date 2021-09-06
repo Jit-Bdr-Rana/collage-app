@@ -40,7 +40,7 @@
 			<ul class="navbar-nav align-self-stretch text-uppercase">
 
 
-				<li class=""><a class="nav-link  text-left"
+				<li  th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}" class=""><a class="nav-link  text-left"
 					th:if="${stu_link==null}"  role="button" th:href="@{/admin/student}">
 						<i class="fas fa-images text-white"></i> Student
 				</a> <a class="nav-link  text-left active" th:unless="${stu_link==null}"
@@ -50,7 +50,7 @@
 				</li>
 						
 				
-				<li class=""><a class="nav-link  text-left"
+				<li class="" th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"><a class="nav-link  text-left"
 					th:if="${po_link==null}"  role="button" th:href="@{/admin/program-year}">
 						<i class="fas fa-images text-white"></i> Program And Year
 				</a> <a class="nav-link  text-left active" th:unless="${po_link==null}"
@@ -59,7 +59,7 @@
 				</a>
 				</li>
 				
-					<li class=""><a class="nav-link  text-left"
+					<li th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}" class=""><a class="nav-link  text-left"
 					th:if="${parent_link==null}"  role="button" th:href="@{/admin/parent}">
 						<i class="fas fa-images text-white"></i> Parent
 				</a> <a class="nav-link  text-left active" th:unless="${parent_link==null}"
@@ -67,7 +67,7 @@
 						class="fas fa-images text-white"></i> Parent
 				</a>
 				</li>
-				<li class=""><a class="nav-link  text-left"
+				<li class="" th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'||#request.userPrincipal.principal.user.role.name=='ADMIN'}"><a class="nav-link   text-left"
 					th:if="${fee_link==null}"  role="button" th:href="@{/admin/fee}">
 						<i class="fas fa-images text-white"></i> Fee
 				</a> <a class="nav-link  text-left active" th:unless="${fee_link==null}"
@@ -75,8 +75,8 @@
 						class="fas fa-images text-white"></i> Fee
 				</a>
 				</li>
-					<li class=""><a class="nav-link  text-left"
-					th:if="${calender_link==null}"  role="button" th:href="@{/admin/calender-event}">
+					<li class="" th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN' ||#request.userPrincipal.principal.user.role.name=='ADMIN'}"><a class="nav-link  text-left"
+					th:if="${calender_link==null}"  role="button" th:href="@{/admin/calender-event}" >
 						<i class="fas fa-images text-white"></i> Calender Event
 				</a> <a class="nav-link  text-left active" th:unless="${calender_link==null}"
 					 role="button" th:href="@{/admin/calender-event}"> <i
@@ -84,7 +84,7 @@
 				</a>
 				</li>
 				
-				<li class=""><a class="nav-link  text-left"
+				<li class="" th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'||#request.userPrincipal.principal.user.role.name=='TEACHER'}"><a class="nav-link  text-left"
 					th:if="${result_link==null}"  role="button" th:href="@{/admin/result}">
 						<i class="fas fa-images text-white"></i> Result
 				</a> <a class="nav-link  text-left active" th:unless="${result_link==null}"
@@ -103,7 +103,7 @@
 				</a>
 				</li>
 				
-				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a th:class="${gallery_link}?'nav-link  text-left active':'nav-link  text-left'"
+				<li th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'||#request.userPrincipal.principal.user.role.name=='ADMIN'}" ><a th:class="${gallery_link}?'nav-link  text-left active':'nav-link  text-left'"
 					: role="button" th:href="@{/admin/gallery}">
 						<i class="fas fa-images text-white"></i>Gallery
 						</a>
@@ -112,7 +112,7 @@
 				
 				
 				
-				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a class="nav-link  text-left"
+				<li  th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'} "><a class="nav-link  text-left"
 					th:if="${user_link==null}"  role="button" th:href="@{/admin/user}">
 						<i class="fas fa-images text-white"></i>User
 				</a> <a class="nav-link  text-left active" th:unless="${user_link==null}"

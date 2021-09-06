@@ -76,11 +76,7 @@ public class ResultController {
     	String semester=request.getParameter("semester");
     	String subject=request.getParameter("subject");
     	
-    	System.out.println(program);
-    	System.out.println(term);
-    	System.out.println(semester);
-    	System.out.println(subject);
-    	System.out.println("semester");
+    	
     	if(program==null || term==null || semester==null || subject==null) {
     		model.addAttribute("pro_sem_term","make sure you select program semester and term");
 			return showResultForm(model);
@@ -94,7 +90,7 @@ public class ResultController {
     		}
     		
     		ResultCategory resultCategory=new ResultCategory();
-    		resultCategory.setProgram(program);
+    		resultCategory.setProgram(programService.programFindById(Integer.parseInt(program)));
     		resultCategory.setSemester(Integer.parseInt(semester));
     		resultCategory.setCreatedAt(date);
     		resultCategory.setTerm(Integer.parseInt(term));

@@ -75,7 +75,7 @@
 
 								<div class="select-icon">
 									<select name="semester" id="SemYearId">
-										<option value="" selected>--- Select the Semester ---</option>
+										
 										<th:block th:each="i:${#numbers.sequence(1, 8)}">
 											<option th:if="${semester==i}" th:value="${i}" selected>Semester
 												[[${i}]]</option>
@@ -89,7 +89,7 @@
 						</div>
 					</div>
 					<div class="submit-btn footer_margin">
-						<input type="submit" value="Check Gar">
+						<input type="submit" value="Check ">
 					</div>
 				</form>
 				<div class="result-layout mb-3" th:if="${show}">
@@ -99,7 +99,7 @@
 								<tr>
 									<th scope="col">type</th>
 									<th scope="col">Amount</th>
-
+                                   
 								</tr>
 							</thead>
 							<tbody>
@@ -107,11 +107,34 @@
 								<td>[[${stufee.getKey()}]]</td>
 								<td>Rs.[[${stufee.getValue()}]]</td>
 								</tr>
+								<tr>
+								 <td>total Fee</td>
+								 <td>Rs.[[${totalDue}]]</td>
+								</tr>
+								<tr th:if="${totalPaid<totalDue}">
+								 <td>total Paid</td>
+								 <td>Rs.[[${totalPaid}]]</td>
+								</tr>
+								<tr th:if="${totalPaid<totalDue}">
+								 <td>total due</td>
+								 <td>Rs.[[${totalDue-totalPaid}]]</td>
+								</tr>
+								<tr th:if="${totalPaid==totalDue}">
+								 <td>total Paid</td>
+								 <td>Rs.[[${totalPaid}]]</td>
+								</tr>
+								<tr th:if="${totalPaid==0}">
+								 <td>total Due</td>
+								 <td>Rs.[[${totalDue}]]</td>
+								</tr>
 								<br>
 							</tbody>
 							<tfoot>
-								<p class="text-center">
-									<b>Tero fee Baki chhaina Tiri sakis</b>
+								<p class="text-center" th:unless="${totalPaid!=totalDue}">
+									<b>You have no dues</b>
+								</p>
+								<p class="text-center" th:if="${totalPaid!=totalDue}">
+									<b>you have dues <strong>[[${totalDue-totalPaid}]]</strong></b>
 								</p>
 							</tfoot>
 						</table>
