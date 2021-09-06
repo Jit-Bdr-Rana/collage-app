@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{'front/css/style.css'}">
+    <link rel="stylesheet" type="text/css" th:href="@{'/front/css/style.css'}">
     
     <title>Collage App</title>
   </head>
@@ -39,7 +39,7 @@
                     Number to View the result
                     .</p>
             </div>
-            <form class="result-form">
+            <form class="result-form" method="post" th:action="@{/result/check}">
                 <div class="row">
 
                     <div class="col-md-6">
@@ -48,7 +48,18 @@
                                 Email
                             </label>
                             <div class="input-field">
-                                <input type="email" name="email" placeholder="Enter your Email Address">
+                                <input type="email" name="email" required placeholder="Enter your Email Address">
+                            </div>
+                        </div>
+
+                    </div>
+                                        <div class="col-md-6">
+                        <div class="form-input">
+                            <label for="">
+                                Symbol no
+                            </label>
+                            <div class="input-field">
+                                <input type="number" name="symbolno" required placeholder="Enter your Symbolno">
                             </div>
                         </div>
 
@@ -62,15 +73,9 @@
 
 
                             <div class="select-icon">
-                                <select name="" id="">
-                                    <option value="">--- Select the Program ---</option>
-                                    <option value="BACHELOR IN CIVIL ENGINEERING">BACHELOR IN CIVIL ENGINEERING
-                                    </option>
-                                    <option value="BACHELOR IN CIVIL ENGINEERING">BACHELOR OF INFORMATION TECHNOLOGY
-                                        (B.I.T.)
-                                    </option>
-                                    <option value="BACHELOR IN CIVIL ENGINEERING">BACHELOR IN COMPUTER ENGINEERING
-                                    </option>
+                                <select name="program" id="">
+                                    
+                                    <option th:each="program:${programList}" th:value="${program.id}">[[${program.name}]]</option>
                                 </select>
                             </div>
                         </div>
@@ -85,10 +90,10 @@
 
 
                             <div class="select-icon">
-                                <select name="SemYearId" id="SemYearId">
-                                    <option value="">--- Select the Semester ---</option>
-                                    <option value="1">SECOND SEMESTER</option>
-                                    <option value="2">FIRST SEMESTER</option>
+                                <select name="semester" id="SemYearId">
+                                   
+                                    <option value="1">FIRST SEMESTER</option>
+                                    <option value="2">SECOND SEMESTER</option>
                                     <option value="3">THIRD SEMESTER</option>
                                     <option value="4">FOURTH SEMESTER</option>
                                     <option value="5">FIFTH SEMESTER</option>
@@ -104,17 +109,18 @@
                     <div class="col-md-6">
                         <div class="form-input">
                             <label for="">
-                                Exam Year :
+                                Exam Term :
                             </label>
 
 
                             <div class="select-icon">
-                                <select name="" id="">
-                                    <option value="">--- Term ---</option>
+                                <select name="term" id="">
+                                    
 
                                     <option value="1">1st</option>
                                     <option value="2">2nd</option>
                                     <option value="3">3rd</option>
+                                      <option value="4">4th</option>
                                 </select>
                             </div>
                         </div>

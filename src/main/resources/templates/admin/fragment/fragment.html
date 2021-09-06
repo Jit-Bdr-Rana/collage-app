@@ -110,12 +110,7 @@
 				
 				</li>
 				
-				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a class="nav-link  text-left"
-					: role="button" th:href="@{/admin/user}">
-						<i class="fas fa-images text-white"></i>Assignment
-						</a>
 				
-				</li>
 				
 				<li  <!--/*th:if="${#request.userPrincipal.principal.user.role.name=='SUPERADMIN'}"*/--> ><a class="nav-link  text-left"
 					th:if="${user_link==null}"  role="button" th:href="@{/admin/user}">

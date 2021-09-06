@@ -39,6 +39,10 @@
                                     <div class="table-responsive ">
                                       <div class="alert alert-primary mt-3" role="alert" th:if="${success}" th:text="${success}"
 									 ></div>
+									   <div class="alert alert-danger mt-3" role="alert" th:if="${error}" th:text="${error}"
+									 > 
+									  
+									 </div>
                                     <table class="table table-bordered mt-4" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>

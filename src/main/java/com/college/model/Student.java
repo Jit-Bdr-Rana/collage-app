@@ -1,6 +1,7 @@
 package com.college.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -55,6 +57,10 @@ public class Student {
  
  @ManyToOne(targetEntity=Year.class)
  private Year registrationyear;
+ 
+ @OneToMany(targetEntity=Result.class,cascade=CascadeType.ALL)
+ @JoinColumn(name="student_id", referencedColumnName="id")
+ private List<Result> result;
  
  public Year getRegistrationyear() {
 	return registrationyear;

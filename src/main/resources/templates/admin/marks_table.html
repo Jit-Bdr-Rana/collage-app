@@ -51,12 +51,15 @@
                                         Add New</a>
                                         <div class="alert alert-primary mt-5" role="alert" th:if="${success}" th:text="${success}"
 									 ></div>
+									  <div class="alert alert-danger mt-5" role="alert" th:if="${error}" th:text="${error}"
+									 ></div>
 									 
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>SN</th>
                                                 <th>Email</th>
+                                                <th>Symbol</th>
                                                 <th>Subject</th>
                                                 <th>FullMark</th>
                                                 <th>PassMark</th>
@@ -67,7 +70,8 @@
                                         <tbody>
                                             <tr th:each="result,iState:${listOfResults}">
                                                 <td>[[${iState.count}]]</td>
-                                                <td>[[${result.student}]]</td>
+                                                <td>[[${result.student.email}]]</td>
+                                                <td>[[${result.symbolNo}]]</td>
                                                 <td>[[${result.resultCategory.program}]]</td>
                                                 <td>[[${result.fullMark}]]</td>
                                                   <td>[[${result.passMark}]]</td>

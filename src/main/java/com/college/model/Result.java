@@ -14,9 +14,15 @@ public class Result {
 	public Integer getId() {
 		return id;
 	}
-	public String getStudent() {
-		return student;
+	
+	public String getSymbolNo() {
+		return symbolNo;
 	}
+
+	public void setSymbolNo(String symbolNo) {
+		this.symbolNo = symbolNo;
+	}
+
 	public Integer getFullMark() {
 		return fullMark;
 	}
@@ -35,7 +41,7 @@ public class Result {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setStudent(String student) {
+	public void setStudent(Student student) {
 		this.student = student;
 	}
 	public void setFullMark(Integer fullMark) {
@@ -57,14 +63,16 @@ public class Result {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String student;
+	private String symbolNo;
 	private Integer fullMark;
 	private Integer passMark;
 	private Integer obtainMark;
 	
+	 @ManyToOne(targetEntity=Student.class)
+	 private Student student;
 	@Override
 	public String toString() {
-		return "Result [id=" + id + ", student=" + student + ", fullMark=" + fullMark + ", passMark=" + passMark
+		return "Result [id=" + id + ", student=" + symbolNo + ", fullMark=" + fullMark + ", passMark=" + passMark
 				+ ", obtainMark=" + obtainMark + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ ", resultCategory=" + resultCategory + "]";
 	}
@@ -81,5 +89,8 @@ public class Result {
 	}
 	@ManyToOne(targetEntity=ResultCategory.class)
 	 private ResultCategory resultCategory;
+	public Student getStudent() {
+		return student;
+	}
 
 }

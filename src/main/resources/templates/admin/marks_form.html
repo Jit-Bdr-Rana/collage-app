@@ -38,27 +38,34 @@
                                         <form class="ml-5 mr-5" role="form" th:action="@{/admin/result/marks/save}"  th:object="${result}" method="post">
                                           <input type="hidden" th:field="*{id}" th:value="*{id}" >
                                           <div class="box-body row mt-4">
-                                            <div class="col-md-4">
+                                          
+                                            <div class="col-md-6">
                                               <div class="form-group">
-                                                 <label>Student</label>
-                                                 <input type="text" class="form-control" th:field="*{student}" >
+                                                 <label>Student Email</label>
+                                                 <input type="text" class="form-control" name="email" th:value="${email}">
                                                </div>
                                             </div>
-
-                                            <div class="col-md-2">                
+                                              <div class="col-md-6">
+                                              <div class="form-group">
+                                                 <label>Student Symbolno</label>
+                                                 <input type="text" class="form-control" th:field="*{symbolNo}" >
+                                               </div>
+                                            </div>
+                                            
+                                            <div class="col-md-3">                
                                               <div class="form-group">
                                                  <label>Full Marks</label>
                                                  <input type="number" class="form-control" th:field="*{fullMark}">
                                             </div>
                                            </div>
 
-                                            <div class="col-md-2">       
+                                            <div class="col-md-3">       
                                               <div class="form-group">
                                                  <label>Pass Marks</label>
                                                  <input type="number" class="form-control" th:field="*{passMark}">
                                                </div>
                                             </div>
-                                            <div class="col-md-2 ">
+                                            <div class="col-md-3 ">
                                                 <div class="form-group ">
                                                 	<label>Obtain Marks</label>
                                                 <input type="number" class="form-control" th:field="*{obtainMark}">							            </div>
