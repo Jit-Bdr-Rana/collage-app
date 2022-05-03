@@ -17,8 +17,6 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-
 @Entity(name="Student")
 @Table(name="students")
 public class Student {
